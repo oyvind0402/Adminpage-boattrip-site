@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SemesterOppgave2.Model
 {
+    //Will only need this model if we want to create a sign up solution, which it doesnt say we need in the assignment
     public class User
     {
         public int Id { get; set; }
