@@ -41,5 +41,7 @@ namespace SemesterOppgave2.DAL
         Task<List<Order>> GetAllOrders();
         Task<Order> GetOneOrder(int id);
         Task<bool> SaveOrder(Order order);
+
+        Task<bool> LogIn(User user);
     }
 }

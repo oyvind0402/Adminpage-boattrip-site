@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections;
+using SemesterOppgave2.DAL;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -147,7 +148,15 @@ namespace SemesterOppgave2.DAL
                     context.Routes.Add(route);
                 }
 
-                //Need to create an admin user here
+                //Creating the admin user
+                var admin = new Users();
+                admin.Email = "admin@admin.com";
+                var password = "Admin1";
+                byte[] salt = BoatTripRepository.CreateSalt();
+                byte[] hash = BoatTripRepository.CreateHash(password, salt);
+                admin.Password = hash;
+                admin.Salt = salt;
+                context.Users.Add(admin);
 
                 context.SaveChanges();
             }

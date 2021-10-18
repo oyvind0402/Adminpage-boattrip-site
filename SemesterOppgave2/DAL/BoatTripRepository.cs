@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SemesterOppgave2.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace SemesterOppgave2.DAL
@@ -790,6 +792,47 @@ namespace SemesterOppgave2.DAL
             {
                 _log.LogInformation(e.Message);
                 _log.LogInformation(e.InnerException.Message);
+                return false;
+            }
+        }
+
+        //Admin user methods:
+        public static byte[] CreateHash(string password, byte[] salt)
+        {
+            return KeyDerivation.Pbkdf2(
+                password: password,
+                salt: salt,
+                prf: KeyDerivationPrf.HMACSHA512,
+                iterationCount: 1000,
+                numBytesRequested: 32);
+        }
+
+        public static byte[] CreateSalt()
+        {
+            var csp = new RNGCryptoServiceProvider();
+            var salt = new byte[24];
+            csp.GetBytes(salt);
+            return salt;
+        }
+
+        public async Task<bool> LogIn(User user)
+        {
+            try
+            {
+                Users foundUser = await _db.Users.FirstOrDefaultAsync(u => u.Email == user.Email);
+                byte[] hash = CreateHash(user.Password, foundUser.Salt);
+                bool ok = hash.SequenceEqual(foundUser.Password);
+                if(ok)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
                 return false;
             }
         }

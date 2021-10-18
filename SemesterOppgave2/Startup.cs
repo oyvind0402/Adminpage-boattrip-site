@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using SemesterOppgave2.DAL;
+using System;
 
 namespace SemesterOppgave2
 {
@@ -26,6 +27,14 @@ namespace SemesterOppgave2
             services.AddControllers();
             services.AddDbContext<BoatTripContext>(options => options.UseSqlite("Data source=Order.db"));
             services.AddScoped<IBoatTripRepository, BoatTripRepository>();
+
+            services.AddSession(options =>
+            {
+                options.Cookie.Name = ".AdventureWorks.Session";
+                options.IdleTimeout = TimeSpan.FromSeconds(1800); // 30 minutter
+                options.Cookie.IsEssential = true;
+            });
+            services.AddDistributedMemoryCache();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -58,6 +67,8 @@ namespace SemesterOppgave2
             }
 
             app.UseRouting();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

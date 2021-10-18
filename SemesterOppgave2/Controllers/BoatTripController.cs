@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using SemesterOppgave2.DAL;
 using SemesterOppgave2.Model;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,8 @@ namespace SemesterOppgave2.Controllers
     {
         private readonly IBoatTripRepository _db;
         private readonly ILogger<BoatTripRepository> _log;
+        private const string _loggedIn = "loggedIn";
+        private const string _notLoggedIn = "";
 
         public BoatTripController(IBoatTripRepository db, ILogger<BoatTripRepository> log)
         {
@@ -41,6 +44,11 @@ namespace SemesterOppgave2.Controllers
 
         public async Task<ActionResult> SaveCustomer(Customer customer)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
+
             if (ModelState.IsValid)
             {
                 bool saveCustomer = await _db.SaveCustomer(customer);
@@ -60,6 +68,11 @@ namespace SemesterOppgave2.Controllers
 
         public async Task<ActionResult> DeleteCustomer(int id)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
+
             bool deleteCustomer = await _db.DeleteCustomer(id);
             if (!deleteCustomer)
             {
@@ -71,6 +84,11 @@ namespace SemesterOppgave2.Controllers
 
         public async Task<ActionResult> EditCustomer(Customer customer)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
+
             if (ModelState.IsValid)
             {
                 bool editCustomer = await _db.EditCustomer(customer);
@@ -108,7 +126,12 @@ namespace SemesterOppgave2.Controllers
 
         public async Task<ActionResult> SavePostPlace(PostPlace postPlace)
         {
-            if(ModelState.IsValid)
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
+
+            if (ModelState.IsValid)
             {
                 bool savePostPlace = await _db.SavePostPlace(postPlace);
                 if(!savePostPlace)
@@ -127,6 +150,11 @@ namespace SemesterOppgave2.Controllers
 
         public async Task<ActionResult> DeletePostPlace(string zipCode)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
+
             bool deletedPostPlace = await _db.DeletePostPlace(zipCode);
             if(!deletedPostPlace)
             {
@@ -138,7 +166,12 @@ namespace SemesterOppgave2.Controllers
 
         public async Task<ActionResult> EditPostPlace(PostPlace postPlace)
         {
-           if(ModelState.IsValid)
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
+
+            if (ModelState.IsValid)
             {
                 bool editPostPlace = await _db.EditPostPlace(postPlace);
                 if(!editPostPlace)
@@ -175,7 +208,12 @@ namespace SemesterOppgave2.Controllers
 
         public async Task<ActionResult> SaveBoat(Boat boat)
         {
-            if(ModelState.IsValid)
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
+
+            if (ModelState.IsValid)
             {
                 bool saveBoat = await _db.SaveBoat(boat);
                 if(!saveBoat)
@@ -194,6 +232,11 @@ namespace SemesterOppgave2.Controllers
 
         public async Task<ActionResult> DeleteBoat(int id)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
+
             bool deleteBoat = await _db.DeleteBoat(id);
             if (!deleteBoat)
             {
@@ -205,6 +248,11 @@ namespace SemesterOppgave2.Controllers
 
         public async Task<ActionResult> EditBoat(Boat boat)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
+
             if (ModelState.IsValid)
             {
                 bool editBoat = await _db.EditBoat(boat);
@@ -242,7 +290,12 @@ namespace SemesterOppgave2.Controllers
 
         public async Task<ActionResult> SaveTerminal(Terminal terminal)
         {
-            if(ModelState.IsValid)
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
+
+            if (ModelState.IsValid)
             {
                 bool saveTerminal = await _db.SaveTerminal(terminal);
                 if(!saveTerminal)
@@ -261,6 +314,11 @@ namespace SemesterOppgave2.Controllers
 
         public async Task<ActionResult> DeleteTerminal(int id)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
+
             bool deletedTerminal = await _db.DeleteTerminal(id);
             if(!deletedTerminal)
             {
@@ -272,7 +330,12 @@ namespace SemesterOppgave2.Controllers
 
         public async Task<ActionResult> EditTerminal(Terminal terminal)
         {
-            if(ModelState.IsValid)
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
+
+            if (ModelState.IsValid)
             {
                 bool editTerminal = await _db.EditTerminal(terminal);
                 if(!editTerminal)
@@ -309,7 +372,12 @@ namespace SemesterOppgave2.Controllers
 
         public async Task<ActionResult> SaveRoute(Route route)
         {
-            if(ModelState.IsValid)
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
+
+            if (ModelState.IsValid)
             {
                 bool saveRoute = await _db.SaveRoute(route);
                 if(!saveRoute)
@@ -328,6 +396,11 @@ namespace SemesterOppgave2.Controllers
 
         public async Task<ActionResult> DeleteRoute(int id)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
+
             bool deleteRoute = await _db.DeleteRoute(id);
             if(!deleteRoute)
             {
@@ -391,6 +464,33 @@ namespace SemesterOppgave2.Controllers
                 _log.LogInformation("Input not valid!");
                 return BadRequest("Input not valid!");
             }
+        }
+
+        //Admin user methods:
+        public async Task<ActionResult> LogIn(User user)
+        {
+            if(ModelState.IsValid)
+            {
+                bool logInOK = await _db.LogIn(user);
+                if(!logInOK)
+                {
+                    _log.LogInformation("Login failed!");
+                    HttpContext.Session.SetString(_loggedIn, _notLoggedIn);
+                    return Ok(false);
+                }
+                HttpContext.Session.SetString(_loggedIn, _loggedIn);
+                return Ok(true);
+            }
+            else
+            {
+                _log.LogInformation("Input not valid!");
+                return BadRequest("Input not valid!");
+            }
+        }
+
+        public void LogOut()
+        {
+            HttpContext.Session.SetString(_loggedIn, _notLoggedIn);
         }
     }
 }
