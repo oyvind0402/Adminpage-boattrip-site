@@ -28,7 +28,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Logs\" />
+    <None Remove="ClientApp\src\app\admin\admin.ts" />
+    <None Remove="ClientApp\src\app\app-routing.module.ts" />
+    <None Remove="ClientApp\src\app\home\home.ts" />
+    <None Remove="ClientApp\src\app\navmenu\navmenu.ts" />
+    <None Remove="ClientApp\src\app\user.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\admin\admin.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\app-routing.module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\home\home.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\navmenu\navmenu.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\user.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

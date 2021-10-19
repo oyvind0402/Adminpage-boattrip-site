@@ -1,0 +1,55 @@
+.header {
+  display: flex;
+  position: sticky;
+  top: 0;
+  right: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  background: rgb(41, 50, 65);
+  z-index: 10;
+}
+
+.nav-list {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  margin: 0;
+  grid-gap: 30px;
+  width: 70%;
+  text-align: center;
+  justify-content: end;
+  list-style: none;
+  overflow: hidden;
+}
+
+.nav-list-item {
+  display: flex;
+  align-items: center;
+  height: 80px;
+}
+
+.nav-list-link {
+  color: rgb(224, 251, 252);
+  text-decoration: none;
+  background-image: linear-gradient(rgb(224, 251, 252), rgb(224, 251, 252));
+  background-size: 0% 5px;
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  transition: background 0.3s linear;
+  font-size: 24px;
+  font-weight: 600;
+  font-family: "Open sans", sans-serif;
+  cursor: pointer;
+}
+
+.nav-list-link:hover {
+  background-size: 100% 5px;
+}
+
+.nav-logo-img {
+  height: clamp(120px, 8rem, 10vh);
+}
+
+.site-logo {
+    padding: 0.5rem, 2rem;
+}
