@@ -1,4 +1,4 @@
-using Moq;
+﻿using Moq;
 using SemesterOppgave2.DAL;
 using SemesterOppgave2.Model;
 using System;
@@ -14,9 +14,8 @@ using System.Net;
 
 namespace BoattripTest
 {
-    public class BoatTest
+    public class CustomerTest
     {
-
         private const string _loggedIn = "loggedIn";
         private const string _notLoggedIn = "";
 
@@ -33,16 +32,42 @@ namespace BoattripTest
         {
 
             //Arrange
-            var boat1 = new Boat { BoatName = "Colorline", Capacity = 1000, TicketPrice = 400 };
-            var boat2 = new Boat { BoatName = "Hurtigruten", Capacity = 600, TicketPrice = 1250 };
-            var boat3 = new Boat { BoatName = "DFDS", Capacity = 400, TicketPrice = 650 };
+            var customer1 = new Customer { 
+                Firstname = "Eivind", 
+                Lastname = "Ekeberg", 
+                Street = "Osloveien 12", 
+                Phonenr = "21111111", 
+                Email = "eivind-ekeberg@gmail.com",
+                ZipCode= "2222",
+                City = "Oslo"
+            };
+            var customer2 = new Customer { 
+                Firstname = "Lina", 
+                Lastname = "Hekkestad", 
+                Street = "Trondheimvei 12", 
+                Phonenr = "22222222", 
+                Email = "lina-hekkestad@gmail.com",
+                ZipCode = "4567",
+                City ="Kristiansand"
 
-            var boatList = new List<Boat>();
-            boatList.Add(boat1);
-            boatList.Add(boat2);
-            boatList.Add(boat3);
+            };
+            var customer3 = new Customer { 
+                Firstname = "Håkon", 
+                Lastname = "Håkonsen", 
+                Street = "Kristiandsandgata 12", 
+                Phonenr = "33333333", 
+                Email = "haakon-haakonsen@gmail.com",
+                ZipCode = "4567",
+                City = "Kristiansand"
 
-            mockRep.Setup(k => k.GetAllBoats()).ReturnsAsync(boatList);
+            };
+
+            var customerList = new List<Customer>();
+            customerList.Add(customer1);
+            customerList.Add(customer3);
+            customerList.Add(customer2);
+
+            mockRep.Setup(k => k.GetAllCustomers()).ReturnsAsync(customerList);
             var boatTripController = new BoatTripController(mockRep.Object, mockLog.Object);
 
             mockSession[_loggedIn] = _loggedIn;
@@ -52,13 +77,13 @@ namespace BoattripTest
 
             //act
 
-            var result = await boatTripController.GetAllBoats() as OkObjectResult;
+            var result = await boatTripController.GetAllCustomers() as OkObjectResult;
 
             //assert
 
             Assert.Equal((int)HttpStatusCode.OK, result.StatusCode);
 
-            Assert.Equal<List<Boat>>((List < Boat >)result.Value, boatList);
+            Assert.Equal<List<Customer>>((List<Customer>)result.Value, customerList);
 
         }
 
@@ -67,7 +92,7 @@ namespace BoattripTest
         {
             //arrange
 
-            mockRep.Setup(k => k.GetAllBoats()).ReturnsAsync(It.IsAny<List<Boat>>());
+            mockRep.Setup(k => k.GetAllCustomers()).ReturnsAsync(It.IsAny<List<Customer>>());
 
             var boatTripController = new BoatTripController(mockRep.Object, mockLog.Object);
             mockSession[_loggedIn] = _notLoggedIn;
@@ -75,7 +100,7 @@ namespace BoattripTest
             boatTripController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             //act
-            var result = await boatTripController.GetAllBoats() as UnauthorizedObjectResult;
+            var result = await boatTripController.GetAllCustomers() as UnauthorizedObjectResult;
 
             //assert
             Assert.Equal((int)HttpStatusCode.Unauthorized, result.StatusCode);
@@ -86,9 +111,17 @@ namespace BoattripTest
         public async Task GetOneLoggedIn()
         {
             //arrange
-            var boat1 = new Boat { BoatName = "Colorline", Capacity = 1000, TicketPrice = 400 };
-
-            mockRep.Setup(k => k.GetOneBoat(It.IsAny<int>())).ReturnsAsync(boat1);
+            var customer1 = new Customer
+            {
+                Firstname = "Eivind",
+                Lastname = "Ekeberg",
+                Street = "Osloveien 12",
+                Phonenr = "21111111",
+                Email = "eivind-ekeberg@gmail.com",
+                ZipCode = "2222",
+                City = "Oslo"
+            };
+            mockRep.Setup(k => k.GetOneCustomer(It.IsAny<int>())).ReturnsAsync(customer1);
 
             var boatTripController = new BoatTripController(mockRep.Object, mockLog.Object);
 
@@ -98,17 +131,17 @@ namespace BoattripTest
 
             //act
 
-            var result = await boatTripController.GetOneBoat(It.IsAny<int>()) as OkObjectResult;
+            var result = await boatTripController.GetOneCustomer(It.IsAny<int>()) as OkObjectResult;
 
             //assert
             Assert.Equal((int)HttpStatusCode.OK, result.StatusCode);
-            Assert.Equal<Boat>(boat1, (Boat)result.Value);
+            Assert.Equal<Customer>(customer1, (Customer)result.Value);
         }
         [Fact]
         public async Task GetOneLoggedInNotOK()
         {
 
-            mockRep.Setup(k => k.GetOneBoat(It.IsAny<int>())).ReturnsAsync(()=>null);
+            mockRep.Setup(k => k.GetOneCustomer(It.IsAny<int>())).ReturnsAsync(() => null);
 
             var boatTripController = new BoatTripController(mockRep.Object, mockLog.Object);
 
@@ -117,11 +150,11 @@ namespace BoattripTest
             boatTripController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             //act
-            var result = await boatTripController.GetOneBoat(It.IsAny<int>()) as NotFoundObjectResult;
+            var result = await boatTripController.GetOneCustomer(It.IsAny<int>()) as NotFoundObjectResult;
 
             //assert
             Assert.Equal((int)HttpStatusCode.NotFound, result.StatusCode);
-            Assert.Equal("Could not find that boat!", result.Value);
+            Assert.Equal("Could not find that customer!", result.Value);
 
         }
 
@@ -130,7 +163,7 @@ namespace BoattripTest
         {
             //arrange
 
-            mockRep.Setup(k => k.GetOneBoat(It.IsAny<int>())).ReturnsAsync(()=> null);
+            mockRep.Setup(k => k.GetOneCustomer(It.IsAny<int>())).ReturnsAsync(() => null);
 
             var boatTripController = new BoatTripController(mockRep.Object, mockLog.Object);
 
@@ -140,7 +173,7 @@ namespace BoattripTest
 
             //act
 
-            var result = await boatTripController.GetOneBoat(It.IsAny<int>()) as OkObjectResult;
+            var result = await boatTripController.GetOneCustomer(It.IsAny<int>()) as OkObjectResult;
 
             //assert
             Assert.Equal((int)HttpStatusCode.OK, result.StatusCode);
@@ -150,7 +183,7 @@ namespace BoattripTest
         [Fact]
         public async Task SaveLoggedInOK()
         {
-            mockRep.Setup(k => k.SaveBoat(It.IsAny<Boat>())).ReturnsAsync(true);
+            mockRep.Setup(k => k.SaveCustomer(It.IsAny<Customer>())).ReturnsAsync(true);
 
             var boatTripController = new BoatTripController(mockRep.Object, mockLog.Object);
 
@@ -159,17 +192,17 @@ namespace BoattripTest
             boatTripController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             // Act
-            var resultat = await boatTripController.SaveBoat(It.IsAny<Boat>()) as OkObjectResult;
+            var resultat = await boatTripController.SaveCustomer(It.IsAny<Customer>()) as OkObjectResult;
 
             // Assert 
             Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
-            Assert.Equal("Boat saved!", resultat.Value);
+            Assert.Equal("Customer saved!", resultat.Value);
         }
 
         [Fact]
         public async Task SaveLoggedInNotOK()
         {
-            mockRep.Setup(k => k.SaveBoat(It.IsAny<Boat>())).ReturnsAsync(false);
+            mockRep.Setup(k => k.SaveCustomer(It.IsAny<Customer>())).ReturnsAsync(false);
 
             var boatTripController = new BoatTripController(mockRep.Object, mockLog.Object);
 
@@ -178,31 +211,39 @@ namespace BoattripTest
             boatTripController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             // Act
-            var result = await boatTripController.SaveBoat(It.IsAny<Boat>()) as BadRequestObjectResult;
+            var result = await boatTripController.SaveCustomer(It.IsAny<Customer>()) as BadRequestObjectResult;
 
             // Assert 
             Assert.Equal((int)HttpStatusCode.BadRequest, result.StatusCode);
-            Assert.Equal("Could not save that boat!", result.Value);
+            Assert.Equal("Could not save that customer!", result.Value);
         }
         [Fact]
 
         public async Task SaveLoggedInFailModel()
         {
-            var boat1 = new Boat { BoatName = "", Capacity = 1000, TicketPrice = 400 };
+            var customer1 = new Customer
+            {
+                Firstname = "",
+                Lastname = "Ekeberg",
+                Street = "Osloveien 12",
+                Phonenr = "21111111",
+                Email = "eivind-ekeberg@gmail.com",
+                ZipCode = "2222",
+                City = "Oslo"
+            };
 
-
-            mockRep.Setup(k => k.SaveBoat(boat1)).ReturnsAsync(true);
+            mockRep.Setup(k => k.SaveCustomer(customer1)).ReturnsAsync(true);
 
             var boatTripController = new BoatTripController(mockRep.Object, mockLog.Object);
 
-            boatTripController.ModelState.AddModelError("BoatName", "Input not valid!");
+            boatTripController.ModelState.AddModelError("Firstname", "Input not valid!");
 
             mockSession[_loggedIn] = _loggedIn;
             mockHttpContext.Setup(s => s.Session).Returns(mockSession);
             boatTripController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             // Act
-            var result = await boatTripController.SaveBoat(boat1) as BadRequestObjectResult;
+            var result = await boatTripController.SaveCustomer(customer1) as BadRequestObjectResult;
 
             // Assert 
             Assert.Equal((int)HttpStatusCode.BadRequest, result.StatusCode);
@@ -211,7 +252,7 @@ namespace BoattripTest
         [Fact]
         public async Task SaveNotLoggedIn()
         {
-            mockRep.Setup(k => k.SaveBoat(It.IsAny<Boat>())).ReturnsAsync(true);
+            mockRep.Setup(k => k.SaveCustomer(It.IsAny<Customer>())).ReturnsAsync(true);
 
             var boatTripController = new BoatTripController(mockRep.Object, mockLog.Object);
 
@@ -220,7 +261,7 @@ namespace BoattripTest
             boatTripController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             // Act
-            var resultat = await boatTripController.SaveBoat(It.IsAny<Boat>()) as UnauthorizedObjectResult;
+            var resultat = await boatTripController.SaveCustomer(It.IsAny<Customer>()) as UnauthorizedObjectResult;
 
             // Assert 
             Assert.Equal((int)HttpStatusCode.Unauthorized, resultat.StatusCode);
@@ -229,7 +270,7 @@ namespace BoattripTest
         [Fact]
         public async Task DeleteLoggedInOK()
         {
-            mockRep.Setup(k => k.DeleteBoat(It.IsAny<int>())).ReturnsAsync(true);
+            mockRep.Setup(k => k.DeleteCustomer(It.IsAny<int>())).ReturnsAsync(true);
 
             var boatTripController = new BoatTripController(mockRep.Object, mockLog.Object);
 
@@ -238,11 +279,11 @@ namespace BoattripTest
             boatTripController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             // Act
-            var resultat = await boatTripController.DeleteBoat(It.IsAny<int>()) as OkObjectResult;
+            var resultat = await boatTripController.DeleteCustomer(It.IsAny<int>()) as OkObjectResult;
 
             // Assert 
             Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
-            Assert.Equal("Boat deleted!", resultat.Value);
+            Assert.Equal("Customer deleted!", resultat.Value);
         }
 
         [Fact]
@@ -250,7 +291,7 @@ namespace BoattripTest
         {
             // Arrange
 
-            mockRep.Setup(k => k.DeleteBoat(It.IsAny<int>())).ReturnsAsync(false);
+            mockRep.Setup(k => k.DeleteCustomer(It.IsAny<int>())).ReturnsAsync(false);
 
             var boatTripController = new BoatTripController(mockRep.Object, mockLog.Object);
 
@@ -259,7 +300,7 @@ namespace BoattripTest
             boatTripController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             // Act
-            var resultat = await boatTripController.DeleteBoat(It.IsAny<int>()) as UnauthorizedObjectResult;
+            var resultat = await boatTripController.DeleteCustomer(It.IsAny<int>()) as UnauthorizedObjectResult;
 
             // Assert 
             Assert.Equal((int)HttpStatusCode.Unauthorized, resultat.StatusCode);
@@ -271,7 +312,7 @@ namespace BoattripTest
         {
             // Arrange
 
-            mockRep.Setup(k => k.DeleteBoat(It.IsAny<int>())).ReturnsAsync(false);
+            mockRep.Setup(k => k.DeleteCustomer(It.IsAny<int>())).ReturnsAsync(false);
 
             var boatTripController = new BoatTripController(mockRep.Object, mockLog.Object);
 
@@ -280,11 +321,11 @@ namespace BoattripTest
             boatTripController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             // Act
-            var resultat = await boatTripController.DeleteBoat(It.IsAny<int>()) as NotFoundObjectResult;
+            var resultat = await boatTripController.DeleteCustomer(It.IsAny<int>()) as NotFoundObjectResult;
 
             // Assert 
             Assert.Equal((int)HttpStatusCode.NotFound, resultat.StatusCode);
-            Assert.Equal("Could not delete that boat!", resultat.Value);
+            Assert.Equal("Could not delete that customer!", resultat.Value);
         }
 
     }
