@@ -27,12 +27,20 @@ namespace SemesterOppgave2.Controllers
         //Customer methods:
         public async Task<ActionResult> GetAllCustomers()
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
             List<Customer> allCustomers = await _db.GetAllCustomers();
             return Ok(allCustomers);
         }
 
         public async Task<ActionResult> GetOneCustomer(int id)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
             Customer customer = await _db.GetOneCustomer(id);
             if (customer == null)
             {
@@ -109,12 +117,20 @@ namespace SemesterOppgave2.Controllers
         //PostPlace methods:
         public async Task<ActionResult> GetAllPostPlaces()
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
             List<PostPlace> allPostPlaces = await _db.GetAllPostPlaces();
             return Ok(allPostPlaces);
         }
 
         public async Task<ActionResult> GetOnePostPlace(string zipCode)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
             PostPlace postPlace = await _db.GetOnePostPlace(zipCode);
             if(postPlace == null)
             {
@@ -191,12 +207,20 @@ namespace SemesterOppgave2.Controllers
         //Boat methods:
         public async Task<ActionResult> GetAllBoats()
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
             List<Boat> allBoats = await _db.GetAllBoats();
             return Ok(allBoats);
         }
 
         public async Task<ActionResult> GetOneBoat(int id)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
             Boat boat = await _db.GetOneBoat(id);
             if (boat == null)
             {
@@ -273,12 +297,20 @@ namespace SemesterOppgave2.Controllers
         //Terminal methods:
         public async Task<ActionResult> GetAllTerminals()
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
             List<Terminal> allTerminals = await _db.GetAllTerminals();
             return Ok(allTerminals);
         }
 
         public async Task<ActionResult> GetOneTerminal(int id)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
             Terminal terminal = await _db.GetOneTerminal(id);
             if(terminal == null)
             {
@@ -355,12 +387,20 @@ namespace SemesterOppgave2.Controllers
         //Route methods:
         public async Task<ActionResult> GetAllRoutes()
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
             List<Route> allRoutes = await _db.GetAllRoutes();
             return Ok(allRoutes);
         }
 
         public async Task<ActionResult> GetOneRoute(int id)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
             Route route = await _db.GetOneRoute(id);
             if (route == null)
             {
@@ -432,12 +472,20 @@ namespace SemesterOppgave2.Controllers
         //Order methods:
         public async Task<ActionResult> GetAllOrders()
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
             List<Order> allOrders = await _db.GetAllOrders();
             return Ok(allOrders);
         }
 
         public async Task<ActionResult> GetOneOrder(int id)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
             Order order = await _db.GetOneOrder(id);
             if (order == null)
             {
@@ -449,6 +497,10 @@ namespace SemesterOppgave2.Controllers
 
         public async Task<ActionResult> SaveOrder(Order order)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
             bool saveOrder = await _db.SaveOrder(order);
             if (ModelState.IsValid)
             {
