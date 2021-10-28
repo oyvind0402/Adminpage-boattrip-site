@@ -100,7 +100,7 @@ namespace SemesterOppgave2.Controllers
         }
 
         [HttpPut]
-        [Route("editcustomer"]
+        [Route("editcustomer")]
         public async Task<ActionResult> EditCustomer(Customer customer)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
