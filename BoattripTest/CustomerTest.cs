@@ -173,10 +173,10 @@ namespace BoattripTest
 
             //act
 
-            var result = await boatTripController.GetOneCustomer(It.IsAny<int>()) as OkObjectResult;
+            var result = await boatTripController.GetOneCustomer(It.IsAny<int>()) as UnauthorizedObjectResult;
 
             //assert
-            Assert.Equal((int)HttpStatusCode.OK, result.StatusCode);
+            Assert.Equal((int)HttpStatusCode.Unauthorized, result.StatusCode);
             Assert.Equal("Not logged in!", result.Value);
         }
 
