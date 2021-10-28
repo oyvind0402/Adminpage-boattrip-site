@@ -1,3 +1,20 @@
-<div>
-  <h2>Test</h2>
-</div>
+<main>
+  <div>
+    <h1>Log in</h1>
+    <form id="login-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-stuff">
+        <label>Email</label>
+        <input class="form-item" formControlName="email" placeholder="Email" />
+        <span class="email-error" [hidden]="form.controls.email.valid || (form.controls.email.pristine)"></span>
+      </div>
+      <div class="form-stuff">
+        <label>Password</label>
+        <input class="form-item" formControlName="password" placeholder="Password" />
+        <span class="password-error" [hidden]="form.controls.password.valid || (form.controls.password.pristine)"></span>
+      </div>
+      <div class="form-stuff">
+        <button type="submit" class="submit-btn">Login</button>
+      </div>
+    </form>
+  </div>
+</main>

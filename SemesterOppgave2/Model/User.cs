@@ -12,9 +12,7 @@ namespace SemesterOppgave2.Model
         public int Id { get; set; }
         [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$")]
         public string Email { get; set; }
-        [RegularExpression(@"^([a-zA-ZæøåÆØÅ\.\ \-]{2,20})$")]
-        public string Username { get; set; }
-        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)[a-zA-Z\d]{6,})$")]
+        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d)([a-zA-Z\d]{6,})$")]
         public string Password { get; set; }
     }
 }

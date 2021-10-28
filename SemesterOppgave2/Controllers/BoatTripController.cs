@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 
 namespace SemesterOppgave2.Controllers
 {
-    [Route("[controller]/[action]")]
+    [Route("api/[controller]")]
+    [ApiController]
     public class BoatTripController : ControllerBase
     {
         private readonly IBoatTripRepository _db;
@@ -25,6 +26,8 @@ namespace SemesterOppgave2.Controllers
         }
 
         //Customer methods:
+        [HttpGet]
+        [Route("getallcustomers")]
         public async Task<ActionResult> GetAllCustomers()
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -35,6 +38,8 @@ namespace SemesterOppgave2.Controllers
             return Ok(allCustomers);
         }
 
+        [HttpGet("{id}")]
+        [Route("getonecustomer")]
         public async Task<ActionResult> GetOneCustomer(int id)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -50,6 +55,8 @@ namespace SemesterOppgave2.Controllers
             return Ok(customer);
         }
 
+        [HttpPost]
+        [Route("savecustomer")]
         public async Task<ActionResult> SaveCustomer(Customer customer)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -74,6 +81,8 @@ namespace SemesterOppgave2.Controllers
             }
         }
 
+        [HttpDelete("{id}")]
+        [Route("deletecustomer")]
         public async Task<ActionResult> DeleteCustomer(int id)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -90,6 +99,8 @@ namespace SemesterOppgave2.Controllers
             return Ok("Customer deleted!");
         }
 
+        [HttpPut]
+        [Route("editcustomer"]
         public async Task<ActionResult> EditCustomer(Customer customer)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -115,6 +126,8 @@ namespace SemesterOppgave2.Controllers
         }
 
         //PostPlace methods:
+        [HttpGet]
+        [Route("getallpostplaces")]
         public async Task<ActionResult> GetAllPostPlaces()
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -125,6 +138,8 @@ namespace SemesterOppgave2.Controllers
             return Ok(allPostPlaces);
         }
 
+        [HttpGet("{id}")]
+        [Route("getonepostplace")]
         public async Task<ActionResult> GetOnePostPlace(string zipCode)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -132,7 +147,7 @@ namespace SemesterOppgave2.Controllers
                 return Unauthorized("Not logged in!");
             }
             PostPlace postPlace = await _db.GetOnePostPlace(zipCode);
-            if(postPlace == null)
+            if (postPlace == null)
             {
                 _log.LogInformation("Could not find that postplace!");
                 return NotFound("Could not find that postplace!");
@@ -140,6 +155,8 @@ namespace SemesterOppgave2.Controllers
             return Ok(postPlace);
         }
 
+        [HttpPost]
+        [Route("savepostplace")]
         public async Task<ActionResult> SavePostPlace(PostPlace postPlace)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -150,7 +167,7 @@ namespace SemesterOppgave2.Controllers
             if (ModelState.IsValid)
             {
                 bool savePostPlace = await _db.SavePostPlace(postPlace);
-                if(!savePostPlace)
+                if (!savePostPlace)
                 {
                     _log.LogInformation("Could not save that postplace!");
                     return BadRequest("Could not save that postplace!");
@@ -164,6 +181,8 @@ namespace SemesterOppgave2.Controllers
             }
         }
 
+        [HttpDelete("{id}")]
+        [Route("deletepostplace")]
         public async Task<ActionResult> DeletePostPlace(string zipCode)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -172,7 +191,7 @@ namespace SemesterOppgave2.Controllers
             }
 
             bool deletedPostPlace = await _db.DeletePostPlace(zipCode);
-            if(!deletedPostPlace)
+            if (!deletedPostPlace)
             {
                 _log.LogInformation("Could not delete that postplace!");
                 return NotFound("Could not delete that postplace!");
@@ -180,6 +199,8 @@ namespace SemesterOppgave2.Controllers
             return Ok("Postplace deleted!");
         }
 
+        [HttpPut]
+        [Route("editpostplace")]
         public async Task<ActionResult> EditPostPlace(PostPlace postPlace)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -190,14 +211,14 @@ namespace SemesterOppgave2.Controllers
             if (ModelState.IsValid)
             {
                 bool editPostPlace = await _db.EditPostPlace(postPlace);
-                if(!editPostPlace)
+                if (!editPostPlace)
                 {
                     _log.LogInformation("Could not edit that postplace!");
                     return NotFound("Could not edit that postplace!");
                 }
                 return Ok("Postplace edited!");
             }
-           else
+            else
             {
                 _log.LogInformation("Input not valid!");
                 return BadRequest("Input not valid!");
@@ -205,6 +226,8 @@ namespace SemesterOppgave2.Controllers
         }
 
         //Boat methods:
+        [HttpGet]
+        [Route("getallboats")]
         public async Task<ActionResult> GetAllBoats()
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -215,6 +238,8 @@ namespace SemesterOppgave2.Controllers
             return Ok(allBoats);
         }
 
+        [HttpGet("{id}")]
+        [Route("getoneboat")]
         public async Task<ActionResult> GetOneBoat(int id)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -230,6 +255,8 @@ namespace SemesterOppgave2.Controllers
             return Ok(boat);
         }
 
+        [HttpPost]
+        [Route("saveboat")]
         public async Task<ActionResult> SaveBoat(Boat boat)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -240,7 +267,7 @@ namespace SemesterOppgave2.Controllers
             if (ModelState.IsValid)
             {
                 bool saveBoat = await _db.SaveBoat(boat);
-                if(!saveBoat)
+                if (!saveBoat)
                 {
                     _log.LogInformation("Could not save that boat!");
                     return BadRequest("Could not save that boat!");
@@ -254,6 +281,8 @@ namespace SemesterOppgave2.Controllers
             }
         }
 
+        [HttpDelete("{id}")]
+        [Route("deleteboat")]
         public async Task<ActionResult> DeleteBoat(int id)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -270,6 +299,8 @@ namespace SemesterOppgave2.Controllers
             return Ok("Boat deleted!");
         }
 
+        [HttpPut]
+        [Route("editboat")]
         public async Task<ActionResult> EditBoat(Boat boat)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -295,6 +326,8 @@ namespace SemesterOppgave2.Controllers
         }
 
         //Terminal methods:
+        [HttpGet]
+        [Route("getallterminals")]
         public async Task<ActionResult> GetAllTerminals()
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -305,6 +338,8 @@ namespace SemesterOppgave2.Controllers
             return Ok(allTerminals);
         }
 
+        [HttpGet("{id}")]
+        [Route("getoneterminal")]
         public async Task<ActionResult> GetOneTerminal(int id)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -312,7 +347,7 @@ namespace SemesterOppgave2.Controllers
                 return Unauthorized("Not logged in!");
             }
             Terminal terminal = await _db.GetOneTerminal(id);
-            if(terminal == null)
+            if (terminal == null)
             {
                 _log.LogInformation("Could not find that terminal!");
                 return NotFound("Could not find that terminal!");
@@ -320,6 +355,8 @@ namespace SemesterOppgave2.Controllers
             return Ok(terminal);
         }
 
+        [HttpPost]
+        [Route("saveterminal")]
         public async Task<ActionResult> SaveTerminal(Terminal terminal)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -330,7 +367,7 @@ namespace SemesterOppgave2.Controllers
             if (ModelState.IsValid)
             {
                 bool saveTerminal = await _db.SaveTerminal(terminal);
-                if(!saveTerminal)
+                if (!saveTerminal)
                 {
                     _log.LogInformation("Could not save that terminal!");
                     return BadRequest("Could not save that terminal!");
@@ -344,6 +381,8 @@ namespace SemesterOppgave2.Controllers
             }
         }
 
+        [HttpDelete("{id}")]
+        [Route("deleteterminal")]
         public async Task<ActionResult> DeleteTerminal(int id)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -352,7 +391,7 @@ namespace SemesterOppgave2.Controllers
             }
 
             bool deletedTerminal = await _db.DeleteTerminal(id);
-            if(!deletedTerminal)
+            if (!deletedTerminal)
             {
                 _log.LogInformation("Could not delete that terminal!");
                 return NotFound("Could not delete that terminal!");
@@ -360,6 +399,8 @@ namespace SemesterOppgave2.Controllers
             return Ok("Terminal deleted!");
         }
 
+        [HttpPut]
+        [Route("editterminal")]
         public async Task<ActionResult> EditTerminal(Terminal terminal)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -370,7 +411,7 @@ namespace SemesterOppgave2.Controllers
             if (ModelState.IsValid)
             {
                 bool editTerminal = await _db.EditTerminal(terminal);
-                if(!editTerminal)
+                if (!editTerminal)
                 {
                     _log.LogInformation("Could not edit that terminal!");
                     return NotFound("Could not edit that terminal!");
@@ -385,6 +426,8 @@ namespace SemesterOppgave2.Controllers
         }
 
         //Route methods:
+        [HttpGet]
+        [Route("getallroutes")]
         public async Task<ActionResult> GetAllRoutes()
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -395,6 +438,8 @@ namespace SemesterOppgave2.Controllers
             return Ok(allRoutes);
         }
 
+        [HttpGet("{id}")]
+        [Route("getoneroute")]
         public async Task<ActionResult> GetOneRoute(int id)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -410,6 +455,8 @@ namespace SemesterOppgave2.Controllers
             return Ok(route);
         }
 
+        [HttpPost]
+        [Route("saveroute")]
         public async Task<ActionResult> SaveRoute(Route route)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -420,7 +467,7 @@ namespace SemesterOppgave2.Controllers
             if (ModelState.IsValid)
             {
                 bool saveRoute = await _db.SaveRoute(route);
-                if(!saveRoute)
+                if (!saveRoute)
                 {
                     _log.LogInformation("Could not save that route!");
                     return BadRequest("Could not save that route!");
@@ -434,6 +481,8 @@ namespace SemesterOppgave2.Controllers
             }
         }
 
+        [HttpDelete("{id}")]
+        [Route("deleteroute")]
         public async Task<ActionResult> DeleteRoute(int id)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -442,7 +491,7 @@ namespace SemesterOppgave2.Controllers
             }
 
             bool deleteRoute = await _db.DeleteRoute(id);
-            if(!deleteRoute)
+            if (!deleteRoute)
             {
                 _log.LogInformation("Could not delete that route!");
                 return NotFound("Could not delete that route!");
@@ -450,6 +499,8 @@ namespace SemesterOppgave2.Controllers
             return Ok("Route deleted!");
         }
 
+        [HttpPut]
+        [Route("editroute")]
         public async Task<ActionResult> EditRoute(Route route)
         {
             if (ModelState.IsValid)
@@ -470,6 +521,8 @@ namespace SemesterOppgave2.Controllers
         }
 
         //Order methods:
+        [HttpGet]
+        [Route("getallorders")]
         public async Task<ActionResult> GetAllOrders()
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -480,6 +533,8 @@ namespace SemesterOppgave2.Controllers
             return Ok(allOrders);
         }
 
+        [HttpGet("{id}")]
+        [Route("getoneorder")]
         public async Task<ActionResult> GetOneOrder(int id)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -495,6 +550,8 @@ namespace SemesterOppgave2.Controllers
             return Ok(order);
         }
 
+        [HttpPost]
+        [Route("saveorder")]
         public async Task<ActionResult> SaveOrder(Order order)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -519,6 +576,8 @@ namespace SemesterOppgave2.Controllers
         }
 
         //Admin user methods:
+        [HttpPost]
+        [Route("login")]
         public async Task<ActionResult> LogIn(User user)
         {
             if(ModelState.IsValid)
@@ -539,7 +598,8 @@ namespace SemesterOppgave2.Controllers
                 return BadRequest("Input not valid!");
             }
         }
-
+        [HttpGet]
+        [Route("logout")]
         public void LogOut()
         {
             HttpContext.Session.SetString(_loggedIn, _notLoggedIn);

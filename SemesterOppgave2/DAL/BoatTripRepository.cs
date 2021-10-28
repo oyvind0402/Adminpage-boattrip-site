@@ -820,6 +820,7 @@ namespace SemesterOppgave2.DAL
             try
             {
                 Users foundUser = await _db.Users.FirstOrDefaultAsync(u => u.Email == user.Email);
+                _log.LogInformation("foundUser Email: " + foundUser.Email + "\nUser Email: " + user.Email);
                 byte[] hash = CreateHash(user.Password, foundUser.Salt);
                 bool ok = hash.SequenceEqual(foundUser.Password);
                 if(ok)
@@ -828,11 +829,13 @@ namespace SemesterOppgave2.DAL
                 }
                 else
                 {
+                    _log.LogInformation("Wrong password!");
                     return false;
                 }
             }
             catch
             {
+                _log.LogInformation("Something went wrong logging in.");
                 return false;
             }
         }

@@ -151,7 +151,6 @@ namespace SemesterOppgave2.DAL
                 //Creating the admin user
                 var admin = new Users();
                 admin.Email = "admin@admin.com";
-                admin.Username = "admin1";
                 var password = "Admin1";
                 byte[] salt = BoatTripRepository.CreateSalt();
                 byte[] hash = BoatTripRepository.CreateHash(password, salt);

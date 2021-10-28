@@ -25,7 +25,7 @@ namespace SemesterOppgave2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<BoatTripContext>(options => options.UseSqlite("Data source=Order.db"));
+            services.AddDbContext<BoatTripContext>(options => options.UseSqlite("Data source=boattrip.db"));
             services.AddScoped<IBoatTripRepository, BoatTripRepository>();
 
             services.AddSession(options =>

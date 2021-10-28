@@ -8,7 +8,6 @@ import { Home } from './home/home';
 import { NavMenu } from './navmenu/navmenu';
 import { AppRoutingModule } from './app-routing.module';
 
-
 @NgModule({
   declarations: [
     AppComponent,

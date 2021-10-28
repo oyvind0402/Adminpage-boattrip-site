@@ -1,3 +1,7 @@
-<div>
+<div *ngIf="admin">
   <h2>AdminTest:D</h2>
+  <button (click)="logOut()">Logg ut</button>
+</div>
+<div *ngIf="!admin">
+  <h2>Du har ikke logget inn som admin!</h2>
 </div>
