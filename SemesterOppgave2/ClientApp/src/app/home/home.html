@@ -2,17 +2,17 @@
   <div>
     <h1>Log in</h1>
     <form id="login-form" [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="form-stuff">
+      <div class="form-div">
         <label>Email</label>
         <input class="form-item" formControlName="email" placeholder="Email" />
         <span class="email-error" [hidden]="form.controls.email.valid || (form.controls.email.pristine)"></span>
       </div>
-      <div class="form-stuff">
+      <div class="form-div">
         <label>Password</label>
-        <input class="form-item" formControlName="password" placeholder="Password" />
+        <input class="form-item" type="password" formControlName="password" placeholder="Password" />
         <span class="password-error" [hidden]="form.controls.password.valid || (form.controls.password.pristine)"></span>
       </div>
-      <div class="form-stuff">
+      <div class="form-div-btn" >
         <button type="submit" class="submit-btn">Login</button>
       </div>
     </form>
