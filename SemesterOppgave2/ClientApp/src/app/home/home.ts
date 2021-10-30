@@ -4,12 +4,20 @@ import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms'
 import { Router } from '@angular/router';
 import { User } from '../user';
 
+
 @Component({
   templateUrl: 'home.html'
 })
 
 export class Home {
   form: FormGroup;
+
+
+
+  ngOnInit() {
+  }
+
+  
   
   validering = {
     email: [
@@ -20,7 +28,7 @@ export class Home {
     ]
   };
 
-  constructor(private _http: HttpClient, private router: Router, private fb: FormBuilder) {
+  constructor( private _http: HttpClient, private router: Router, private fb: FormBuilder) {
     this.form = fb.group(this.validering);
   }
 

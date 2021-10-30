@@ -7,13 +7,16 @@ import { Admin } from './admin/admin';
 import { Home } from './home/home';
 import { NavMenu } from './navmenu/navmenu';
 import { AppRoutingModule } from './app-routing.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { CustomerService } from './_services/customer.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     Admin,
     Home,
-    NavMenu
+    NavMenu,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +24,7 @@ import { AppRoutingModule } from './app-routing.module';
     ReactiveFormsModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [CustomerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
