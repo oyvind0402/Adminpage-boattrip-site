@@ -467,7 +467,7 @@ namespace BoattripTest
 
             // Assert 
             Assert.Equal((int)HttpStatusCode.NotFound, resultat.StatusCode);
-            Assert.Equal("Could not delete that route!", resultat.Value);
+            Assert.Equal("Could not delete that order!", resultat.Value);
         }
     }
 }
