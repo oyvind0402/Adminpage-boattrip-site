@@ -12,20 +12,13 @@ import { User } from '../user';
 
 export class Home {
   form: FormGroup;
-
-
-
-  ngOnInit() {
-  }
-
-  
   
   validering = {
     email: [
-      null, Validators.compose([Validators.required, Validators.pattern("([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)")])
+      '', Validators.compose([Validators.required, Validators.pattern("([\\w\\.\\-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)")])
     ],
     password: [
-      null, Validators.compose([Validators.required, Validators.pattern("(?=.*[A-Za-z])(?=.*\d)([a-zA-Z\d]{6,})")])
+      '', Validators.compose([Validators.required, Validators.pattern("(?=.*[A-Za-z])(?=.*\\d)([a-zA-Z\\d]{6,})")])
     ]
   };
 
@@ -41,7 +34,6 @@ export class Home {
     console.log(user.email + " " + user.password);
 
     this._http.post<User>("api/boattrip/login", user).subscribe(value => {
-      //Har den her for nå, skal endre til å sjekke etter session cookie etterhvert
       localStorage.setItem("admin", "true");
       this.router.navigate(['/admin']);
     },

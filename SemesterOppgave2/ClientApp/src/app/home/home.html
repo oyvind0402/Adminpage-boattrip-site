@@ -9,11 +9,11 @@
       </div>
       <div class="form-div">
         <label>Password</label>
-        <input class="form-item" type="password" formControlName="password" placeholder="Password" />
+        <input class="form-item" type="password" formControlName="password" placeholder="Password" required />
         <span class="password-error" [hidden]="form.controls.password.valid || (form.controls.password.pristine)">Not valid password!</span>
       </div>
       <div class="form-div-btn" >
-        <button type="submit" class="submit-btn">Login</button>
+        <button type="submit" [disabled]="!form.valid" class="submit-btn">Login</button>
       </div>
     </form>
   </div>
