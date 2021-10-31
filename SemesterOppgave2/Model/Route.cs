@@ -43,5 +43,10 @@ namespace SemesterOppgave2.Model
         public string DepartureTerminalZipCode { get; set; }
         [RegularExpression(@"^[0-9a-zA-ZøæåØÆÅöÖäÄ. \-]{2,30}$")]
         public string DepartureTerminalStreet { get; set; }
+
+        public override string ToString()
+        {
+            return "Route with id: " + Id;
+        }
     }
 }

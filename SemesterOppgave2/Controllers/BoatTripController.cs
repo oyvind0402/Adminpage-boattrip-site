@@ -575,6 +575,47 @@ namespace SemesterOppgave2.Controllers
             }
         }
 
+        [HttpDelete("{id}")]
+        [Route("deleteorder")]
+        public async Task<ActionResult> DeleteOrder(int id)
+        {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
+            bool deleteOrder = await _db.DeleteOrder(id);
+            if(!deleteOrder)
+            {
+                _log.LogInformation("Could not delete that order!");
+                return NotFound("Could not delete that order!");
+            }
+            return Ok("Order deleted!");
+        }
+
+        [HttpPut]
+        [Route("editorder")]
+        public async Task<ActionResult> EditOrder(Order order)
+        {
+            if(string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
+            bool editOrder = await _db.EditOrder(order);
+            if(ModelState.IsValid)
+            {
+                if (!editOrder)
+                {
+                    _log.LogInformation("Could not edit that order!");
+                    return BadRequest("Could not edit that order!");
+                }
+                return Ok("Order edited!!");
+            } else
+            {
+                _log.LogInformation("Input not valid!");
+                return BadRequest("Input not valid!");
+            }
+        }
+
         //Admin user methods:
         [HttpPost]
         [Route("login")]

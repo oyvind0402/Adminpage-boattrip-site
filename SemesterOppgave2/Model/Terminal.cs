@@ -17,5 +17,9 @@ namespace SemesterOppgave2.Model
         public string City { get; set; }
         [RegularExpression(@"^[1-9][0-9]{4}|[0-9]{4}|[1-9]{1}[0-9]{2}( )[0-9]{2}$")]
         public string ZipCode { get; set; }
+        public override string ToString()
+        {
+            return "Terminal with id: " + Id;
+        }
     }
 }

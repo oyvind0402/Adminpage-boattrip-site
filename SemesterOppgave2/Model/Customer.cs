@@ -23,5 +23,9 @@ namespace SemesterOppgave2.Model
         public string ZipCode { get; set; }
         [RegularExpression(@"^[0-9a-zA-ZøæåØÆÅ. \-]{2,30}$")]
         public string City { get; set; }
+        public override string ToString()
+        {
+            return "Customer with id: " + Id;
+        }
     }
 }

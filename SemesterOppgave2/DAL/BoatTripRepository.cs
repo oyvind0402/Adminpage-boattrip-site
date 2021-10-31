@@ -98,6 +98,7 @@ namespace SemesterOppgave2.DAL
                 }
                 _db.Customers.Add(newCustomer);
                 await _db.SaveChangesAsync();
+                _log.LogInformation(customer.ToString() + " saved!");
                 return true;
             }
             catch
@@ -113,6 +114,7 @@ namespace SemesterOppgave2.DAL
                 Customers customer = await _db.Customers.FindAsync(id);
                 _db.Customers.Remove(customer);
                 await _db.SaveChangesAsync();
+                _log.LogInformation(customer.ToString() + " deleted!");
                 return true;
             }
             catch
@@ -153,6 +155,7 @@ namespace SemesterOppgave2.DAL
                 customer.Street = changedCustomer.Street;
 
                 await _db.SaveChangesAsync();
+                _log.LogInformation(customer.ToString() + " edited!");
                 return true;
             }
             catch
@@ -208,6 +211,7 @@ namespace SemesterOppgave2.DAL
                 };
                 _db.PostPlaces.Add(newPostPlace);
                 await _db.SaveChangesAsync();
+                _log.LogInformation(postPlace.ToString() + " saved!");
                 return true;
             }
             catch
@@ -223,6 +227,7 @@ namespace SemesterOppgave2.DAL
                 PostPlaces postPlace = await _db.PostPlaces.FindAsync(zipCode);
                 _db.PostPlaces.Remove(postPlace);
                 await _db.SaveChangesAsync();
+                _log.LogInformation(postPlace.ToString() + " deleted!");
                 return true;
             }
             catch
@@ -246,6 +251,7 @@ namespace SemesterOppgave2.DAL
                 }
                 postPlace.City = changedPostPlace.City;
                 await _db.SaveChangesAsync();
+                _log.LogInformation(postPlace.ToString() + " edited!");
                 return true;
             }
             catch
@@ -310,6 +316,7 @@ namespace SemesterOppgave2.DAL
                     };
                     _db.Boats.Add(newBoat);
                     await _db.SaveChangesAsync();
+                    _log.LogInformation(boat.ToString() + " saved!");
                     return true;
                 } 
                 else
@@ -330,6 +337,7 @@ namespace SemesterOppgave2.DAL
                 Boats boat = await _db.Boats.FindAsync(id);
                 _db.Boats.Remove(boat);
                 await _db.SaveChangesAsync();
+                _log.LogInformation(boat.ToString() + " deleted!");
                 return true;
             }
             catch
@@ -347,6 +355,7 @@ namespace SemesterOppgave2.DAL
                 boat.Capacity = changedBoat.Capacity;
                 boat.TicketPrice = changedBoat.TicketPrice;
                 await _db.SaveChangesAsync();
+                _log.LogInformation(boat.ToString() + " edited!");
                 return true;
             }
             catch
@@ -425,6 +434,7 @@ namespace SemesterOppgave2.DAL
                     };
                     _db.Terminals.Add(newTerminal);
                     await _db.SaveChangesAsync();
+                    _log.LogInformation(terminal.ToString() + " saved!");
                     return true;
                 } else
                 {
@@ -444,6 +454,7 @@ namespace SemesterOppgave2.DAL
                 var terminal = await _db.Terminals.FindAsync(id);
                 _db.Terminals.Remove(terminal);
                 await _db.SaveChangesAsync();
+                _log.LogInformation(terminal.ToString() + " deleted!");
                 return true;
             }
             catch
@@ -462,6 +473,7 @@ namespace SemesterOppgave2.DAL
                 editedTerminal.TerminalAddress.City = terminal.City;
                 editedTerminal.TerminalAddress.ZipCode = terminal.ZipCode;
                 await _db.SaveChangesAsync();
+                _log.LogInformation(terminal.ToString() + " edited!");
                 return true;
             }
             catch
@@ -601,6 +613,7 @@ namespace SemesterOppgave2.DAL
                 };
                 _db.Routes.Add(newRoute);
                 await _db.SaveChangesAsync();
+                _log.LogInformation(route.ToString() + " saved!");
                 return true;
             }
             catch
@@ -629,6 +642,7 @@ namespace SemesterOppgave2.DAL
                 route.DeparturePlace.TerminalAddress.City = editedRoute.DepartureTerminalCity;
                 route.DeparturePlace.TerminalAddress.ZipCode = editedRoute.DepartureTerminalZipCode;
                 await _db.SaveChangesAsync();
+                _log.LogInformation(route.ToString() + " edited!");
                 return true;
             }
             catch (Exception e)
@@ -646,6 +660,7 @@ namespace SemesterOppgave2.DAL
                 Routes route = await _db.Routes.FindAsync(id);
                 _db.Routes.Remove(route);
                 await _db.SaveChangesAsync();
+                _log.LogInformation(route.ToString() + " deleted!");
                 return true;
             }
             catch
@@ -786,6 +801,63 @@ namespace SemesterOppgave2.DAL
                 _db.Orders.Add(newOrder);
 
                 await _db.SaveChangesAsync();
+                _log.LogInformation(order.ToString() + " saved!");
+                return true;
+            }
+            catch (Exception e)
+            {
+                _log.LogInformation(e.Message);
+                _log.LogInformation(e.InnerException.Message);
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteOrder(int id)
+        {
+            try
+            {
+                Orders order = await _db.Orders.FindAsync(id);
+                _db.Orders.Remove(order);
+                await _db.SaveChangesAsync();
+                _log.LogInformation(order.ToString() + " deleted!");
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> EditOrder(Order editedOrder)
+        {
+            try
+            {
+                Orders order = await _db.Orders.FindAsync(editedOrder.Id);
+                order.TicketAmount = editedOrder.TicketAmount;
+                order.TotalPrice = editedOrder.TotalPrice;
+                order.Route.Boat.BoatName = editedOrder.BoatName;
+                order.Route.Boat.Capacity = editedOrder.Capacity;
+                order.Route.Boat.TicketPrice = editedOrder.TicketPrice;
+                order.Route.ArrivalTime = editedOrder.ArrivalTime;
+                order.Route.DepartureTime = editedOrder.DepartureTime;
+                order.Route.ArrivalPlace.Street = editedOrder.ArrivalTerminalStreet;
+                order.Route.ArrivalPlace.TerminalName = editedOrder.ArrivalTerminalName;
+                order.Route.ArrivalPlace.TerminalAddress.City = editedOrder.ArrivalTerminalCity;
+                order.Route.ArrivalPlace.TerminalAddress.ZipCode = editedOrder.ArrivalTerminalZipCode;
+                order.Route.DeparturePlace.Street = editedOrder.DepartureTerminalStreet;
+                order.Route.DeparturePlace.TerminalName = editedOrder.DepartureTerminalName;
+                order.Route.DeparturePlace.TerminalAddress.City = editedOrder.DepartureTerminalCity;
+                order.Route.DeparturePlace.TerminalAddress.ZipCode = editedOrder.DepartureTerminalZipCode;
+                order.Route.TicketsLeft = editedOrder.TicketsLeft;
+                order.Customer.Firstname = editedOrder.Firstname;
+                order.Customer.Lastname = editedOrder.Lastname;
+                order.Customer.Email = editedOrder.Email;
+                order.Customer.Phonenr = editedOrder.Phonenr;
+                order.Customer.Street = editedOrder.Street;
+                order.Customer.Postplace.City = editedOrder.City;
+                order.Customer.Postplace.ZipCode = editedOrder.ZipCode;
+                await _db.SaveChangesAsync();
+                _log.LogInformation(order.ToString() + " edited!");
                 return true;
             }
             catch (Exception e)

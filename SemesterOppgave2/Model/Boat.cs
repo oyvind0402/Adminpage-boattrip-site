@@ -15,5 +15,9 @@ namespace SemesterOppgave2.Model
         public int Capacity { get; set; }
         [RegularExpression(@"^([1-9]{1}[0-9]{1,3})$")]
         public int TicketPrice { get; set; }
+        public override string ToString()
+        {
+            return "Boat with id: " + Id;
+        }
     }
 }

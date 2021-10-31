@@ -408,12 +408,11 @@ namespace BoattripTest
             Assert.Equal("Not logged in!", resultat.Value);
         }
 
-        //there is no DeleteOrder? 
 
-        /*[Fact]
+        [Fact]
         public async Task DeleteLoggedInOK()
         {
-            mockRep.Setup(k => k.deleteOrder(It.IsAny<int>())).ReturnsAsync(true);
+            mockRep.Setup(k => k.DeleteOrder(It.IsAny<int>())).ReturnsAsync(true);
 
             var boatTripController = new BoatTripController(mockRep.Object, mockLog.Object);
 
@@ -422,11 +421,11 @@ namespace BoattripTest
             boatTripController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             // Act
-            var resultat = await boatTripController.DeleteRoute(It.IsAny<int>()) as OkObjectResult;
+            var resultat = await boatTripController.DeleteOrder(It.IsAny<int>()) as OkObjectResult;
 
             // Assert 
             Assert.Equal((int)HttpStatusCode.OK, resultat.StatusCode);
-            Assert.Equal("Route deleted!", resultat.Value);
+            Assert.Equal("Order deleted!", resultat.Value);
         }
 
         [Fact]
@@ -469,6 +468,6 @@ namespace BoattripTest
             // Assert 
             Assert.Equal((int)HttpStatusCode.NotFound, resultat.StatusCode);
             Assert.Equal("Could not delete that route!", resultat.Value);
-        }*/
+        }
     }
 }
