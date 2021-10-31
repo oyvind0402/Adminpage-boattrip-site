@@ -5,12 +5,12 @@
       <div class="form-div">
         <label>Email</label>
         <input class="form-item" formControlName="email" placeholder="Email" />
-        <span class="email-error" [hidden]="form.controls.email.valid || (form.controls.email.pristine)"></span>
+        <span class="email-error" [hidden]="form.controls.email.valid || (form.controls.email.pristine)">Not valid email!</span>
       </div>
       <div class="form-div">
         <label>Password</label>
         <input class="form-item" type="password" formControlName="password" placeholder="Password" />
-        <span class="password-error" [hidden]="form.controls.password.valid || (form.controls.password.pristine)"></span>
+        <span class="password-error" [hidden]="form.controls.password.valid || (form.controls.password.pristine)">Not valid password!</span>
       </div>
       <div class="form-div-btn" >
         <button type="submit" class="submit-btn">Login</button>

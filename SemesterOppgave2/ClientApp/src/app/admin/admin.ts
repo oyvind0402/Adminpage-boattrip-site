@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   templateUrl: 'admin.html',
@@ -11,10 +10,10 @@ import { CookieService } from 'ngx-cookie-service';
 export class Admin {
   admin: boolean;
 
-  constructor(private _http: HttpClient, private router: Router, private cookieService: CookieService) { }
+  constructor(private _http: HttpClient, private router: Router) { }
 
   checkAdmin() {
-    if (this.cookieService.check(".AdventureWorks.Session")) {
+    if (localStorage.getItem("admin")) {
       this.admin = true;
     } else {
       this.admin = false;
@@ -23,7 +22,7 @@ export class Admin {
 
   logOut() {
     this._http.get("api/boattrip/logout").subscribe(() => {
-      this.cookieService.delete(".AdventureWorks.Session");
+      localStorage.removeItem("admin");
       this.admin = false;
       this.router.navigate(['/home']);
     }, error => console.log(error)
@@ -32,6 +31,5 @@ export class Admin {
 
   ngOnInit() {
     this.checkAdmin();
-    console.log(this.cookieService.get(".AdventureWorks.Session"));
   }
 }
