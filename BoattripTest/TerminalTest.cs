@@ -76,6 +76,24 @@ namespace BoattripTest
         }
 
         [Fact]
+        public async Task GetAllLoggedInOKErrorDB()
+        {
+            var terminalList = new List<Terminal>();
+
+            mockRep.Setup(t => t.GetAllTerminals()).ReturnsAsync(() => null);
+            var boatTripController = new BoatTripController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggedIn] = _loggedIn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            boatTripController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            var result = await boatTripController.GetAllTerminals() as OkObjectResult;
+
+            Assert.Equal((int)HttpStatusCode.OK, result.StatusCode);
+            Assert.Null(result.Value);
+        }
+
+        [Fact]
         public async Task GetAllNotLoggedIn()
         {
             //arrange

@@ -111,6 +111,24 @@ namespace BoattripTest
         }
 
         [Fact]
+        public async Task GetAllLoggedInOKErrorDB()
+        {
+            var routeListe = new List<Route>();
+
+            mockRep.Setup(r => r.GetAllRoutes()).ReturnsAsync(() => null);
+            var boatTripController = new BoatTripController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggedIn] = _loggedIn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            boatTripController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            var result = await boatTripController.GetAllRoutes() as OkObjectResult;
+
+            Assert.Equal((int)HttpStatusCode.OK, result.StatusCode);
+            Assert.Null(result.Value);
+        }
+
+        [Fact]
         public async Task GetAllNotLoggedIn()
         {
             //arrange

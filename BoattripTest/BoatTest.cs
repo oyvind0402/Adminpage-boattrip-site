@@ -42,7 +42,7 @@ namespace BoattripTest
             boatList.Add(boat2);
             boatList.Add(boat3);
 
-            mockRep.Setup(k => k.GetAllBoats()).ReturnsAsync(boatList);
+            mockRep.Setup(b => b.GetAllBoats()).ReturnsAsync(boatList);
             var boatTripController = new BoatTripController(mockRep.Object, mockLog.Object);
 
             mockSession[_loggedIn] = _loggedIn;
@@ -60,6 +60,25 @@ namespace BoattripTest
 
             Assert.Equal<List<Boat>>((List < Boat >)result.Value, boatList);
 
+        }
+
+        [Fact]
+        public async Task GetAllLoggedInOKErrorDB()
+        {
+            var boatList = new List<Boat>();
+
+            mockRep.Setup(k => k.GetAllBoats()).ReturnsAsync(() => null);
+
+            var boatTripController = new BoatTripController(mockRep.Object, mockLog.Object);
+
+            mockSession[_loggedIn] = _loggedIn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            boatTripController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            var result = await boatTripController.GetAllBoats() as OkObjectResult;
+
+            Assert.Equal((int)HttpStatusCode.OK, result.StatusCode);
+            Assert.Null(result.Value);
         }
 
         [Fact]
