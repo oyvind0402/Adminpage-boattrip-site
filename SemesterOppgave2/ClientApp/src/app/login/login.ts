@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CookieService } from "ngx-cookie-service"
+//import { CookieService } from "ngx-cookie-service"
 
 
 //import { AlertService, AuthenticationService } from '../_services/index';
@@ -14,7 +14,8 @@ export class Login implements OnInit {
   loading = false;
   returnUrl: string;
 
-  constructor(private cookieService: CookieService,
+  constructor(
+    //private cookieService: CookieService,
     private route: ActivatedRoute,
     private router: Router,
    //private authenticationService: AuthenticationService
