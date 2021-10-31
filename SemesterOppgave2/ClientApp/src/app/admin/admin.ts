@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  templateUrl: 'admin.html'
+  templateUrl: 'admin.html',
+  styleUrls: ['./admin.css'],
 })
 
 export class Admin {
