@@ -6,11 +6,11 @@ export class Order {
   //routes
   departureTime: string;
   arrivalTime: string;
-  TicketsLeft: number;
+  ticketsLeft: number;
 
   //Arrival terminal
-  arrivalTermnalName: string;
-  arrivalTermianlCity: string;
+  arrivalTerminalName: string;
+  arrivalTerminalCity: string;
   arrivalTerminalZipcode: string;
   arrivalTerminalStreet: string;
 

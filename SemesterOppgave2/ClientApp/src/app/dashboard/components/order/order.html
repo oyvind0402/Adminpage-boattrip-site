@@ -1,10 +1,11 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+<div>
+  <h2>Orders:</h2>
+  <ul>
+    <li *ngFor="let order of orders">
+      Route: {{order.departureTerminalName}} - {{order.arrivalTerminalName}}: {{order.departureTime}} - {{order.arrivalTime}}
+      Customer: {{order.firstname}} {{order.lastname}}
+      Boat: {{order.boatName}}
+      Ticketprice: {{order.ticketPrice}}
+    </li>
+  </ul>
+</div>

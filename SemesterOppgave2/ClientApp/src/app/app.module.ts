@@ -16,6 +16,10 @@ import { TerminalComponent } from './dashboard/components/terminal/terminal.serv
 import { BoatService } from './_services/boat.service';
 import { RouteService } from './_services/route.service';
 import { TerminalService } from './_services/terminal.service';
+import { OrderComponent } from './dashboard/components/order/order.component';
+import { OrderService } from './_services/order.service';
+import { PostPlaceService } from './_services/postPlace.service';
+import { PostPlaceComponent } from './dashboard/components/postplace/postplace.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +33,8 @@ import { TerminalService } from './_services/terminal.service';
     BoatComponent,
     RouteComponent,
     TerminalComponent,
+    OrderComponent,
+    PostPlaceComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +42,7 @@ import { TerminalService } from './_services/terminal.service';
     ReactiveFormsModule,
     AppRoutingModule,
   ],
-  providers: [CustomerService, BoatService, RouteService, TerminalService],
+  providers: [CustomerService, BoatService, RouteService, TerminalService, OrderService, PostPlaceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,7 +2,7 @@
   <h2>Customers:</h2>
   <ul>
     <li *ngFor="let customer of customers">
-      {{customer.firstname}} {{customer.lastname}}
+      {{customer.firstname}} {{customer.lastname}} - Phonenr: {{customer.phonenr}} - Email: {{customer.email}} - {{customer.street}}, {{customer.zipCode}} {{customer.city}}
      
     </li>
   </ul>

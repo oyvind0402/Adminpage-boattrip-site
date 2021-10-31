@@ -36,6 +36,7 @@
     <None Remove="ClientApp\src\app\admin\admin.ts" />
     <None Remove="ClientApp\src\app\app-routing.module.ts" />
     <None Remove="ClientApp\src\app\dashboard\components\order\order.component.ts" />
+    <None Remove="ClientApp\src\app\dashboard\components\postplace\postplace.component.ts" />
     <None Remove="ClientApp\src\app\dashboard\components\route\route.component.ts" />
     <None Remove="ClientApp\src\app\dashboard\components\terminal\terminal.service.ts" />
     <None Remove="ClientApp\src\app\dashboard\customer.component.ts" />
@@ -69,6 +70,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\customer\customer.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\boat\boat.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\order\order.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\postplace\postplace.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\route\route.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\terminal\terminal.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\home\home.ts" />
