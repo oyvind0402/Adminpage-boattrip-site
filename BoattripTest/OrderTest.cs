@@ -442,7 +442,7 @@ namespace BoattripTest
             boatTripController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             // Act
-            var resultat = await boatTripController.DeleteRoute(It.IsAny<int>()) as UnauthorizedObjectResult;
+            var resultat = await boatTripController.DeleteOrder(It.IsAny<int>()) as UnauthorizedObjectResult;
 
             // Assert 
             Assert.Equal((int)HttpStatusCode.Unauthorized, resultat.StatusCode);
@@ -463,7 +463,7 @@ namespace BoattripTest
             boatTripController.ControllerContext.HttpContext = mockHttpContext.Object;
 
             // Act
-            var resultat = await boatTripController.DeleteRoute(It.IsAny<int>()) as NotFoundObjectResult;
+            var resultat = await boatTripController.DeleteOrder(It.IsAny<int>()) as NotFoundObjectResult;
 
             // Assert 
             Assert.Equal((int)HttpStatusCode.NotFound, resultat.StatusCode);
