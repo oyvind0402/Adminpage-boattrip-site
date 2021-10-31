@@ -1,5 +1,12 @@
 <div *ngIf="admin">
-  <h2>AdminTest:D</h2>
+  <div class="knapper-oversikt">
+    <button class="visKnapper">Boats</button>
+    <button class="visKnapper">Customers</button>
+    <button class="visKnapper">Orders</button>
+    <button class="visKnapper">Routes</button>
+    <button class="visKnapper">Terminals</button>
+    <button class="visKnapper">Post Places</button>
+  </div>
   <button (click)="logOut()">Logg ut</button>
 </div>
 <div *ngIf="!admin">
