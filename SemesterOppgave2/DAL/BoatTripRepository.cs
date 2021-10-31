@@ -820,7 +820,6 @@ namespace SemesterOppgave2.DAL
             try
             {
                 Users foundUser = await _db.Users.FirstOrDefaultAsync(u => u.Email == user.Email);
-                _log.LogInformation("foundUser Email: " + foundUser.Email + "\nUser Email: " + user.Email);
                 byte[] hash = CreateHash(user.Password, foundUser.Salt);
                 bool ok = hash.SequenceEqual(foundUser.Password);
                 if(ok)
