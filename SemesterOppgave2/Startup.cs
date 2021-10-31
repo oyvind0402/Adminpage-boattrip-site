@@ -33,6 +33,7 @@ namespace SemesterOppgave2
                 options.Cookie.Name = ".AdventureWorks.Session";
                 options.IdleTimeout = TimeSpan.FromSeconds(1800); // 30 minutter
                 options.Cookie.IsEssential = true;
+                options.Cookie.HttpOnly = false;
             });
             services.AddDistributedMemoryCache();
 

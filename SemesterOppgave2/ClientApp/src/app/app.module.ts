@@ -20,6 +20,7 @@ import { OrderComponent } from './dashboard/components/order/order.component';
 import { OrderService } from './_services/order.service';
 import { PostPlaceService } from './_services/postPlace.service';
 import { PostPlaceComponent } from './dashboard/components/postplace/postplace.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { PostPlaceComponent } from './dashboard/components/postplace/postplace.c
     ReactiveFormsModule,
     AppRoutingModule,
   ],
-  providers: [CustomerService, BoatService, RouteService, TerminalService, OrderService, PostPlaceService],
+  providers: [CustomerService, BoatService, RouteService, TerminalService, OrderService, PostPlaceService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
