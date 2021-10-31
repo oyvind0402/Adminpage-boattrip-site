@@ -1,0 +1,9 @@
+<div>
+  <h2>terminals:</h2>
+  <ul>
+    <li *ngFor="let terminal of terminals">
+      {{terminal.terminalName}} 
+      - <a (click)="deleteUser(user.id)">Delete</a>
+    </li>
+  </ul>
+</div>

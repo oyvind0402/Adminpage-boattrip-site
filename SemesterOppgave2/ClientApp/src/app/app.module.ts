@@ -7,8 +7,9 @@ import { Admin } from './admin/admin';
 import { Home } from './home/home';
 import { NavMenu } from './navmenu/navmenu';
 import { AppRoutingModule } from './app-routing.module';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { AppFooter } from './footer/footer';
 import { CustomerService } from './_services/customer.service';
+import { CustomerComponent } from './dashboard/components/customer/customer.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,9 @@ import { CustomerService } from './_services/customer.service';
     Admin,
     Home,
     NavMenu,
-    DashboardComponent
+    AppFooter,
+    NavMenu,
+    CustomerComponent
   ],
   imports: [
     BrowserModule,

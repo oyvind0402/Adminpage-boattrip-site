@@ -12,6 +12,11 @@
     <BuildServerSideRenderer>false</BuildServerSideRenderer>
   </PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+		<TypeScriptExperimentalDecorators>True</TypeScriptExperimentalDecorators>
+		<TypeScriptEmitDecoratorMetadata>True</TypeScriptEmitDecoratorMetadata>
+	</PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.17" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.11" />
@@ -30,23 +35,57 @@
   <ItemGroup>
     <None Remove="ClientApp\src\app\admin\admin.ts" />
     <None Remove="ClientApp\src\app\app-routing.module.ts" />
-    <None Remove="ClientApp\src\app\dashboard\dashboard.component.ts" />
+    <None Remove="ClientApp\src\app\dashboard\components\order\order.component.ts" />
+    <None Remove="ClientApp\src\app\dashboard\components\route\route.component.ts" />
+    <None Remove="ClientApp\src\app\dashboard\components\terminal\terminal.service.ts" />
+    <None Remove="ClientApp\src\app\dashboard\customer.component.ts" />
     <None Remove="ClientApp\src\app\home\home.ts" />
+    <None Remove="ClientApp\src\app\models\Boat.ts" />
     <None Remove="ClientApp\src\app\models\customer.ts" />
+    <None Remove="ClientApp\src\app\models\order.ts" />
+    <None Remove="ClientApp\src\app\models\postPlace.ts" />
+    <None Remove="ClientApp\src\app\models\route.ts" />
+    <None Remove="ClientApp\src\app\models\terminal.ts" />
     <None Remove="ClientApp\src\app\navmenu\navmenu.ts" />
     <None Remove="ClientApp\src\app\user.ts" />
+    <None Remove="ClientApp\src\app\_services\boat.service.ts" />
     <None Remove="ClientApp\src\app\_services\customer.service.ts" />
+    <None Remove="ClientApp\src\app\_services\order.service.ts" />
+    <None Remove="ClientApp\src\app\_services\postPlace.service.ts" />
+    <None Remove="ClientApp\src\app\_services\route.service.ts" />
+    <None Remove="ClientApp\src\app\_services\terminal.service.ts" />
+    <None Remove="ClientApp\src\tsconfig.app.json" />
+    <None Remove="ClientApp\tsconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ClientApp\src\tsconfig.app.json" />
+    <Content Include="ClientApp\tsconfig.json" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\admin\admin.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\app-routing.module.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\dashboard\dashboard.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\customer\customer.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\boat\boat.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\order\order.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\route\route.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\terminal\terminal.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\home\home.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\customer.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\boat.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\order.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\postPlace.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\route.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\terminal.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\navmenu\navmenu.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\user.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\_services\boat.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\_services\customer.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\_services\order.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\_services\postPlace.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\_services\route.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\_services\terminal.service.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

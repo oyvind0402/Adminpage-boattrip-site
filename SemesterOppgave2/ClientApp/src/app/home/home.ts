@@ -6,7 +6,8 @@ import { User } from '../user';
 
 
 @Component({
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
+  styleUrls: ['./home.css'],
 })
 
 export class Home {
