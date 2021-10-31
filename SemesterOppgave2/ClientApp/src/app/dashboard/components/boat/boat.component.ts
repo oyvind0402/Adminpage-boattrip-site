@@ -6,7 +6,7 @@ import { BoatService } from '../../../_services/boat.service';
   templateUrl: 'boat.html'
 })
 
-export class BoatComponents {
+export class BoatComponent {
   boats: Boat[] = [];
 
   ngOnInit() {
@@ -20,8 +20,10 @@ export class BoatComponents {
   }
 
   loadAllBoats() {
-    this.boatService.getAll().subscribe(boat => { this.boats = boat; });
+    this.boatService.getAll().subscribe(boat => {
+      this.boats = boat;
+      console.log(boat);
+    });
     console.log(this.boats); 
-
   }
 }

@@ -8,10 +8,9 @@ import { TerminalService } from '../../../_services/terminal.service';
 })
 
 export class TerminalComponent {
-  customers: Terminal[] = [];
+  terminals: Terminal[] = [];
 
   ngOnInit() {
-
     this.loadAllTerminals();
   }
 
@@ -25,9 +24,9 @@ export class TerminalComponent {
 
 
   loadAllTerminals() {
-    this.terminalService.getAll().subscribe(terminal => { this.customers = terminal; });
-    console.log(this.customers); 
-
+    this.terminalService.getAll().subscribe(terminal => {
+      this.terminals = terminal;
+    });
   }
 
 }

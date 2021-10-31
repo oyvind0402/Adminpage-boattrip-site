@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: 'admin.html',
@@ -9,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class Admin {
   admin: boolean;
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient, private router: Router) { }
 
   checkAdmin() {
     if (localStorage.getItem("admin")) {

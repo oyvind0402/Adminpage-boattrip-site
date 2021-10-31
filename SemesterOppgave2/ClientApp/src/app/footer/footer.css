@@ -2,9 +2,9 @@ footer {
   background: rgb(41, 50, 65);
   text-align: center;
   color: rgb(224, 251, 252);
-  position: absolute;
-  bottom: 0;
   width: 100%;
+  position: fixed;
+  bottom: 0;
 }
 
 footer p {
