@@ -24,6 +24,9 @@ import { EditBoatComponent } from './dashboard/components/boat/editboat.componen
 import { SaveBoatComponent } from './dashboard/components/boat/saveboat.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BoatModal } from './dashboard/components/boat/deleteboatmodal';
+import { CustomerModal } from './dashboard/components/customer/deletecustomermodal';
+import { SaveCustomerComponent } from './dashboard/components/customer/savecustomer.component';
+import { EditCustomerComponent } from './dashboard/components/customer/editcustomer.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,9 @@ import { BoatModal } from './dashboard/components/boat/deleteboatmodal';
     AppFooter,
     NavMenu,
     CustomerComponent,
+    EditCustomerComponent,
+    SaveCustomerComponent,
+    CustomerModal,
     BoatComponent,
     EditBoatComponent,
     SaveBoatComponent,
@@ -52,6 +58,6 @@ import { BoatModal } from './dashboard/components/boat/deleteboatmodal';
   ],
   providers: [CustomerService, BoatService, RouteService, TerminalService, OrderService, PostPlaceService],
   bootstrap: [AppComponent],
-  entryComponents: [BoatModal],
+  entryComponents: [BoatModal, CustomerModal],
 })
 export class AppModule { }

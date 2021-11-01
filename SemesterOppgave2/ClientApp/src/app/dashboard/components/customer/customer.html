@@ -1,7 +1,7 @@
 <div>
   <div class="content">
     <h2>Customers:</h2>
-    <button class="btn btn-add">New customer</button>
+    <button class="btn btn-add"[routerLink]="['/savecustomer']">New customer</button>
     <table class="table table-customer">
       <thead>
         <tr>
@@ -25,8 +25,8 @@
           <td label="Street name">{{customer.street}}</td>
           <td label="Zipcode">{{customer.zipCode}}</td>
           <td label="City">{{customer.city}}</td>
-          <td><button class="btn btn-endre">Edit</button></td>
-          <td><button class="btn btn-slett">Delete</button></td>
+          <td><button class="btn btn-endre" [routerLink]="['/editcustomer', customer.id]">Edit</button></td>
+          <td><button class="btn btn-slett" (click)="deleteCustomer(customer.id)">Delete</button></td>
         </tr>
       </tbody>
     </table>

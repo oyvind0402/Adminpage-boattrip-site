@@ -3,5 +3,5 @@ export class Terminal {
   terminalName: string;
   street: string;
   city: string;
-  zipcode: string;
+  zipCode: string;
 }

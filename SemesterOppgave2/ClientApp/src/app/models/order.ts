@@ -11,7 +11,7 @@ export class Order {
   //Arrival terminal
   arrivalTerminalName: string;
   arrivalTerminalCity: string;
-  arrivalTerminalZipcode: string;
+  arrivalTerminalZipCode: string;
   arrivalTerminalStreet: string;
 
   //departure terminal
@@ -31,7 +31,7 @@ export class Order {
   street: string;
   phonenr: string;
   email: string;
-  zipcode: string;
+  zipCode: string;
   city: string;
 
 }

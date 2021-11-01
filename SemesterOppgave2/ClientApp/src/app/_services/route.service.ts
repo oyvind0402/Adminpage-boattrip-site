@@ -11,18 +11,18 @@ export class RouteService {
   }
 
   getOne(id: number) {
-    return this.http.get('/api/boattrip/getoneroute/' + id);
+    return this.http.get<Route>('/api/boattrip/getoneroute/' + id);
   }
 
   save(route: Route) {
-    return this.http.post('/api/boattrip/saveroute/', route);
+    return this.http.post('/api/boattrip/saveroute/', route, { responseType: 'text' });
   }
 
   edit(route: Route) {
-    return this.http.put('/api/boattrip/editroute/' + route.id, route);
+    return this.http.put('/api/boattrip/editroute/', route, { responseType: 'text' });
   }
 
   delete(id: number) {
-    return this.http.delete('/api/boattrip/deleteroute/' + id);
+    return this.http.delete('/api/boattrip/deleteroute/' + id, { responseType: 'text' });
   }
 }

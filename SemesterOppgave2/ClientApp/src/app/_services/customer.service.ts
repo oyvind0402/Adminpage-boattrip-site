@@ -11,18 +11,18 @@ export class CustomerService {
   }
 
   getOne(id: number) {
-    return this.http.get('/api/boattrip/getonecustomer/' + id);
+    return this.http.get<Customer>('/api/boattrip/getonecustomer/' + id);
   }
   
   save(customer: Customer) {
-    return this.http.post('/api/boattrip/savecustomer/', customer);
+    return this.http.post('/api/boattrip/savecustomer/', customer, { responseType: 'text' });
   }
   
   edit(customer: Customer) {
-    return this.http.put('/api/boattrip/editcustomer/' + customer.id, customer);
+    return this.http.put('/api/boattrip/editcustomer/', customer, { responseType: 'text' });
   }
   
   delete(id: number) {
-    return this.http.delete('/api/boattrip/deletecustomer/' + id);
+    return this.http.delete('/api/boattrip/deletecustomer/' + id, { responseType: 'text' });
   }
 }

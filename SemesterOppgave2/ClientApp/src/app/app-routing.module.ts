@@ -5,6 +5,8 @@ import { BoatComponent } from './dashboard/components/boat/boat.component';
 import { EditBoatComponent } from './dashboard/components/boat/editboat.component';
 import { SaveBoatComponent } from './dashboard/components/boat/saveboat.component';
 import { CustomerComponent } from './dashboard/components/customer/customer.component';
+import { EditCustomerComponent } from './dashboard/components/customer/editcustomer.component';
+import { SaveCustomerComponent } from './dashboard/components/customer/savecustomer.component';
 import { OrderComponent } from './dashboard/components/order/order.component';
 import { PostPlaceComponent } from './dashboard/components/postplace/postplace.component';
 import { RouteComponent } from './dashboard/components/route/route.component';
@@ -17,6 +19,8 @@ const appRoots: Routes = [
   { path: 'editboat/:id', component: EditBoatComponent },
   { path: 'saveboat', component: SaveBoatComponent },
   { path: 'customer', component: CustomerComponent },
+  { path: 'editcustomer/:id', component: EditCustomerComponent },
+  { path: 'savecustomer', component: SaveCustomerComponent },
   { path: 'route', component: RouteComponent },
   { path: 'terminal', component: TerminalComponent },
   { path: 'postplace', component: PostPlaceComponent },

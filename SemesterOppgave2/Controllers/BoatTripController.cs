@@ -38,8 +38,8 @@ namespace SemesterOppgave2.Controllers
             return Ok(allCustomers);
         }
 
-        [HttpGet("{id}")]
-        [Route("getonecustomer")]
+        [HttpGet]
+        [Route("getonecustomer/{id}")]
         public async Task<ActionResult> GetOneCustomer(int id)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -81,8 +81,8 @@ namespace SemesterOppgave2.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
-        [Route("deletecustomer")]
+        [HttpDelete]
+        [Route("deletecustomer/{id}")]
         public async Task<ActionResult> DeleteCustomer(int id)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -138,8 +138,8 @@ namespace SemesterOppgave2.Controllers
             return Ok(allPostPlaces);
         }
 
-        [HttpGet("{id}")]
-        [Route("getonepostplace")]
+        [HttpGet]
+        [Route("getonepostplace/{id}")]
         public async Task<ActionResult> GetOnePostPlace(string zipCode)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -181,8 +181,8 @@ namespace SemesterOppgave2.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
-        [Route("deletepostplace")]
+        [HttpDelete]
+        [Route("deletepostplace/{id}")]
         public async Task<ActionResult> DeletePostPlace(string zipCode)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -338,8 +338,8 @@ namespace SemesterOppgave2.Controllers
             return Ok(allTerminals);
         }
 
-        [HttpGet("{id}")]
-        [Route("getoneterminal")]
+        [HttpGet]
+        [Route("getoneterminal/{id}")]
         public async Task<ActionResult> GetOneTerminal(int id)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -381,8 +381,8 @@ namespace SemesterOppgave2.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
-        [Route("deleteterminal")]
+        [HttpDelete]
+        [Route("deleteterminal{id}")]
         public async Task<ActionResult> DeleteTerminal(int id)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -438,8 +438,8 @@ namespace SemesterOppgave2.Controllers
             return Ok(allRoutes);
         }
 
-        [HttpGet("{id}")]
-        [Route("getoneroute")]
+        [HttpGet]
+        [Route("getoneroute/{id}")]
         public async Task<ActionResult> GetOneRoute(int id)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -481,8 +481,8 @@ namespace SemesterOppgave2.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
-        [Route("deleteroute")]
+        [HttpDelete]
+        [Route("deleteroute/{id}")]
         public async Task<ActionResult> DeleteRoute(int id)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -537,8 +537,8 @@ namespace SemesterOppgave2.Controllers
             return Ok(allOrders);
         }
 
-        [HttpGet("{id}")]
-        [Route("getoneorder")]
+        [HttpGet]
+        [Route("getoneorder/{id}")]
         public async Task<ActionResult> GetOneOrder(int id)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -579,8 +579,8 @@ namespace SemesterOppgave2.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
-        [Route("deleteorder")]
+        [HttpDelete]
+        [Route("deleteorder/{id}")]
         public async Task<ActionResult> DeleteOrder(int id)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))

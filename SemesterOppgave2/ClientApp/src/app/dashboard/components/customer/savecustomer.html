@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="col-md-4">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Firstname</label>
+        <input class="form-control" formControlName="firstname" />
+        <p class="alert alert-warning" [hidden]="form.controls.firstname.valid || (form.controls.firstname.pristine)">
+          Firstname isnt valid!
+        </p>
+      </div>
+      <div class="form-group">
+        <label>Lastname</label>
+        <input class="form-control" formControlName="lastname" />
+        <p class="alert alert-warning" [hidden]="form.controls.lastname.valid || (form.controls.lastname.pristine)">
+          Lastname isnt valid!
+        </p>
+      </div>
+      <div class="form-group">
+        <label>Phone number</label>
+        <input class="form-control" formControlName="phonenr" />
+        <p class="alert alert-warning" [hidden]="form.controls.phonenr.valid || (form.controls.phonenr.pristine)">
+          Phone number isnt valid!
+        </p>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input class="form-control" formControlName="email" />
+        <p class="alert alert-warning" [hidden]="form.controls.email.valid || (form.controls.email.pristine)">
+          Email isnt valid!
+        </p>
+      </div>
+      <div class="form-group">
+        <label>Street</label>
+        <input class="form-control" formControlName="street" />
+        <p class="alert alert-warning" [hidden]="form.controls.street.valid || (form.controls.street.pristine)">
+          Street isnt valid!
+        </p>
+      </div>
+      <div class="form-group">
+        <label>Zip Code</label>
+        <input class="form-control" formControlName="zipCode" />
+        <p class="alert alert-warning" [hidden]="form.controls.zipCode.valid || (form.controls.zipCode.pristine)">
+          Zip Code isnt valid!
+        </p>
+      </div>
+      <div class="form-group">
+        <label>City</label>
+        <input class="form-control" formControlName="city" />
+        <p class="alert alert-warning" [hidden]="form.controls.city.valid || (form.controls.city.pristine)">
+          City isnt valid!
+        </p>
+      </div>
+      <div class="form-group">
+        <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Save</button>
+        <button class="btn btn-default" routerLink="/customer">Back</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -13,7 +13,7 @@ export class Admin {
   constructor(private _http: HttpClient, private router: Router) { }
 
   checkAdmin() {
-    if (localStorage.getItem("admin")) {
+    if (sessionStorage.getItem("admin")) {
       this.admin = true;
     } else {
       this.admin = false;
@@ -22,7 +22,7 @@ export class Admin {
 
   logOut() {
     this._http.get("api/boattrip/logout").subscribe(() => {
-      localStorage.removeItem("admin");
+      sessionStorage.removeItem("admin");
       this.admin = false;
       this.router.navigate(['/home']);
     }, error => console.log(error)

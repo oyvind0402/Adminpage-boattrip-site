@@ -1,5 +1,5 @@
 <main>
-  <div>
+  <div *ngIf="!admin">
     <h1>Log in</h1>
     <form id="login-form" [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="form-div">
@@ -18,5 +18,8 @@
         <button type="submit" [disabled]="!form.valid" class="submit-btn">Login</button>
       </div>
     </form>
+  </div>
+  <div *ngIf="admin">
+    <h1>Velkommen tilbake Admin!</h1>
   </div>
 </main>

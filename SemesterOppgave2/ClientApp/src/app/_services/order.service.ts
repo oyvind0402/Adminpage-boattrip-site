@@ -11,19 +11,18 @@ export class OrderService {
   }
 
   getOne(id: number) {
-    return this.http.get('/api/boattrip/getoneorder/' + id);
+    return this.http.get<Order>('/api/boattrip/getoneorder/' + id);
   }
 
-  save(customer: Order) {
-    return this.http.post('/api/boattrip/saveorder/', customer);
+  save(order: Order) {
+    return this.http.post('/api/boattrip/saveorder/', order, { responseType: 'text' });
   }
 
-  // no methods in controller
-  /*edit(customer: Order) {
-    return this.http.put('/api/boattrip/editcustomer/' + customer.id, customer);
+  edit(order: Order) {
+    return this.http.put('/api/boattrip/editorder/', order, { responseType: 'text' });
   }
 
   delete(id: number) {
-    return this.http.delete('/api/boattrip/deletecustomer/' + id);
-  }*/
+    return this.http.delete('/api/boattrip/deleteorder/' + id, { responseType: 'text' });
+  }
 }

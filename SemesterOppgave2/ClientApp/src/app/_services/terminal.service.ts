@@ -11,18 +11,18 @@ export class TerminalService {
   }
 
   getOne(id: number) {
-    return this.http.get('/api/boattrip/getoneterminal/' + id);
+    return this.http.get<Terminal>('/api/boattrip/getoneterminal/' + id);
   }
 
   save(terminal: Terminal) {
-    return this.http.post('/api/boattrip/saveterminal/', terminal);
+    return this.http.post('/api/boattrip/saveterminal/', terminal, { responseType: 'text' });
   }
 
   edit(terminal: Terminal) {
-    return this.http.put('/api/boattrip/editterminal/' + terminal.id, terminal);
+    return this.http.put('/api/boattrip/editterminal/', terminal, { responseType: 'text' });
   }
 
   delete(id: number) {
-    return this.http.delete('/api/boattrip/deleteterminal/' + id);
+    return this.http.delete('/api/boattrip/deleteterminal/' + id, { responseType: 'text' });
   }
 }

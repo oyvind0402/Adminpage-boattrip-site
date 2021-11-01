@@ -2,7 +2,7 @@ export class Route {
   id: number;
   departureTime: string;
   arrivalTime: string;
-  TicketsLeft: number;
+  ticketsLeft: number;
 
   //boat
   boatName: string;
@@ -10,9 +10,9 @@ export class Route {
   ticketPrice: string;
 
   //Arrival terminal
-  arrivalTermnalName: string;
-  arrivalTermianlCity: string;
-  arrivalTerminalZipcode: string;
+  arrivalTerminalName: string;
+  arrivalTerminalCity: string;
+  arrivalTerminalZipCode: string;
   arrivalTerminalStreet: string;
 
   //departure terminal
@@ -20,5 +20,4 @@ export class Route {
   departureTerminalCity: string;
   departureTerminalZipCode: string;
   departureTerminalStreet: string;
-
 }

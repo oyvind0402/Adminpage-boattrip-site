@@ -11,18 +11,18 @@ export class PostPlaceService {
   }
 
   getOne(id: number) {
-    return this.http.get('/api/boattrip/getonepostplace/' + id);
+    return this.http.get <PostPlace>('/api/boattrip/getonepostplace/' + id);
   }
 
   save(postPlace: PostPlace) {
-    return this.http.post('/api/boattrip/savepostplace/', postPlace);
+    return this.http.post('/api/boattrip/savepostplace/', postPlace, { responseType: 'text' });
   }
 
   edit(postPlace: PostPlace) {
-    return this.http.put('/api/boattrip/editpostplace/' + postPlace.zipCode, postPlace);
+    return this.http.put('/api/boattrip/editpostplace/', postPlace, { responseType: 'text' });
   }
 
   delete(id: number) {
-    return this.http.delete('/api/boattrip/deletepostplace/' + id);
+    return this.http.delete('/api/boattrip/deletepostplace/' + id, { responseType: 'text' });
   }
 }

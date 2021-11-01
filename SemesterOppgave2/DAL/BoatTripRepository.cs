@@ -78,7 +78,8 @@ namespace SemesterOppgave2.DAL
                     Firstname = customer.Firstname,
                     Lastname = customer.Lastname,
                     Phonenr = customer.Phonenr,
-                    Email = customer.Email
+                    Email = customer.Email,
+                    Street = customer.Street
                 };
 
                 var checkPostPlace = await _db.PostPlaces.FindAsync(customer.ZipCode);

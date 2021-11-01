@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -12,6 +12,7 @@ import { User } from '../user';
 
 export class Home {
   form: FormGroup;
+  admin: boolean;
   
   validering = {
     email: [
@@ -31,10 +32,8 @@ export class Home {
     user.email = this.form.value.email;
     user.password = this.form.value.password;
 
-    console.log(user.email + " " + user.password);
-
     this._http.post<User>("api/boattrip/login", user).subscribe(value => {
-      localStorage.setItem("admin", "true");
+      sessionStorage.setItem("admin", "true");
       this.router.navigate(['/admin']);
     },
       error => console.log(error)
@@ -43,5 +42,13 @@ export class Home {
 
   onSubmit() {
     this.logIn();
+  }
+
+  ngOnInit() {
+    if (sessionStorage.getItem("admin")) {
+      this.admin = true;
+    } else {
+      this.admin = false;
+    }
   }
 }

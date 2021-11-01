@@ -5,6 +5,6 @@ export class Customer {
   street: string;
   phonenr: string;
   email: string;
-  zipcode: string;
+  zipCode: string;
   city: string;
 }
