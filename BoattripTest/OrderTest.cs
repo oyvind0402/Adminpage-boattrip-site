@@ -394,7 +394,7 @@ namespace BoattripTest
 
             var boatTripController = new BoatTripController(mockRep.Object, mockLog.Object);
 
-            boatTripController.ModelState.AddModelError("BoatName", "Input not valid!");
+            boatTripController.ModelState.AddModelError("Firstname", "Input not valid!");
 
             mockSession[_loggedIn] = _loggedIn;
             mockHttpContext.Setup(s => s.Session).Returns(mockSession);

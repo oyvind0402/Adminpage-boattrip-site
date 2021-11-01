@@ -268,8 +268,8 @@ namespace BoattripTest
             Assert.Equal((int)HttpStatusCode.BadRequest, result.StatusCode);
             Assert.Equal("Could not save that route!", result.Value);
         }
-        [Fact]
 
+        [Fact]
         public async Task SaveLoggedInFailModel()
         {
             var route1 = new Route
@@ -307,6 +307,7 @@ namespace BoattripTest
             Assert.Equal((int)HttpStatusCode.BadRequest, result.StatusCode);
             Assert.Equal("Input not valid!", result.Value);
         }
+
         [Fact]
         public async Task SaveNotLoggedIn()
         {
