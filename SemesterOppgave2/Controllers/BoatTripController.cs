@@ -503,6 +503,10 @@ namespace SemesterOppgave2.Controllers
         [Route("editroute")]
         public async Task<ActionResult> EditRoute(Route route)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
+            {
+                return Unauthorized("Not logged in!");
+            }
             if (ModelState.IsValid)
             {
                 bool editRoute = await _db.EditRoute(route);
@@ -606,9 +610,9 @@ namespace SemesterOppgave2.Controllers
                 if (!editOrder)
                 {
                     _log.LogInformation("Could not edit that order!");
-                    return BadRequest("Could not edit that order!");
+                    return NotFound("Could not edit that order!");
                 }
-                return Ok("Order edited!!");
+                return Ok("Order edited!");
             } else
             {
                 _log.LogInformation("Input not valid!");
