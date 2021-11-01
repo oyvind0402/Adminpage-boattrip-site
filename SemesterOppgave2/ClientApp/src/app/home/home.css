@@ -33,6 +33,13 @@ h1 {
   float: right;
   width: 260px;
 }
+  .form-div .email-error {
+    color: red;
+  }
+
+  .form-div .password-error {
+    color: red;
+  }
 
 .form-div-btn {
   width: 100%;

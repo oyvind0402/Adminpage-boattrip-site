@@ -4,7 +4,8 @@ import { CustomerService } from '../../../_services/customer.service';
 
 
 @Component({
-  templateUrl: 'customer.html'
+  templateUrl: 'customer.html',
+  styleUrls: ['./customer.css'],
 })
 
 export class CustomerComponent {

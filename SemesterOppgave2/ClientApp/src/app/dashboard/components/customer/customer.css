@@ -1,0 +1,84 @@
+.content {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.btn{
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+}
+
+  .btn:hover {
+    background: rgb(41, 50, 65);
+    color: rgb(224, 251, 252);
+  }
+
+.btn-endre {
+    background-color: green;
+    color: white;
+}
+
+.btn-slett {
+  background-color: red;
+  color: white;
+}
+
+.btn-add {
+  flex: 1 0 28%;
+  height: 50px;
+  margin: 25px 0 50px 0;
+  width: 300px;
+  background: rgb(41, 50, 65);
+  padding: 10px 40px;
+  color: rgb(224, 251, 252);
+  text-transform: uppercase;
+  font-weight: 700;
+  font-family: "Montserrat", Arial, sans-serif;
+  cursor: pointer;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+  .btn-add:hover {
+    background: rgba(152, 193, 217, 0.15);
+    border: 2px solid rgb(41, 50, 65);
+    color: rgb(41, 50, 65);
+  }
+
+
+@media screen and (max-width: 1100px) {
+  table {
+    border-collapse: separate;
+    border-spacing: 0 50px;
+  }
+
+  table thead {
+    display: none;
+  }
+
+  table td {
+    display: flex;
+  }
+  table tr {
+    margin-bottom: 5px;
+  }
+
+    table td::before {
+      content: attr(label);
+      font-weight: bold;
+      width: 120px;
+      min-width: 120px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+  .content {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  h2 {
+      margin-left: 10px;
+  }
+}
