@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Admin } from './admin/admin';
 import { BoatComponent } from './dashboard/components/boat/boat.component';
+import { EditBoatComponent } from './dashboard/components/boat/editboat.component';
+import { SaveBoatComponent } from './dashboard/components/boat/saveboat.component';
 import { CustomerComponent } from './dashboard/components/customer/customer.component';
 import { OrderComponent } from './dashboard/components/order/order.component';
 import { PostPlaceComponent } from './dashboard/components/postplace/postplace.component';
@@ -12,6 +14,8 @@ import { Home } from './home/home';
 
 const appRoots: Routes = [
   { path: 'boat', component: BoatComponent },
+  { path: 'editboat/:id', component: EditBoatComponent },
+  { path: 'saveboat', component: SaveBoatComponent },
   { path: 'customer', component: CustomerComponent },
   { path: 'route', component: RouteComponent },
   { path: 'terminal', component: TerminalComponent },

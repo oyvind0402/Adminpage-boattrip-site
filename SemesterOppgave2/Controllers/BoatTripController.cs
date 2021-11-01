@@ -238,8 +238,8 @@ namespace SemesterOppgave2.Controllers
             return Ok(allBoats);
         }
 
-        [HttpGet("{id}")]
-        [Route("getoneboat")]
+        [HttpGet]
+        [Route("getoneboat/{id}")]
         public async Task<ActionResult> GetOneBoat(int id)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -281,8 +281,8 @@ namespace SemesterOppgave2.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
-        [Route("deleteboat")]
+        [HttpDelete]
+        [Route("deleteboat/{id}")]
         public async Task<ActionResult> DeleteBoat(int id)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))

@@ -1,8 +1,26 @@
 <div>
-  <h2>Boats</h2>
-  <ul>
-    <li *ngFor="let boat of boats">
-      {{boat.boatName}} {{boat.capacity}} {{boat.ticketPrice}}
-    </li>
-  </ul>
+  <div class="content">
+    <h2>Boats:</h2>
+    <button class="btn btn-add" [routerLink]="['/saveboat']">New boat</button>
+    <table class="table table-boat">
+      <thead>
+        <tr>
+          <th>Boatname</th>
+          <th>Capacity</th>
+          <th>Ticketprice</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let boat of boats">
+          <td label="Boatname">{{boat.boatName}}</td>
+          <td label="Capacity">{{boat.capacity}}</td>
+          <td label="Ticketprice">{{boat.ticketPrice}}</td>
+          <td><button class="btn btn-endre" [routerLink]="['/editboat', boat.id]">Edit</button></td>
+          <td><button class="btn btn-slett" (click)="deleteBoat(boat.id)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

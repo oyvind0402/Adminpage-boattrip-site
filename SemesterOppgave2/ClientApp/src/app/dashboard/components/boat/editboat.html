@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="col-md-4">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <input class="form-control" formControlName="id" type="hidden" />
+      <div class="form-group">
+        <label>Boatname</label>
+        <input class="form-control" formControlName="boatName" />
+        <p class="alert alert-warning" [hidden]="form.controls.boatName.valid || (form.controls.boatName.pristine)">
+          Boatname isnt valid!
+        </p>
+      </div>
+      <div class="form-group">
+        <label>Capacity</label>
+        <input class="form-control" type="number" formControlName="capacity" />
+        <p class="alert alert-warning" [hidden]="form.controls.capacity.valid || (form.controls.capacity.pristine)">
+          Capacity isnt valid!
+        </p>
+      </div>
+      <div class="form-group">
+        <label>Ticketprice</label>
+        <input class="form-control" type="number" formControlName="ticketPrice" />
+        <p class="alert alert-warning" [hidden]="form.controls.ticketPrice.valid || (form.controls.ticketPrice.pristine)">
+          Ticketprice isnt valid!
+        </p>
+      </div>
+      <div class="form-group">
+        <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Edit</button>
+        <button class="btn btn-default" routerLink="/boat">Back</button>
+      </div>
+    </form>
+  </div>
+</div>

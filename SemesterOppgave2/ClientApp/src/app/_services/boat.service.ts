@@ -11,18 +11,18 @@ export class BoatService {
   }
 
   getOne(id: number) {
-    return this.http.get('/api/boattrip/getoneboat/' + id);
+    return this.http.get<Boat>('/api/boattrip/getoneboat/' + id);
   }
 
   save(boat: Boat) {
-    return this.http.post('/api/boattrip/saveboat/', boat);
+    return this.http.post('/api/boattrip/saveboat/', boat, { responseType: 'text' });
   }
 
   edit(boat: Boat) {
-    return this.http.put('/api/boattrip/editboat/' + boat.id, boat);
+    return this.http.put('/api/boattrip/editboat', boat, { responseType: 'text' });
   }
 
   delete(id: number) {
-    return this.http.delete('/api/boattrip/deleteboat/' + id);
+    return this.http.delete('/api/boattrip/deleteboat/' + id, { responseType: 'text' });
   }
 }

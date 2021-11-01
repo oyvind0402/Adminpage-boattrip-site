@@ -1,7 +1,7 @@
 <div>
   <div class="content">
     <h2>Customers:</h2>
-    <button class="btn btn-add">Add customer</button>
+    <button class="btn btn-add">New customer</button>
     <table class="table table-customer">
       <thead>
         <tr>
@@ -25,19 +25,12 @@
           <td label="Street name">{{customer.street}}</td>
           <td label="Zipcode">{{customer.zipCode}}</td>
           <td label="City">{{customer.city}}</td>
-          <td><button class="btn btn-endre">Endre</button></td>
-          <td><button class="btn btn-slett">Slett</button></td>
+          <td><button class="btn btn-endre">Edit</button></td>
+          <td><button class="btn btn-slett">Delete</button></td>
         </tr>
       </tbody>
     </table>
   </div>
-
-  <!--
-  <ul>
-    <li *ngFor="let customer of customers">
-      {{customer.firstname}} {{customer.lastname}} - Phonenr: {{customer.phonenr}} - Email: {{customer.email}} - {{customer.street}}, {{customer.zipCode}} {{customer.city}}
-    </li>
-  </ul>-->
 </div>
 
 

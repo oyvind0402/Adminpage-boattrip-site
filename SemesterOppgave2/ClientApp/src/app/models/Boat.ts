@@ -1,6 +1,6 @@
 export class Boat {
   id: number;
-  boatname: string;
+  boatName: string;
   capacity: number;
   ticketPrice: number;
 }

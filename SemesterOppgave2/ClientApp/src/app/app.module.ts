@@ -20,6 +20,10 @@ import { OrderComponent } from './dashboard/components/order/order.component';
 import { OrderService } from './_services/order.service';
 import { PostPlaceService } from './_services/postPlace.service';
 import { PostPlaceComponent } from './dashboard/components/postplace/postplace.component';
+import { EditBoatComponent } from './dashboard/components/boat/editboat.component';
+import { SaveBoatComponent } from './dashboard/components/boat/saveboat.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BoatModal } from './dashboard/components/boat/deleteboatmodal';
 
 @NgModule({
   declarations: [
@@ -31,6 +35,9 @@ import { PostPlaceComponent } from './dashboard/components/postplace/postplace.c
     NavMenu,
     CustomerComponent,
     BoatComponent,
+    EditBoatComponent,
+    SaveBoatComponent,
+    BoatModal,
     RouteComponent,
     TerminalComponent,
     OrderComponent,
@@ -41,8 +48,10 @@ import { PostPlaceComponent } from './dashboard/components/postplace/postplace.c
     HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    NgbModule,
   ],
   providers: [CustomerService, BoatService, RouteService, TerminalService, OrderService, PostPlaceService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [BoatModal],
 })
 export class AppModule { }
