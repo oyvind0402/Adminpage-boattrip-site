@@ -451,7 +451,7 @@ namespace BoattripTest
         {
             // Arrange
 
-            mockRep.Setup(k => k.DeleteRoute(It.IsAny<int>())).ReturnsAsync(true);
+            mockRep.Setup(k => k.DeleteOrder(It.IsAny<int>())).ReturnsAsync(true);
 
             var boatTripController = new BoatTripController(mockRep.Object, mockLog.Object);
 
@@ -472,7 +472,7 @@ namespace BoattripTest
         {
             // Arrange
 
-            mockRep.Setup(k => k.DeleteRoute(It.IsAny<int>())).ReturnsAsync(false);
+            mockRep.Setup(k => k.DeleteOrder(It.IsAny<int>())).ReturnsAsync(false);
 
             var boatTripController = new BoatTripController(mockRep.Object, mockLog.Object);
 
