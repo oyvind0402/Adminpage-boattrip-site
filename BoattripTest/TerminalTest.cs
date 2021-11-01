@@ -328,5 +328,78 @@ namespace BoattripTest
             Assert.Equal((int)HttpStatusCode.NotFound, resultat.StatusCode);
             Assert.Equal("Could not delete that terminal!", resultat.Value);
         }
+
+        [Fact]
+        public async Task EditLoggedInOK()
+        {
+            mockRep.Setup(t => t.EditTerminal(It.IsAny<Terminal>())).ReturnsAsync(true);
+
+            var boatTripController = new BoatTripController(mockRep.Object, mockLog.Object);
+            mockSession[_loggedIn] = _loggedIn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            boatTripController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            var result = await boatTripController.EditTerminal(It.IsAny<Terminal>()) as OkObjectResult;
+
+            Assert.Equal((int)HttpStatusCode.OK, result.StatusCode);
+            Assert.Equal("Terminal edited!", result.Value);
+        }
+
+        [Fact]
+        public async Task EditLoggedInNotOK()
+        {
+            mockRep.Setup(t => t.EditTerminal(It.IsAny<Terminal>())).ReturnsAsync(false);
+
+            var boatTripController = new BoatTripController(mockRep.Object, mockLog.Object);
+            mockSession[_loggedIn] = _loggedIn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            boatTripController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            var result = await boatTripController.EditTerminal(It.IsAny<Terminal>()) as NotFoundObjectResult;
+
+            Assert.Equal((int)HttpStatusCode.NotFound, result.StatusCode);
+            Assert.Equal("Could not edit that terminal!", result.Value);
+        }
+
+        [Fact]
+        public async Task EditNotLoggedIn()
+        {
+            mockRep.Setup(t => t.EditTerminal(It.IsAny<Terminal>())).ReturnsAsync(true);
+
+            var boatTripController = new BoatTripController(mockRep.Object, mockLog.Object);
+            mockSession[_loggedIn] = _notLoggedIn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            boatTripController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            var result = await boatTripController.EditTerminal(It.IsAny<Terminal>()) as UnauthorizedObjectResult;
+
+            Assert.Equal((int)HttpStatusCode.Unauthorized, result.StatusCode);
+            Assert.Equal("Not logged in!", result.Value);
+        }
+
+        [Fact]
+        public async Task EditLoggedInWrongModel()
+        {
+            var terminal = new Terminal
+            {
+                TerminalName = "",
+                Street = "Schweigaards gate 1",
+                ZipCode = "2222",
+                City = "Oslo"
+            }; ;
+
+            mockRep.Setup(t => t.EditTerminal(terminal)).ReturnsAsync(true);
+
+            var boatTripController = new BoatTripController(mockRep.Object, mockLog.Object);
+            boatTripController.ModelState.AddModelError("TerminalName", "Input not valid!");
+            mockSession[_loggedIn] = _loggedIn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            boatTripController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            var result = await boatTripController.EditTerminal(terminal) as BadRequestObjectResult;
+
+            Assert.Equal((int)HttpStatusCode.BadRequest, result.StatusCode);
+            Assert.Equal("Input not valid!", result.Value);
+        }
     }
 }

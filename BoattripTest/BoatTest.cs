@@ -306,5 +306,77 @@ namespace BoattripTest
             Assert.Equal("Could not delete that boat!", resultat.Value);
         }
 
+        [Fact]
+        public async Task EditLoggedInOK()
+        {
+            mockRep.Setup(b => b.EditBoat(It.IsAny<Boat>())).ReturnsAsync(true);
+
+            var boatTripController = new BoatTripController(mockRep.Object, mockLog.Object);
+            mockSession[_loggedIn] = _loggedIn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            boatTripController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            var result = await boatTripController.EditBoat(It.IsAny<Boat>()) as OkObjectResult;
+
+            Assert.Equal((int)HttpStatusCode.OK, result.StatusCode);
+            Assert.Equal("Boat edited!", result.Value);
+        }
+
+        [Fact]
+        public async Task EditLoggedInNotOK()
+        {
+            mockRep.Setup(b => b.EditBoat(It.IsAny<Boat>())).ReturnsAsync(false);
+
+            var boatTripController = new BoatTripController(mockRep.Object, mockLog.Object);
+            mockSession[_loggedIn] = _loggedIn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            boatTripController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            var result = await boatTripController.EditBoat(It.IsAny<Boat>()) as NotFoundObjectResult;
+
+            Assert.Equal((int)HttpStatusCode.NotFound, result.StatusCode);
+            Assert.Equal("Could not edit that boat!", result.Value);
+        }
+
+        [Fact]
+        public async Task EditNotLoggedIn()
+        {
+            mockRep.Setup(r => r.EditBoat(It.IsAny<Boat>())).ReturnsAsync(true);
+
+            var boatTripController = new BoatTripController(mockRep.Object, mockLog.Object);
+            mockSession[_loggedIn] = _notLoggedIn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            boatTripController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            var result = await boatTripController.EditBoat(It.IsAny<Boat>()) as UnauthorizedObjectResult;
+
+            Assert.Equal((int)HttpStatusCode.Unauthorized, result.StatusCode);
+            Assert.Equal("Not logged in!", result.Value);
+        }
+
+        [Fact]
+        public async Task EditLoggedInWrongModel()
+        {
+            var boat = new Boat
+            {
+                BoatName = "",
+                Capacity = 500,
+                TicketPrice = 1200,
+            };
+
+            mockRep.Setup(b => b.EditBoat(boat)).ReturnsAsync(true);
+
+            var boatTripController = new BoatTripController(mockRep.Object, mockLog.Object);
+            boatTripController.ModelState.AddModelError("BoatName", "Input not valid!");
+            mockSession[_loggedIn] = _loggedIn;
+            mockHttpContext.Setup(s => s.Session).Returns(mockSession);
+            boatTripController.ControllerContext.HttpContext = mockHttpContext.Object;
+
+            var result = await boatTripController.EditBoat(boat) as BadRequestObjectResult;
+
+            Assert.Equal((int)HttpStatusCode.BadRequest, result.StatusCode);
+            Assert.Equal("Input not valid!", result.Value);
+        }
+
     }
 }
