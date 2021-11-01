@@ -8,6 +8,7 @@
   align-items: center;
   background: rgb(41, 50, 65);
   z-index: 10;
+  height: 120px;
 }
 
 .nav-list {

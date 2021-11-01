@@ -1,0 +1,5 @@
+.content {
+    height: fit-content;
+    min-height: calc(100vh - 120px - 88px - 20px); /*height nav, footer og margin top*/
+    margin-top: 20px;
+}

@@ -3,11 +3,11 @@ footer {
   text-align: center;
   color: rgb(224, 251, 252);
   width: 100%;
-  position: fixed;
+  height: 88px;
   bottom: 0;
 }
 
-footer p {
+  footer p {
     margin: 0;
     padding: 20px 10px;
-}
+  }

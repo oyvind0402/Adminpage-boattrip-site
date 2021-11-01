@@ -1,15 +1,25 @@
+.knapper-div {
+  align-items: center;
+}
+
 
 .knapper-oversikt {
   display: flex;
   flex-wrap: wrap;
-  width: 80%;
+  width: 60%;
+  padding: 0px 0px 5px 5px;
+  margin: 20px auto;
 }
 
 
 button {
-  float: left;
-  width: 350px;
-  text-align: center;
+  flex: 1 0 28%;
+  height: 50px;
+  margin-top: 25px;
+  margin-right: 50px;
+  background: blue;
+
+  width: 300px;
   background: rgb(41, 50, 65);
   padding: 10px 40px;
   color: rgb(224, 251, 252);
@@ -17,9 +27,8 @@ button {
   font-weight: 700;
   font-family: "Montserrat", Arial, sans-serif;
   cursor: pointer;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   text-align: center;
-  margin: 20px 50px;
 }
 
   button:hover {
@@ -27,4 +36,25 @@ button {
     border: 2px solid rgb(41, 50, 65);
     color: rgb(41, 50, 65);
   }
+
+.btn-logg-ut{
+    margin-top: 75px;
+    margin-bottom: 50px;
+}
+
+@media only screen and (max-width: 1000px) {
+  button {
+    flex: 1 0 100%;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+
+  .knapper-oversikt {
+    width: 75%;
+  }
+  button {
+    flex: 1 0 100%;
+  }
+}
 
