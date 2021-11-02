@@ -42,7 +42,9 @@
     <None Remove="ClientApp\src\app\dashboard\components\deletemodal\deletemodal.ts" />
     <None Remove="ClientApp\src\app\dashboard\components\order\editorder.component.ts" />
     <None Remove="ClientApp\src\app\dashboard\components\order\order.component.ts" />
+    <None Remove="ClientApp\src\app\dashboard\components\postplace\editpostplace.component.ts" />
     <None Remove="ClientApp\src\app\dashboard\components\postplace\postplace.component.ts" />
+    <None Remove="ClientApp\src\app\dashboard\components\postplace\savepostplace.component.ts" />
     <None Remove="ClientApp\src\app\dashboard\components\route\route.component.ts" />
     <None Remove="ClientApp\src\app\dashboard\components\terminal\terminal.service.ts" />
     <None Remove="ClientApp\src\app\dashboard\customer.component.ts" />
@@ -82,7 +84,9 @@
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\deletemodal\deletemodal.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\order\editorder.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\order\order.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\postplace\editpostplace.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\postplace\postplace.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\postplace\savepostplace.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\route\route.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\terminal\terminal.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\home\home.ts" />

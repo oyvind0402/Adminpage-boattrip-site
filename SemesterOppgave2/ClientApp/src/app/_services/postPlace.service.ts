@@ -10,7 +10,7 @@ export class PostPlaceService {
     return this.http.get<PostPlace[]>("api/boattrip/getallpostplaces")
   }
 
-  getOne(id: number) {
+  getOne(id: string) {
     return this.http.get <PostPlace>('/api/boattrip/getonepostplace/' + id);
   }
 
@@ -22,7 +22,7 @@ export class PostPlaceService {
     return this.http.put('/api/boattrip/editpostplace/', postPlace, { responseType: 'text' });
   }
 
-  delete(id: number) {
+  delete(id: string) {
     return this.http.delete('/api/boattrip/deletepostplace/' + id, { responseType: 'text' });
   }
 }
