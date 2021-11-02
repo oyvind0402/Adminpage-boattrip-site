@@ -664,8 +664,6 @@ namespace SemesterOppgave2.DAL
             }
             catch (Exception e)
             {
-                _log.LogInformation(e.Message);
-                _log.LogInformation(e.InnerException.Message);
                 return false;
             }
         }
@@ -722,8 +720,6 @@ namespace SemesterOppgave2.DAL
             }
             catch (Exception e)
             {
-                _log.LogInformation(e.Message);
-                _log.LogInformation(e.InnerException.Message);
                 return null;
             }
         }
@@ -823,8 +819,6 @@ namespace SemesterOppgave2.DAL
             }
             catch (Exception e)
             {
-                _log.LogInformation(e.Message);
-                _log.LogInformation(e.InnerException.Message);
                 return false;
             }
         }
@@ -883,8 +877,6 @@ namespace SemesterOppgave2.DAL
             }
             catch (Exception e)
             {
-                _log.LogInformation(e.Message);
-                _log.LogInformation(e.InnerException.Message);
                 return false;
             }
         }
