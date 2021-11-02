@@ -33,6 +33,7 @@ import { SaveOrderComponent } from './dashboard/components/order/saveorder.compo
 
 import { DeleteModal } from './dashboard/components/deletemodal/deletemodal';
 import { EditTerminalComponent } from './dashboard/components/terminal/editterminal.component';
+
 import { SavePostPlaceComponent } from './dashboard/components/postplace/savepostplace.component';
 import { EditPostplaceComponent } from './dashboard/components/postplace/editpostplace.component';
 import { EditRouteComponent } from './dashboard/components/route/editroute.component';
@@ -74,6 +75,7 @@ import { SaveTerminalComponent } from './dashboard/components/terminal/savetermi
 
     PostPlaceComponent,
     EditPostplaceComponent,
+    SavePostPlaceComponent,
 
 
     //SavePostPlaceComponent

@@ -48,7 +48,7 @@ const appRoots: Routes = [
 
   { path: 'postplace', component: PostPlaceComponent },
   { path: 'editpostplace/:id', component: EditPostplaceComponent },
- // { path: 'savepostplace', component: SavePostPlaceComponent },
+  { path: 'savepostplace', component: SavePostPlaceComponent },
 
   { path: 'home', component: Home },
   { path: 'admin', component: Admin },

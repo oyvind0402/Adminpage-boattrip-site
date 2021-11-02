@@ -1,10 +1,29 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+<div class="container">
+  <div class="col-md-4">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-</body>
-</html>
+      <div class="form-group">
+        <label>Zipcode</label>
+        <input class="form-control" formControlName="zipcode" />
+        <p class="alert alert-warning" [hidden]="form.controls.zipcode.valid || (form.controls.zipcode.pristine)">
+          Zipcode isnt valid!
+        </p>
+      </div>
+
+      <div class="form-group">
+        <label>City</label>
+        <input class="form-control" formControlName="city" />
+        <p class="alert alert-warning" [hidden]="form.controls.city.valid || (form.controls.city.pristine)">
+          City isnt valid!
+        </p>
+      </div>
+
+
+      <!--Submit-->
+      <div class="form-group">
+        <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Save</button>
+        <button class="btn btn-default" routerLink="/postplace">Back</button>
+      </div>
+    </form>
+  </div>
+</div>
