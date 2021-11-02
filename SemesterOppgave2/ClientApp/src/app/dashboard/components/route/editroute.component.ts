@@ -94,9 +94,9 @@ export class EditRouteComponent {
 
     //route
     editedRoute.id = this.form.value.id;
-    editedRoute.departureTime = this.form.value.departureTime;
-    editedRoute.arrivalTime = this.form.value.arrivalTime;
-    editedRoute.ticketsLeft = this.form.value.ticketsLeft;
+    editedRoute.departureTime = this.form.value.departuretime;
+    editedRoute.arrivalTime = this.form.value.arrivaltime;
+    editedRoute.ticketsLeft = this.form.value.ticketsleft;
 
     //arrivalterminal
     editedRoute.arrivalTerminalName = this.currentRoute.arrivalTerminalName;

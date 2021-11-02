@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Order } from '../../../models/order';
-import { OrderService } from '../../../_services/order.service';
+import { Route } from '../../../models/order';
+import { RouteService } from '../../../_services/order.service';
 import { DeleteModal } from '../deletemodal/deletemodal';
 
 @Component({
@@ -11,14 +11,14 @@ import { DeleteModal } from '../deletemodal/deletemodal';
 })
 
 export class OrderComponent {
-  orders: Order[] = [];
+  orders: Route[] = [];
   deletedOrder: string;
 
   ngOnInit() {
     this.loadAllOrders();
   }
 
-  constructor(private orderService: OrderService, private router: Router, private modalService: NgbModal) { }
+  constructor(private orderService: RouteService, private router: Router, private modalService: NgbModal) { }
   deleteOrder(id: number) {
     this.orderService.getOne(id).subscribe((order) => {
       this.deletedOrder = order.departureTerminalName + "-" + order.arrivalTerminalName;

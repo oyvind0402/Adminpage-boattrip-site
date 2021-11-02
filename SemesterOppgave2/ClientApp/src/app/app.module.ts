@@ -17,7 +17,6 @@ import { BoatService } from './_services/boat.service';
 import { RouteService } from './_services/route.service';
 import { TerminalService } from './_services/terminal.service';
 import { OrderComponent } from './dashboard/components/order/order.component';
-import { OrderService } from './_services/order.service';
 import { PostPlaceService } from './_services/postPlace.service';
 import { PostPlaceComponent } from './dashboard/components/postplace/postplace.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -36,6 +35,9 @@ import { EditTerminalComponent } from './dashboard/components/terminal/edittermi
 import { SavePostPlaceComponent } from './dashboard/components/postplace/savepostplace.component';
 import { EditPostplaceComponent } from './dashboard/components/postplace/editpostplace.component';
 import { EditRouteComponent } from './dashboard/components/route/editroute.component';
+import { SaveRouteComponent } from './dashboard/components/route/saveroute.component';
+
+
 import { SaveTerminalComponent } from './dashboard/components/terminal/saveterminal.component';
 
 
@@ -63,6 +65,7 @@ import { SaveTerminalComponent } from './dashboard/components/terminal/savetermi
 
     RouteComponent,
     EditRouteComponent,
+    SaveRouteComponent,
 
     TerminalComponent,
     EditTerminalComponent,
@@ -81,7 +84,7 @@ import { SaveTerminalComponent } from './dashboard/components/terminal/savetermi
     AppRoutingModule,
     NgbModule,
   ],
-  providers: [CustomerService, BoatService, RouteService, TerminalService, OrderService, PostPlaceService],
+  providers: [CustomerService, BoatService, RouteService, TerminalService, RouteService, PostPlaceService],
   bootstrap: [AppComponent],
   entryComponents: [DeleteModal],
 })

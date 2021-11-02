@@ -22,6 +22,8 @@ import { EditPostplaceComponent } from './dashboard/components/postplace/editpos
 import { SavePostPlaceComponent } from './dashboard/components/postplace/savepostplace.component';
 import { EditRouteComponent } from './dashboard/components/route/editroute.component';
 import { SaveTerminalComponent } from './dashboard/components/terminal/saveterminal.component';
+import { SaveRouteComponent } from './dashboard/components/route/saveroute.component';
+
 
 const appRoots: Routes = [
   { path: 'order', component: OrderComponent },
@@ -38,6 +40,7 @@ const appRoots: Routes = [
 
   { path: 'route', component: RouteComponent },
   { path: 'editroute/:id', component: EditRouteComponent },
+  { path: 'saveroute', component: SaveRouteComponent },
 
   { path: 'terminal', component: TerminalComponent },
   { path: 'editterminal/:id', component: EditTerminalComponent },

@@ -1,12 +1,13 @@
 <div>
   <div class="content">
     <h2>Routes:</h2>
-    <button class="btn btn-add" >New route</button>
+    <button class="btn btn-add" [routerLink]="['/saveroute']">New route</button>
     <table class="table table-route">
       <thead>
         <tr>
           <th>Departure</th>
           <th>Arrival</th>
+          <th>Tickets left</th>
           <th></th>
           <th></th>
         </tr>
@@ -15,6 +16,7 @@
         <tr *ngFor="let route of routes">
           <td label="Departure">{{route.departureTerminalName}} <br />{{route.departureTime}}</td>
           <td label="Arrival">{{route.arrivalTerminalName}}<br />{{route.arrivalTime}}</td>
+          <td label="Tickets left">{{route.ticketsLeft}}</td>
           <td><button class="btn btn-endre" [routerLink]="['/editroute', route.id]">Edit</button></td>
           <td><button class="btn btn-slett" (click)="deleteRoute(route.id)">Delete</button></td>
         </tr>
