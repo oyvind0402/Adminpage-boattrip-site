@@ -6,8 +6,8 @@ export class Route {
 
   //boat
   boatName: string;
-  capacity: string;
-  ticketPrice: string;
+  capacity: number;
+  ticketPrice: number;
 
   //Arrival terminal
   arrivalTerminalName: string;

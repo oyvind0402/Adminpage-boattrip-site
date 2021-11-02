@@ -37,7 +37,7 @@ const appRoots: Routes = [
   { path: 'savecustomer', component: SaveCustomerComponent },
 
   { path: 'route', component: RouteComponent },
-  { path: 'editroute:id', component: EditRouteComponent },
+  { path: 'editroute/:id', component: EditRouteComponent },
 
   { path: 'terminal', component: TerminalComponent },
   { path: 'editterminal/:id', component: EditTerminalComponent },
