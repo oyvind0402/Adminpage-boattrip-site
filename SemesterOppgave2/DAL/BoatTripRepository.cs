@@ -862,13 +862,13 @@ namespace SemesterOppgave2.DAL
                 order.Customer.Postplace.City = editedOrder.City;
                 order.Customer.Postplace.ZipCode = editedOrder.ZipCode;
                 await _db.SaveChangesAsync();
-                //_log.LogInformation(order.ToString() + " edited!");
+                _log.LogInformation(order.ToString() + " edited!");
                 return true;
             }
             catch (Exception e)
             {
-                //_log.LogInformation(e.Message);
-                //_log.LogInformation(e.InnerException.Message);
+                _log.LogInformation(e.Message);
+                _log.LogInformation(e.InnerException.Message);
                 return false;
             }
         }
