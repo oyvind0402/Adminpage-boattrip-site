@@ -16,7 +16,7 @@
           <td label="Departure">{{route.departureTerminalName}} <br />{{route.departureTime}}</td>
           <td label="Arrival">{{route.arrivalTerminalName}}<br />{{route.arrivalTime}}</td>
           <td><button class="btn btn-endre" >Edit</button></td>
-          <td><button class="btn btn-slett" >Delete</button></td>
+          <td><button class="btn btn-slett" (click)="deleteRoute(route.id)">Delete</button></td>
         </tr>
       </tbody>
     </table>
