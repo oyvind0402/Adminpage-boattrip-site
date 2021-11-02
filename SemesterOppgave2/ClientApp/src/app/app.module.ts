@@ -12,7 +12,7 @@ import { CustomerService } from './_services/customer.service';
 import { CustomerComponent } from './dashboard/components/customer/customer.component';
 import { BoatComponent } from './dashboard/components/boat/boat.component';
 import { RouteComponent } from './dashboard/components/route/route.component';
-import { TerminalComponent } from './dashboard/components/terminal/terminal.service';
+import { TerminalComponent } from './dashboard/components/terminal/terminal.component';
 import { BoatService } from './_services/boat.service';
 import { RouteService } from './_services/route.service';
 import { TerminalService } from './_services/terminal.service';
@@ -32,6 +32,7 @@ import { EditOrderComponent } from './dashboard/components/order/editorder.compo
 import { SaveOrderComponent } from './dashboard/components/order/saveorder.component';
 
 import { DeleteModal } from './dashboard/components/deletemodal/deletemodal';
+import { EditTerminalComponent } from './dashboard/components/terminal/editterminal.component';
 
 
 @NgModule({
@@ -60,6 +61,8 @@ import { DeleteModal } from './dashboard/components/deletemodal/deletemodal';
     EditOrderComponent,
 
     TerminalComponent,
+    EditTerminalComponent,
+
     PostPlaceComponent,
   ],
   imports: [

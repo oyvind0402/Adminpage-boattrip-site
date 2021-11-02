@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="col-md-4">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <input class="form-control" formControlName="id" type="hidden" />
+      <div class="form-group">
+        <label>Terminal name</label>
+        <input class="form-control" formControlName="terminalName" />
+        <p class="alert alert-warning" [hidden]="form.controls.terminalName.valid || (form.controls.terminalName.pristine)">
+          Terminal name isnt valid!
+        </p>
+      </div>
+      <div class="form-group">
+        <label>Street</label>
+        <input class="form-control" formControlName="street" />
+        <p class="alert alert-warning" [hidden]="form.controls.street.valid || (form.controls.street.pristine)">
+          Street isnt valid!
+        </p>
+      </div>
+      <div class="form-group">
+        <label>City</label>
+        <input class="form-control" formControlName="city" />
+        <p class="alert alert-warning" [hidden]="form.controls.city.valid || (form.controls.city.pristine)">
+          City isnt valid!
+        </p>
+      </div>
+      <div class="form-group">
+        <label>Zip Code</label>
+        <input class="form-control" formControlName="zipCode" />
+        <p class="alert alert-warning" [hidden]="form.controls.zipCode.valid || (form.controls.zipCode.pristine)">
+          Zip Code isnt valid!
+        </p>
+      </div>
+      <div class="form-group">
+        <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Edit</button>
+        <button class="btn btn-default" routerLink="/terminal">Back</button>
+      </div>
+    </form>
+  </div>
+</div>

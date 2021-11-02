@@ -10,30 +10,33 @@ import { OrderService } from '../../../_services/order.service';
 
 export class EditOrderComponent {
   form: FormGroup;
+  currentOrder: Order;
 
   validation = {
 
     // Order
-    ticketamount: [0, Validators.compose([Validators.required, Validators.pattern("^[1-9]{1}[0-9]{0,3}$")])],
-    totalpris: [0, Validators.compose([Validators.required, Validators.pattern("^[1-9]{1}[0-9]{1,6}$")])],
+    id: [""],
+    ticketamount: [0, Validators.compose([Validators.required, Validators.pattern("[1-9]{1}[0-9]{0,3}")])],
+    totalprice: [0, Validators.compose([Validators.required, Validators.pattern("[1-9]{1}[0-9]{1,6}")])],
 
+    /*
     //route
-    departuretime: ['', Validators.compose([Validators.required, Validators.pattern("^[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}$")])],
-    arrivaltime: ['', Validators.compose([Validators.required, Validators.pattern("^[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}$")])],
-    ticketsleft: [0, Validators.compose([Validators.required, Validators.pattern("^[0-9]{1,4}$")])],
+    departuretime: ['', Validators.compose([Validators.required, Validators.pattern("[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}")])],
+    arrivaltime: ['', Validators.compose([Validators.required, Validators.pattern("[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}")])],
+    ticketsleft: [0, Validators.compose([Validators.required, Validators.pattern("[0-9]{1,4}")])],
 
 
     //arrivalterminal
-    arrivalterminalname: ['', Validators.compose([Validators.required, Validators.pattern("^[a-zA-ZøæåØÆÅöÖäÄ. \-]{2,20}$")])],
-    arrivalterminalcity: ['', Validators.compose([Validators.required, Validators.pattern("^[a-zA-ZøæåØÆÅöÖäÄ. \-]{2,20}$")])],
-    arrivalterminalzipcode: ['', Validators.compose([Validators.required, Validators.pattern("^[1-9][0-9]{4}|[0-9]{4}|[1-9]{1}[0-9]{2}( )[0-9]{2}$")])],
-    arrivalterminalstreet: ['', Validators.compose([Validators.required, Validators.pattern("^[0-9a-zA-ZøæåØÆÅöÖäÄ. \-]{2,30}$")])],
+    arrivalterminalname: ['', Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅöÖäÄ. \\-]{2,20}")])],
+    arrivalterminalcity: ['', Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅöÖäÄ. \\-]{2,20}")])],
+    arrivalterminalzipcode: ['', Validators.compose([Validators.required, Validators.pattern("[1-9][0-9]{4}|[0-9]{4}|[1-9]{1}[0-9]{2}( )[0-9]{2}")])],
+    arrivalterminalstreet: ['', Validators.compose([Validators.required, Validators.pattern("[0-9a-zA-ZøæåØÆÅöÖäÄ. \\-]{2,30}")])],
 
     //departureterminal
-    departureterminalname: ['', Validators.compose([Validators.required, Validators.pattern("^[a-zA-ZøæåØÆÅöÖäÄ. \-]{2,20}$")])],
-    departureterminalcity: ['', Validators.compose([Validators.required, Validators.pattern("^[a-zA-ZøæåØÆÅöÖäÄ. \-]{2,20}$")])],
-    departureterminalzipcode: ['', Validators.compose([Validators.required, Validators.pattern("^[1-9][0-9]{4}|[0-9]{4}|[1-9]{1}[0-9]{2}( )[0-9]{2}$")])],
-    departureterminalstreet: ['', Validators.compose([Validators.required, Validators.pattern("^[0-9a-zA-ZøæåØÆÅöÖäÄ. \-]{2,30}$")])],
+    departureterminalname: ['', Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅöÖäÄ. \\-]{2,20}")])],
+    departureterminalcity: ['', Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅöÖäÄ. \\-]{2,20}")])],
+    departureterminalzipcode: ['', Validators.compose([Validators.required, Validators.pattern("[1-9][0-9]{4}|[0-9]{4}|[1-9]{1}[0-9]{2}( )[0-9]{2}")])],
+    departureterminalstreet: ['', Validators.compose([Validators.required, Validators.pattern("[0-9a-zA-ZøæåØÆÅöÖäÄ. \\-]{2,30}")])],
 
     //boat
     boatName: ['', Validators.compose([Validators.required, Validators.pattern("[a-zA-ZøæåØÆÅöÖäÄ. \\-]{2,20}")])],
@@ -48,6 +51,7 @@ export class EditOrderComponent {
     street: ['', Validators.compose([Validators.required, Validators.pattern("[0-9a-zA-ZøæåØÆÅ. \\-]{2,50}")])],
     zipCode: ['', Validators.compose([Validators.required, Validators.pattern("[1-9][0-9]{4}|[0-9]{4}|[1-9]{1}[0-9]{2}( )[0-9]{2}")])],
     city: ['', Validators.compose([Validators.required, Validators.pattern("[0-9a-zA-ZøæåØÆÅ. \\-]{2,30}")])]
+    */
   }
 
 
@@ -58,12 +62,14 @@ export class EditOrderComponent {
 
   fetchOrder(id: number) {
     this.orderService.getOne(id).subscribe(order => {
+      this.currentOrder = order;
+
       this.form.patchValue({ id: order.id });
 
       //order
       this.form.patchValue({ ticketamount: order.ticketAmount });
-      this.form.patchValue({ totalpris: order.totalPrice });
-
+      this.form.patchValue({ totalprice: order.totalPrice });
+      /*
       //route
       this.form.patchValue({ departuretime: order.departureTime });
       this.form.patchValue({ arrivaltime: order.arrivalTime });
@@ -93,6 +99,7 @@ export class EditOrderComponent {
       this.form.patchValue({ email: order.email });
       this.form.patchValue({ street: order.street });
       this.form.patchValue({ city: order.city });
+      */
     }, error => console.log(error)
     );
 
@@ -101,39 +108,42 @@ export class EditOrderComponent {
   editOrder() {
     
     const editedOrder = new Order();
+
     //order
+    editedOrder.id = this.form.value.id;
     editedOrder.ticketAmount = this.form.value.ticketamount;
     editedOrder.totalPrice = this.form.value.totalprice;
 
     //route
-    editedOrder.departureTime = this.form.value.departuretime;
-    editedOrder.arrivalTime = this.form.value.arrivaltime;
-    editedOrder.ticketsLeft = this.form.value.ticketsleft;
+    editedOrder.departureTime = this.currentOrder.departureTime;
+    editedOrder.arrivalTime = this.currentOrder.arrivalTime;
+    editedOrder.ticketsLeft = this.currentOrder.ticketsLeft;
 
     //arrivalterminal
-    editedOrder.arrivalTerminalName = this.form.value.arrivalterminalname;
-    editedOrder.arrivalTerminalCity = this.form.value.arrivalterminalcity;
-    editedOrder.arrivalTerminalZipCode = this.form.value.arrivalTerminalZipCode;
-    editedOrder.arrivalTerminalStreet = this.form.value.arrivalterminalstreet;
+    editedOrder.arrivalTerminalName = this.currentOrder.arrivalTerminalName;
+    editedOrder.arrivalTerminalCity = this.currentOrder.arrivalTerminalCity;
+    editedOrder.arrivalTerminalZipCode = this.currentOrder.arrivalTerminalZipCode;
+    editedOrder.arrivalTerminalStreet = this.currentOrder.arrivalTerminalStreet;
 
     //departureterminal
-    editedOrder.departureTerminalName = this.form.value.departureterminalname;
-    editedOrder.departureTerminalCity = this.form.value.departureterminalcity;
-    editedOrder.departureTerminalZipCode = this.form.value.departureterminalzipcode;
-    editedOrder.departureTerminalStreet = this.form.value.departureterminalstreet;
+    editedOrder.departureTerminalName = this.currentOrder.departureTerminalName;
+    editedOrder.departureTerminalCity = this.currentOrder.departureTerminalCity;
+    editedOrder.departureTerminalZipCode = this.currentOrder.departureTerminalZipCode;
+    editedOrder.departureTerminalStreet = this.currentOrder.departureTerminalStreet;
 
     //boat
-    editedOrder.boatName = this.form.value.boatName;
-    editedOrder.capacity = this.form.value.capacity;
-    editedOrder.ticketPrice = this.form.value.ticketPrice;
+    editedOrder.boatName = this.currentOrder.boatName;
+    editedOrder.capacity = this.currentOrder.capacity;
+    editedOrder.ticketPrice = this.currentOrder.ticketPrice;
 
     //customer
-    editedOrder.firstname = this.form.value.firstname;
-    editedOrder.lastname = this.form.value.lastname;
-    editedOrder.phonenr = this.form.value.phonenr;
-    editedOrder.email = this.form.value.email;
-    editedOrder.street = this.form.value.street;
-    editedOrder.city = this.form.value.city;
+    editedOrder.firstname = this.currentOrder.firstname;
+    editedOrder.lastname = this.currentOrder.lastname;
+    editedOrder.phonenr = this.currentOrder.phonenr;
+    editedOrder.email = this.currentOrder.email;
+    editedOrder.street = this.currentOrder.street;
+    editedOrder.city = this.currentOrder.city;
+    editedOrder.zipCode = this.currentOrder.zipCode;
 
     console.log(editedOrder);
 

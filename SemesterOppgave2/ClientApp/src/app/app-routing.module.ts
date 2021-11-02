@@ -15,8 +15,9 @@ import { SaveOrderComponent } from './dashboard/components/order/saveorder.compo
 
 import { PostPlaceComponent } from './dashboard/components/postplace/postplace.component';
 import { RouteComponent } from './dashboard/components/route/route.component';
-import { TerminalComponent } from './dashboard/components/terminal/terminal.service';
+import { TerminalComponent } from './dashboard/components/terminal/terminal.component';
 import { Home } from './home/home';
+import { EditTerminalComponent } from './dashboard/components/terminal/editterminal.component';
 
 
 const appRoots: Routes = [
@@ -33,7 +34,10 @@ const appRoots: Routes = [
   { path: 'savecustomer', component: SaveCustomerComponent },
 
   { path: 'route', component: RouteComponent },
+
   { path: 'terminal', component: TerminalComponent },
+  { path: 'editterminal/:id', component: EditTerminalComponent },
+
   { path: 'postplace', component: PostPlaceComponent },
   { path: 'home', component: Home },
   { path: 'admin', component: Admin },

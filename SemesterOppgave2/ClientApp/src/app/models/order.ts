@@ -22,8 +22,8 @@ export class Order {
 
   //boat
   boatName: string;
-  capacity: string;
-  ticketPrice: string;
+  capacity: number;
+  ticketPrice: number;
 
   //customer
   firstname: string;

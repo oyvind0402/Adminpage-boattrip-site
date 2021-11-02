@@ -19,8 +19,8 @@
           <td label="Street">{{terminal.street}}</td>
           <td label="ZipCode">{{terminal.zipCode}}</td>
           <td label="City">{{terminal.city}}</td>
-          <td><button class="btn btn-endre" >Edit</button></td>
-          <td><button class="btn btn-slett" >Delete</button></td>
+          <td><button class="btn btn-endre" [routerLink]="['/editterminal, terminal.id']">Edit</button></td>
+          <td><button class="btn btn-slett" (click)="deleteTerminal(terminal.id)">Delete</button></td>
         </tr>
       </tbody>
     </table>
