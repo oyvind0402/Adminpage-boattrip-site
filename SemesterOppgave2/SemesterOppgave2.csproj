@@ -44,7 +44,8 @@
     <None Remove="ClientApp\src\app\dashboard\components\order\order.component.ts" />
     <None Remove="ClientApp\src\app\dashboard\components\postplace\postplace.component.ts" />
     <None Remove="ClientApp\src\app\dashboard\components\route\route.component.ts" />
-    <None Remove="ClientApp\src\app\dashboard\components\terminal\terminal.service.ts" />
+    <None Remove="ClientApp\src\app\dashboard\components\terminal\editterminal.component.ts" />
+    <None Remove="ClientApp\src\app\dashboard\components\terminal\terminal.component.ts" />
     <None Remove="ClientApp\src\app\dashboard\customer.component.ts" />
     <None Remove="ClientApp\src\app\home\home.ts" />
     <None Remove="ClientApp\src\app\models\Boat.ts" />
@@ -84,7 +85,8 @@
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\order\order.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\postplace\postplace.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\route\route.component.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\terminal\terminal.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\terminal\editterminal.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\terminal\terminal.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\home\home.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\customer.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\boat.ts" />
