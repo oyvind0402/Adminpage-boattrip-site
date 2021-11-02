@@ -41,6 +41,7 @@
     <None Remove="ClientApp\src\app\dashboard\components\customer\deletecustomermodal.ts" />
     <None Remove="ClientApp\src\app\dashboard\components\customer\editcustomer.component.ts" />
     <None Remove="ClientApp\src\app\dashboard\components\customer\savecustomer.component.ts" />
+    <None Remove="ClientApp\src\app\dashboard\components\order\deleteordermodal.ts" />
     <None Remove="ClientApp\src\app\dashboard\components\order\order.component.ts" />
     <None Remove="ClientApp\src\app\dashboard\components\postplace\postplace.component.ts" />
     <None Remove="ClientApp\src\app\dashboard\components\route\route.component.ts" />
@@ -81,6 +82,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\customer\deletecustomermodal.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\customer\editcustomer.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\customer\savecustomer.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\order\deleteordermodal.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\order\order.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\postplace\postplace.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\route\route.component.ts" />
