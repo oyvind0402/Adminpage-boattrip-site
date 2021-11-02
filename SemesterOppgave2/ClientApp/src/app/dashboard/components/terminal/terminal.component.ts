@@ -36,7 +36,7 @@ export class TerminalComponent {
     const modalRef = this.modalService.open(DeleteModal);
     modalRef.componentInstance.info = this.deletedTerminal;
     modalRef.result.then(result => {
-      if (result = 'Delete') {
+      if (result == 'Delete') {
         this.terminalService.delete(id).subscribe(() => {
           this.loadAllTerminals();
         }, error => console.log(error)

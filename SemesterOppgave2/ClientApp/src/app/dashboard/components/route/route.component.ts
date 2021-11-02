@@ -36,7 +36,7 @@ export class RouteComponent {
     const modalRef = this.modalService.open(DeleteModal);
     modalRef.componentInstance.info = this.deletedRoute;
     modalRef.result.then(result => {
-      if (result = 'Delete') {
+      if (result == 'Delete') {
         this.routeService.delete(id).subscribe(() => {
           this.loadAllRoutes();
         }, error => console.log(error)
