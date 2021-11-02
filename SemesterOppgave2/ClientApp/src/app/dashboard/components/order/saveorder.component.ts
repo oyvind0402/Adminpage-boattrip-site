@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Route } from '../../../models/order';
-import { RouteService } from '../../../_services/order.service';
+import { Order } from '../../../models/order';
+import { OrderService } from '../../../_services/order.service';
 
 @Component({
   templateUrl: 'saveorder.html'
@@ -51,12 +51,12 @@ export class SaveOrderComponent {
   }
 
 
-  constructor(private orderService: RouteService, private router: Router, private fb: FormBuilder) {
+  constructor(private orderService: OrderService, private router: Router, private fb: FormBuilder) {
     this.form = fb.group(this.validation);
   }
 
   saveOrder() {
-    const newOrder = new Route();
+    const newOrder = new Order();
     //order
     newOrder.ticketAmount = this.form.value.ticketamount;
     newOrder.totalPrice = this.form.value.totalprice;

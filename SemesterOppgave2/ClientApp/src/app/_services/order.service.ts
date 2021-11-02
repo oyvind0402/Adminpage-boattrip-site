@@ -1,24 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Route } from '../models/order';
+import { Order } from '../models/order';
 
 @Injectable()
-export class RouteService {
+export class OrderService {
   constructor(private http: HttpClient) { }
   getAll() {
-    return this.http.get<Route[]>("api/boattrip/getallorders")
+    return this.http.get<Order[]>("api/boattrip/getallorders")
   }
 
   getOne(id: number) {
-    return this.http.get<Route>('/api/boattrip/getoneorder/' + id);
+    return this.http.get<Order>('/api/boattrip/getoneorder/' + id);
   }
 
-  save(order: Route) {
+  save(order: Order) {
     return this.http.post('/api/boattrip/saveorder/', order, { responseType: 'text' });
   }
 
-  edit(order: Route) {
+  edit(order: Order) {
     return this.http.put('/api/boattrip/editorder/', order, { responseType: 'text' });
   }
 

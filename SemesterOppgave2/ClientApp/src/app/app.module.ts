@@ -14,6 +14,7 @@ import { BoatComponent } from './dashboard/components/boat/boat.component';
 import { RouteComponent } from './dashboard/components/route/route.component';
 import { TerminalComponent } from './dashboard/components/terminal/terminal.component';
 import { BoatService } from './_services/boat.service';
+import { OrderService } from './_services/order.service';
 import { RouteService } from './_services/route.service';
 import { TerminalService } from './_services/terminal.service';
 import { OrderComponent } from './dashboard/components/order/order.component';
@@ -84,7 +85,7 @@ import { SaveTerminalComponent } from './dashboard/components/terminal/savetermi
     AppRoutingModule,
     NgbModule,
   ],
-  providers: [CustomerService, BoatService, RouteService, TerminalService, RouteService, PostPlaceService],
+  providers: [CustomerService, BoatService, RouteService, TerminalService, OrderService, PostPlaceService],
   bootstrap: [AppComponent],
   entryComponents: [DeleteModal],
 })

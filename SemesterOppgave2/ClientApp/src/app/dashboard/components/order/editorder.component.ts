@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
-import { Route } from '../../../models/order';
-import { RouteService } from '../../../_services/order.service';
+import { Order } from '../../../models/order';
+import { OrderService } from '../../../_services/order.service';
 
 @Component({
   templateUrl: 'editorder.html'
@@ -10,7 +10,7 @@ import { RouteService } from '../../../_services/order.service';
 
 export class EditOrderComponent {
   form: FormGroup;
-  currentOrder: Route;
+  currentOrder: Order;
 
   validation = {
 
@@ -56,7 +56,7 @@ export class EditOrderComponent {
 
 
 
-  constructor(private orderService: RouteService, private router: Router, private fb: FormBuilder, private route: ActivatedRoute) {
+  constructor(private orderService: OrderService, private router: Router, private fb: FormBuilder, private route: ActivatedRoute) {
     this.form = fb.group(this.validation);
   }
 
@@ -107,7 +107,7 @@ export class EditOrderComponent {
 
   editOrder() {
     
-    const editedOrder = new Route();
+    const editedOrder = new Order();
 
     //order
     editedOrder.id = this.form.value.id;

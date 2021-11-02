@@ -1,4 +1,4 @@
-export class Route {
+export class Order {
   id: number;
   ticketAmount: number;
   totalPrice: number;
