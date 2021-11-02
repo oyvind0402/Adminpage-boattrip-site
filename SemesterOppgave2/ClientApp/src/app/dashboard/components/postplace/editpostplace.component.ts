@@ -14,8 +14,9 @@ export class EditPostplaceComponent {
   form: FormGroup;
 
   validation = {
-    zipCode: ["", Validators.compose([Validators.required, Validators.pattern("[1-9][0-9]{4}|[0-9]{4}|[1-9]{1}[0-9]{2}( )[0-9]{2}")])],
-    city: ["", Validators.compose([Validators.required, Validators.pattern("[0-9a-zA-ZøæåØÆÅ. \-]{2,30}")])]
+    id: [""],
+    zipCode: [""],
+    city: ["", Validators.compose([Validators.required, Validators.pattern("[0-9a-zA-ZøæåØÆÅ. \\-]{2,30}")])]
   }
 
   constructor(private postPlaceService: PostPlaceService, private router: Router, fb: FormBuilder, private route: ActivatedRoute) {
@@ -25,28 +26,30 @@ export class EditPostplaceComponent {
   fetchPostPlace(id: string) {
     this.postPlaceService.getOne(id).subscribe(postplace => {
       this.form.patchValue({ id: postplace.zipCode });
+      this.form.patchValue({ zipCode: postplace.zipCode });
       this.form.patchValue({ city: postplace.city });
     }, error => console.log(error)
     );
   }
 
-  editOrder() {
+  editPostplace() {
     const editedPostPlace = new PostPlace();
-    editedPostPlace.city;
+    editedPostPlace.zipCode = this.form.value.zipCode
+    editedPostPlace.city = this.form.value.city
 
     console.log(editedPostPlace);
 
     this.postPlaceService.edit(editedPostPlace).subscribe(() => {
-      this.router.navigate(['/editPostPlace']); // double check the route
+      this.router.navigate(['/postplace']); // double check the route
     }, error => console.log(error)
     );
   }
 
   onSubmit() {
-    this.editOrder();
+    this.editPostplace();
   }
 
-  ngOnInnit() {
+  ngOnInit() {
     this.route.params.subscribe((params) => {
       this.fetchPostPlace(params.id);
     }, error => console.log(error)

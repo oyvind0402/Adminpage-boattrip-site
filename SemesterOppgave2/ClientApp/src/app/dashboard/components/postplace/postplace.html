@@ -15,8 +15,8 @@
         <tr *ngFor="let postplace of postplaces">
           <td label="ZipCode">{{postplace.zipCode}}</td>
           <td label="City">{{postplace.city}}</td>
-          <td><button class="btn btn-endre" >Edit</button></td>
-          <td><button class="btn btn-slett" >Delete</button></td>
+          <td><button class="btn btn-endre" [routerLink]="['/editpostplace', postplace.id]">Edit</button></td>
+          <td><button class="btn btn-slett" (click)="deletePostplace(postplace.id)">Delete</button></td>
         </tr>
       </tbody>
     </table>
