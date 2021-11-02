@@ -36,6 +36,7 @@ import { EditTerminalComponent } from './dashboard/components/terminal/edittermi
 import { SavePostPlaceComponent } from './dashboard/components/postplace/savepostplace.component';
 import { EditPostplaceComponent } from './dashboard/components/postplace/editpostplace.component';
 import { EditRouteComponent } from './dashboard/components/route/editroute.component';
+import { SaveTerminalComponent } from './dashboard/components/terminal/saveterminal.component';
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import { EditRouteComponent } from './dashboard/components/route/editroute.compo
 
     TerminalComponent,
     EditTerminalComponent,
+    SaveTerminalComponent,
 
     PostPlaceComponent,
     EditPostplaceComponent,

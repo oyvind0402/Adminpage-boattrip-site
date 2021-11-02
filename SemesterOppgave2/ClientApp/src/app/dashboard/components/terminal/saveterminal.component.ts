@@ -9,7 +9,7 @@ import { TerminalService } from '../../../_services/terminal.service';
   templateUrl: 'saveterminal.html'
 })
 
-export class EditTerminalComponent {
+export class SaveTerminalComponent {
   form: FormGroup;
 
   validation = {
