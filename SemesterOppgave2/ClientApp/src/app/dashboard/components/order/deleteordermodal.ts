@@ -5,6 +5,6 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: 'deleteordermodal.html'
 })
 export class OrderModal {
-  route: string;
+  order: string;
   constructor(public modal: NgbActiveModal) { }
 }

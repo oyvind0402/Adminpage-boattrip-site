@@ -32,7 +32,7 @@ export class OrderComponent {
 
   showModalAndDelete(id: number) {
     const modalRef = this.modalService.open(OrderModal);
-    modalRef.componentInstance.name = this.deletedOrder;
+    modalRef.componentInstance.order = this.deletedOrder;
     modalRef.result.then(result => {
       if (result == 'Delete') {
         this.orderService.delete(id).subscribe(() => {
