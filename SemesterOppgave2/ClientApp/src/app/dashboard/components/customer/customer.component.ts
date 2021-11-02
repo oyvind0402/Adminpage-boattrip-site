@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -34,8 +35,12 @@ export class CustomerComponent {
       if (result == 'Delete') {
         this.customerService.delete(id).subscribe(() => {
           this.loadAllCustomers();
-        }, error => console.log(error)
-        );
+        }, (error: HttpErrorResponse) => {
+          if (error.status == 404) {
+            alert("Couldn't delete that customer, it's a part of another table (order) as a foreign key! Delete all the orders with this customer first to be able to delete this customer!");
+          }
+        }
+);
       }
       this.router.navigate(['/customer'])
     }, error => console.log(error)

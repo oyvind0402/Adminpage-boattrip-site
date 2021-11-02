@@ -113,10 +113,19 @@ namespace SemesterOppgave2.DAL
             try
             {
                 Customers customer = await _db.Customers.FindAsync(id);
-                _db.Customers.Remove(customer);
-                await _db.SaveChangesAsync();
-                _log.LogInformation(customer.ToString() + " deleted!");
-                return true;
+                //If the customer is a part of any orders we dont delete it
+                var checkCustomerInOrder = await _db.Orders.FirstOrDefaultAsync(c => c.Customer.Email == customer.Email);
+                if(checkCustomerInOrder == null)
+                {
+                    _db.Customers.Remove(customer);
+                    await _db.SaveChangesAsync();
+                    _log.LogInformation(customer.ToString() + " deleted!");
+                    return true;
+                } else
+                {
+                    return false;
+                }
+                
             }
             catch
             {
