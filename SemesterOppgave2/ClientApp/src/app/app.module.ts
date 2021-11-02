@@ -29,6 +29,8 @@ import { SaveCustomerComponent } from './dashboard/components/customer/savecusto
 import { EditCustomerComponent } from './dashboard/components/customer/editcustomer.component';
 
 import { EditOrderComponent } from './dashboard/components/order/editorder.component';
+import { SaveOrderComponent } from './dashboard/components/order/saveorder.component';
+
 import { DeleteModal } from './dashboard/components/deletemodal/deletemodal';
 
 
@@ -51,6 +53,8 @@ import { DeleteModal } from './dashboard/components/deletemodal/deletemodal';
     SaveBoatComponent,
 
     OrderComponent,
+    EditOrderComponent,
+    SaveOrderComponent,
 
     RouteComponent,
     EditOrderComponent,

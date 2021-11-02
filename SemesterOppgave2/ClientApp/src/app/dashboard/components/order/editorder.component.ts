@@ -113,7 +113,7 @@ export class EditOrderComponent {
     //arrivalterminal
     editedOrder.arrivalTerminalName = this.form.value.arrivalterminalname;
     editedOrder.arrivalTerminalCity = this.form.value.arrivalterminalcity;
-    editedOrder.arrivalTerminalZipCode = this.form.value.arrivalterminalzipcode;
+    editedOrder.arrivalTerminalZipCode = this.form.value.arrivalTerminalZipCode;
     editedOrder.arrivalTerminalStreet = this.form.value.arrivalterminalstreet;
 
     //departureterminal
