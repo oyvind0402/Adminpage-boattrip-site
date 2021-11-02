@@ -1,15 +1,7 @@
 <div class="container">
   <div class="col-md-4">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <input class="form-control" formControlName="id" type="hidden" />
-      
-      <div  class="form-group">
-        <label>Zip Code</label>
-        <input class="form-control" formControlName="zipCode" />
-        <p class="alert alert-warning" [hidden]="form.controls.zipCode.valid || (form.controls.zipCode.pristine)">
-          Zip Code isnt valid!
-        </p>
-      </div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">     
+      <input type="hidden" formControlName="id" />
       <div class="form-group">
         <label>City</label>
         <input class="form-control" formControlName="city" />

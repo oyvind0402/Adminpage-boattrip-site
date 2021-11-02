@@ -11,7 +11,7 @@ export class PostPlaceService {
   }
 
   getOne(id: string) {
-    return this.http.get <PostPlace>('/api/boattrip/getonepostplace/' + id);
+    return this.http.get<PostPlace>('/api/boattrip/getonepostplace/' + id);
   }
 
   save(postPlace: PostPlace) {

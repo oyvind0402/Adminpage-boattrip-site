@@ -139,7 +139,7 @@ namespace SemesterOppgave2.Controllers
         }
 
         [HttpGet]
-        [Route("getonepostplace/{id}")]
+        [Route("getonepostplace/{zipCode}")]
         public async Task<ActionResult> GetOnePostPlace(string zipCode)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
@@ -182,7 +182,7 @@ namespace SemesterOppgave2.Controllers
         }
 
         [HttpDelete]
-        [Route("deletepostplace/{id}")]
+        [Route("deletepostplace/{zipCode}")]
         public async Task<ActionResult> DeletePostPlace(string zipCode)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))

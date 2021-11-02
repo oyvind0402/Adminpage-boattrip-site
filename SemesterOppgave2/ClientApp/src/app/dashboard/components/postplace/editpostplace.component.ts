@@ -15,7 +15,6 @@ export class EditPostplaceComponent {
 
   validation = {
     id: [""],
-    zipCode: [""],
     city: ["", Validators.compose([Validators.required, Validators.pattern("[0-9a-zA-ZøæåØÆÅ. \\-]{2,30}")])]
   }
 
@@ -26,7 +25,6 @@ export class EditPostplaceComponent {
   fetchPostPlace(id: string) {
     this.postPlaceService.getOne(id).subscribe(postplace => {
       this.form.patchValue({ id: postplace.zipCode });
-      this.form.patchValue({ zipCode: postplace.zipCode });
       this.form.patchValue({ city: postplace.city });
     }, error => console.log(error)
     );
@@ -34,7 +32,7 @@ export class EditPostplaceComponent {
 
   editPostplace() {
     const editedPostPlace = new PostPlace();
-    editedPostPlace.zipCode = this.form.value.zipCode
+    editedPostPlace.zipCode = this.form.value.id
     editedPostPlace.city = this.form.value.city
 
     console.log(editedPostPlace);
@@ -52,6 +50,7 @@ export class EditPostplaceComponent {
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.fetchPostPlace(params.id);
+      console.log(params);
     }, error => console.log(error)
     );
   }
