@@ -23,6 +23,7 @@ export class TerminalComponent {
   constructor(private terminalService: TerminalService, private modalService: NgbModal, private router: Router) {
 
   }
+
   deleteTerminal(id: number) {
     this.terminalService.getOne(id).subscribe((terminal) => {
       this.deletedTerminal = terminal.street + ", " + terminal.zipCode + " " + terminal.city;

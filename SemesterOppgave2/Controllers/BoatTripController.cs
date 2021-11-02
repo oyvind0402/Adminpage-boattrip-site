@@ -382,7 +382,7 @@ namespace SemesterOppgave2.Controllers
         }
 
         [HttpDelete]
-        [Route("deleteterminal{id}")]
+        [Route("deleteterminal/{id}")]
         public async Task<ActionResult> DeleteTerminal(int id)
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(_loggedIn)))
