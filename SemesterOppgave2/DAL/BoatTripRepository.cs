@@ -205,15 +205,22 @@ namespace SemesterOppgave2.DAL
         {
             try
             {
-                var newPostPlace = new PostPlaces
+                PostPlaces checkPostPlace = await _db.PostPlaces.FindAsync(postPlace.ZipCode);
+                if(checkPostPlace == null)
                 {
-                    ZipCode = postPlace.ZipCode,
-                    City = postPlace.ZipCode
-                };
-                _db.PostPlaces.Add(newPostPlace);
-                await _db.SaveChangesAsync();
-                _log.LogInformation(postPlace.ToString() + " saved!");
-                return true;
+                    checkPostPlace = new PostPlaces
+                    {
+                        ZipCode = postPlace.ZipCode,
+                        City = postPlace.City
+                    };
+                    _db.PostPlaces.Add(checkPostPlace);
+                    await _db.SaveChangesAsync();
+                    _log.LogInformation(postPlace.ToString() + " saved!");
+                    return true;
+                } else
+                {
+                    return false;
+                }
             }
             catch
             {
