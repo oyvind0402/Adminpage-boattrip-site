@@ -21,7 +21,6 @@ import { EditTerminalComponent } from './dashboard/components/terminal/edittermi
 import { EditPostplaceComponent } from './dashboard/components/postplace/editpostplace.component';
 import { SavePostPlaceComponent } from './dashboard/components/postplace/savepostplace.component';
 
-
 const appRoots: Routes = [
   { path: 'order', component: OrderComponent },
   { path: 'editorder/:id', component: EditOrderComponent },

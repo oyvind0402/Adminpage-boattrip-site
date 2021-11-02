@@ -60,13 +60,14 @@ import { EditPostplaceComponent } from './dashboard/components/postplace/editpos
     SaveOrderComponent,
 
     RouteComponent,
-    EditOrderComponent,
 
     TerminalComponent,
     EditTerminalComponent,
 
     PostPlaceComponent,
     EditPostplaceComponent,
+
+
     //SavePostPlaceComponent
   ],
   imports: [

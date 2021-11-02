@@ -6,8 +6,6 @@ import { RouteService } from '../../../_services/route.service';
 import { DeleteModal } from '../deletemodal/deletemodal';
 
 
-
-
 @Component({
   templateUrl: 'route.html',
   styleUrls: ['route.css'],
