@@ -836,20 +836,24 @@ namespace SemesterOppgave2.DAL
                 Orders order = await _db.Orders.FindAsync(editedOrder.Id);
                 order.TicketAmount = editedOrder.TicketAmount;
                 order.TotalPrice = editedOrder.TotalPrice;
+               
                 order.Route.Boat.BoatName = editedOrder.BoatName;
                 order.Route.Boat.Capacity = editedOrder.Capacity;
                 order.Route.Boat.TicketPrice = editedOrder.TicketPrice;
                 order.Route.ArrivalTime = editedOrder.ArrivalTime;
                 order.Route.DepartureTime = editedOrder.DepartureTime;
+                
                 order.Route.ArrivalPlace.Street = editedOrder.ArrivalTerminalStreet;
                 order.Route.ArrivalPlace.TerminalName = editedOrder.ArrivalTerminalName;
                 order.Route.ArrivalPlace.TerminalAddress.City = editedOrder.ArrivalTerminalCity;
                 order.Route.ArrivalPlace.TerminalAddress.ZipCode = editedOrder.ArrivalTerminalZipCode;
+                
                 order.Route.DeparturePlace.Street = editedOrder.DepartureTerminalStreet;
                 order.Route.DeparturePlace.TerminalName = editedOrder.DepartureTerminalName;
                 order.Route.DeparturePlace.TerminalAddress.City = editedOrder.DepartureTerminalCity;
                 order.Route.DeparturePlace.TerminalAddress.ZipCode = editedOrder.DepartureTerminalZipCode;
                 order.Route.TicketsLeft = editedOrder.TicketsLeft;
+                
                 order.Customer.Firstname = editedOrder.Firstname;
                 order.Customer.Lastname = editedOrder.Lastname;
                 order.Customer.Email = editedOrder.Email;
@@ -858,13 +862,13 @@ namespace SemesterOppgave2.DAL
                 order.Customer.Postplace.City = editedOrder.City;
                 order.Customer.Postplace.ZipCode = editedOrder.ZipCode;
                 await _db.SaveChangesAsync();
-                _log.LogInformation(order.ToString() + " edited!");
+                //_log.LogInformation(order.ToString() + " edited!");
                 return true;
             }
             catch (Exception e)
             {
-                _log.LogInformation(e.Message);
-                _log.LogInformation(e.InnerException.Message);
+                //_log.LogInformation(e.Message);
+                //_log.LogInformation(e.InnerException.Message);
                 return false;
             }
         }

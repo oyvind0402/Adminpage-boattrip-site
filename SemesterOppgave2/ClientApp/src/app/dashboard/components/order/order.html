@@ -1,7 +1,7 @@
 <div>
   <div class="content">
     <h2>Order:</h2>
-    <button class="btn btn-add" [routerLink]="['/savecustomer']">New order</button>
+    <button class="btn btn-add" [routerLink]="['/saveorder']">New order</button>
     <table class="table table-order">
       <thead>
         <tr>
@@ -23,7 +23,7 @@
           <td label="Boat">{{order.boatName}}</td>
           <td label="Ticket Amount">{{order.ticketAmount}}</td>
           <td label="Total Price">{{order.totalPrice}}</td>
-          <td><button class="btn btn-endre" >Edit</button></td>
+          <td><button class="btn btn-endre" [routerLink]="['/editorder', order.id]">Edit</button></td>
           <td><button class="btn btn-slett"  (click)="deleteOrder(order.id)">Delete</button></td>
         </tr>
       </tbody>
