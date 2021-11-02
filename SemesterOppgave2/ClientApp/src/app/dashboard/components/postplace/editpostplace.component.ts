@@ -37,7 +37,7 @@ export class EditPostplaceComponent {
     console.log(editedPostPlace);
 
     this.postPlaceService.edit(editedPostPlace).subscribe(() => {
-      this.router.navigate(['/postPlace']); // double check the route
+      this.router.navigate(['/editPostPlace']); // double check the route
     }, error => console.log(error)
     );
   }

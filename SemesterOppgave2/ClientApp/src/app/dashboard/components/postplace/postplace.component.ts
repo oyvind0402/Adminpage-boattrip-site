@@ -19,7 +19,7 @@ export class PostPlaceComponent {
   constructor(private postPlaceService: PostPlaceService) {
 
   }
-  delete(id: number) {
+  delete(id: string) {
     this.postPlaceService.delete(id).subscribe(() => { this.loadAllPostPlaces() });
   }
 

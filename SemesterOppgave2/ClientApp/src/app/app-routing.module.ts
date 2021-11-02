@@ -18,6 +18,8 @@ import { RouteComponent } from './dashboard/components/route/route.component';
 import { TerminalComponent } from './dashboard/components/terminal/terminal.component';
 import { Home } from './home/home';
 import { EditTerminalComponent } from './dashboard/components/terminal/editterminal.component';
+import { EditPostplaceComponent } from './dashboard/components/postplace/editpostplace.component';
+import { SavePostPlaceComponent } from './dashboard/components/postplace/savepostplace.component';
 
 
 const appRoots: Routes = [
@@ -39,6 +41,9 @@ const appRoots: Routes = [
   { path: 'editterminal/:id', component: EditTerminalComponent },
 
   { path: 'postplace', component: PostPlaceComponent },
+  { path: 'editpostplace/:id', component: EditPostplaceComponent },
+ // { path: 'savepostplace', component: SavePostPlaceComponent },
+
   { path: 'home', component: Home },
   { path: 'admin', component: Admin },
   { path: '', redirectTo: '/home', pathMatch: 'full' },

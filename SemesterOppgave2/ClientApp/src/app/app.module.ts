@@ -33,6 +33,8 @@ import { SaveOrderComponent } from './dashboard/components/order/saveorder.compo
 
 import { DeleteModal } from './dashboard/components/deletemodal/deletemodal';
 import { EditTerminalComponent } from './dashboard/components/terminal/editterminal.component';
+import { SavePostPlaceComponent } from './dashboard/components/postplace/savepostplace.component';
+import { EditPostplaceComponent } from './dashboard/components/postplace/editpostplace.component';
 
 
 @NgModule({
@@ -64,6 +66,8 @@ import { EditTerminalComponent } from './dashboard/components/terminal/edittermi
     EditTerminalComponent,
 
     PostPlaceComponent,
+    EditPostplaceComponent,
+    //SavePostPlaceComponent
   ],
   imports: [
     BrowserModule,
