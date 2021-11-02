@@ -39,16 +39,19 @@ export class EditTerminalComponent {
       this.form.patchValue({ street: terminal.street });
       this.form.patchValue({ city: terminal.city });
       this.form.patchValue({ zipCode: terminal.zipCode });
+      console.log(terminal);
     }, error => console.log(error)
     );
   }
 
   editTerminal() {
     const editedTerminal = new Terminal();
+    editedTerminal.id = this.form.value.id;
     editedTerminal.street = this.form.value.street;
     editedTerminal.terminalName = this.form.value.terminalName;
     editedTerminal.city = this.form.value.city;
     editedTerminal.zipCode = this.form.value.zipCode;
+    console.log(editedTerminal);
 
     this.terminalService.edit(editedTerminal).subscribe(() => {
       this.router.navigate(['/terminal']);

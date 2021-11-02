@@ -59,6 +59,7 @@ export class EditCustomerComponent {
   editCustomer() {
     
     const editedCustomer = new Customer();
+    editedCustomer.id = this.form.value.id;
     editedCustomer.firstname = this.form.value.firstname;
     editedCustomer.lastname = this.form.value.lastname;
     editedCustomer.phonenr = this.form.value.phonenr;
