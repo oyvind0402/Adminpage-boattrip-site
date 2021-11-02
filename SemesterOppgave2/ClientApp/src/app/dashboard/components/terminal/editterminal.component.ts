@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Terminal } from '../../../models/terminal';
 import { TerminalService } from '../../../_services/terminal.service';
 
@@ -28,7 +27,7 @@ export class EditTerminalComponent {
     ]
   }
 
-  constructor(private terminalService: TerminalService, private route: ActivatedRoute, private fb: FormBuilder, private router: Router, private modalService: NgbModal) {
+  constructor(private terminalService: TerminalService, private route: ActivatedRoute, private fb: FormBuilder, private router: Router) {
     this.form = fb.group(this.validation);
   }
 

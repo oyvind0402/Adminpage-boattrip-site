@@ -47,6 +47,7 @@
     <None Remove="ClientApp\src\app\dashboard\components\postplace\savepostplace.component.ts" />
     <None Remove="ClientApp\src\app\dashboard\components\route\route.component.ts" />
     <None Remove="ClientApp\src\app\dashboard\components\terminal\editterminal.component.ts" />
+    <None Remove="ClientApp\src\app\dashboard\components\terminal\saveterminal.component.ts" />
     <None Remove="ClientApp\src\app\dashboard\components\terminal\terminal.component.ts" />
     <None Remove="ClientApp\src\app\dashboard\customer.component.ts" />
     <None Remove="ClientApp\src\app\home\home.ts" />
@@ -90,6 +91,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\postplace\savepostplace.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\route\route.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\terminal\editterminal.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\terminal\saveterminal.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\terminal\terminal.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\home\home.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\customer.ts" />

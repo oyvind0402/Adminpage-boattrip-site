@@ -5,7 +5,7 @@ import { Route } from '../../../models/route';
 import { RouteService } from '../../../_services/route.service';
 
 @Component({
-  templateUrl: 'editorder.html'
+  templateUrl: 'editroute.html'
 })
 
 export class EditRouteComponent {
