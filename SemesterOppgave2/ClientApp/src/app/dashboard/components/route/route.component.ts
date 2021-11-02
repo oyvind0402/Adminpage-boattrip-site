@@ -5,7 +5,8 @@ import { RouteService } from '../../../_services/route.service';
 
 
 @Component({
-  templateUrl: 'route.html'
+  templateUrl: 'route.html',
+  styleUrls: ['route.css'],
 })
 
 export class RouteComponent {

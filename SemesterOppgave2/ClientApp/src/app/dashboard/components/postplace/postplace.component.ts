@@ -4,7 +4,8 @@ import { PostPlaceService } from '../../../_services/postPlace.service';
 
 
 @Component({
-  templateUrl: 'postplace.html'
+  templateUrl: 'postplace.html',
+  styleUrls: ['postplace.css'],
 })
 
 export class PostPlaceComponent {

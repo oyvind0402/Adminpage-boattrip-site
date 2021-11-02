@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
-import { Customer } from '../../../models/Customer';
-import { CustomerService } from '../../../_services/customer.service';
+import { Order } from '../../../models/Order';
+import { OrderService } from '../../../_services/order.service';
 
 @Component({
-  templateUrl: 'editcustomer.html'
+  templateUrl: 'editorder.html'
 })
 
-export class EditCustomerComponent {
+export class EditOrderComponent {
   form: FormGroup;
 
   validation = {
@@ -37,51 +37,49 @@ export class EditCustomerComponent {
   }
 
 
-  constructor(private customerService: CustomerService, private router: Router, private fb: FormBuilder, private route: ActivatedRoute) {
+  constructor(private orderService: OrderService, private router: Router, private fb: FormBuilder, private route: ActivatedRoute) {
     this.form = fb.group(this.validation);
   }
 
-  fetchCustomer(id: number) {
-    this.customerService.getOne(id).subscribe(customer => {
-      this.form.patchValue({ id: customer.id });
-      this.form.patchValue({ firstname: customer.firstname });
-      this.form.patchValue({ lastname: customer.lastname });
-      this.form.patchValue({ phonenr: customer.phonenr });
-      this.form.patchValue({ email: customer.email });
-      this.form.patchValue({ street: customer.street });
-      this.form.patchValue({ zipCode: customer.zipCode });
-      this.form.patchValue({ city: customer.city });
+  fetchOrder(id: number) {
+    this.orderService.getOne(id).subscribe(order => {
+      this.form.patchValue({ id: order.id });
+      this.form.patchValue({ firstname: order.firstname });
+      this.form.patchValue({ lastname: order.lastname });
+      this.form.patchValue({ phonenr: order.phonenr });
+      this.form.patchValue({ email: order.email });
+      this.form.patchValue({ street: order.street });
+      this.form.patchValue({ city: order.city });
     }, error => console.log(error)
     );
 
   }
 
-  editCustomer() {
+  editOrder() {
     
-    const editedCustomer = new Customer();
-    editedCustomer.firstname = this.form.value.firstname;
-    editedCustomer.lastname = this.form.value.lastname;
-    editedCustomer.phonenr = this.form.value.phonenr;
-    editedCustomer.email = this.form.value.email;
-    editedCustomer.street = this.form.value.street;
-    editedCustomer.city = this.form.value.city;
-    editedCustomer.zipCode = this.form.value.zipCode;
+    const editedOrder = new Order();
+    editedOrder.firstname = this.form.value.firstname;
+    editedOrder.lastname = this.form.value.lastname;
+    editedOrder.phonenr = this.form.value.phonenr;
+    editedOrder.email = this.form.value.email;
+    editedOrder.street = this.form.value.street;
+    editedOrder.city = this.form.value.city;
 
-    console.log(editedCustomer);
+    console.log(editedOrder);
 
-    this.customerService.edit(editedCustomer).subscribe(() => {
-      this.router.navigate(['/customer']);
+    this.orderService.edit(editedOrder).subscribe(() => {
+      this.router.navigate(['/order']);
     }, error => console.log(error)
     );
   }
 
   onSubmit() {
-    this.editCustomer();
+    this.editOrder();
   }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.fetchCustomer(params.id);
+      this.fetchOrder(params.id);
     }, error => console.log(error)
     );
   }

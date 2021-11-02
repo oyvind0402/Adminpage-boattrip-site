@@ -4,7 +4,8 @@ import { TerminalService } from '../../../_services/terminal.service';
 
 
 @Component({
-  templateUrl: 'terminal.html'
+  templateUrl: 'terminal.html',
+  styleUrls: ['terminal.css'],
 })
 
 export class TerminalComponent {

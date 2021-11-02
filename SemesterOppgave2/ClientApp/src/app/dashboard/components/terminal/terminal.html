@@ -1,8 +1,32 @@
 <div>
-  <h2>Terminals:</h2>
-  <ul>
-    <li *ngFor="let terminal of terminals">
-      {{terminal.terminalName}} - {{terminal.street}}, {{terminal.zipCode}} {{terminal.city}}
-    </li>
-  </ul>
+  <div class="content">
+    <h2>Terminal:</h2>
+    <button class="btn btn-add" >New terminal</button>
+    <table class="table table-terminal">
+      <thead>
+        <tr>
+          <th>Terminal name</th>
+          <th>Street</th>
+          <th>ZipCode</th>
+          <th>City</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let terminal of terminals">
+          <td label="Terminal name">{{terminal.terminalName}}</td>
+          <td label="Street">{{terminal.street}}</td>
+          <td label="ZipCode">{{terminal.zipCode}}</td>
+          <td label="City">{{terminal.city}}</td>
+          <td><button class="btn btn-endre" >Edit</button></td>
+          <td><button class="btn btn-slett" >Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
+
+
+
+

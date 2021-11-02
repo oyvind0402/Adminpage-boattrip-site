@@ -20,14 +20,18 @@ import { OrderComponent } from './dashboard/components/order/order.component';
 import { OrderService } from './_services/order.service';
 import { PostPlaceService } from './_services/postPlace.service';
 import { PostPlaceComponent } from './dashboard/components/postplace/postplace.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { EditBoatComponent } from './dashboard/components/boat/editboat.component';
 import { SaveBoatComponent } from './dashboard/components/boat/saveboat.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BoatModal } from './dashboard/components/boat/deleteboatmodal';
+
 import { CustomerModal } from './dashboard/components/customer/deletecustomermodal';
 import { SaveCustomerComponent } from './dashboard/components/customer/savecustomer.component';
 import { EditCustomerComponent } from './dashboard/components/customer/editcustomer.component';
+
 import { OrderModal } from './dashboard/components/order/deleteordermodal';
+import { EditOrderComponent } from './dashboard/components/order/editorder.component';
 
 
 @NgModule({
@@ -53,6 +57,7 @@ import { OrderModal } from './dashboard/components/order/deleteordermodal';
     OrderModal,
 
     RouteComponent,
+    EditOrderComponent,
 
     TerminalComponent,
     PostPlaceComponent,
