@@ -35,13 +35,11 @@
   <ItemGroup>
     <None Remove="ClientApp\src\app\admin\admin.ts" />
     <None Remove="ClientApp\src\app\app-routing.module.ts" />
-    <None Remove="ClientApp\src\app\dashboard\components\boat\deleteboatmodal.ts" />
     <None Remove="ClientApp\src\app\dashboard\components\boat\editboat.component.ts" />
     <None Remove="ClientApp\src\app\dashboard\components\boat\saveboat.component.ts" />
-    <None Remove="ClientApp\src\app\dashboard\components\customer\deletecustomermodal.ts" />
     <None Remove="ClientApp\src\app\dashboard\components\customer\editcustomer.component.ts" />
     <None Remove="ClientApp\src\app\dashboard\components\customer\savecustomer.component.ts" />
-    <None Remove="ClientApp\src\app\dashboard\components\order\deleteordermodal.ts" />
+    <None Remove="ClientApp\src\app\dashboard\components\deletemodal\deletemodal.ts" />
     <None Remove="ClientApp\src\app\dashboard\components\order\editorder.component.ts" />
     <None Remove="ClientApp\src\app\dashboard\components\order\order.component.ts" />
     <None Remove="ClientApp\src\app\dashboard\components\postplace\postplace.component.ts" />
@@ -75,15 +73,13 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\admin\admin.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\app-routing.module.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\boat\deleteboatmodal.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\boat\editboat.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\boat\saveboat.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\customer\customer.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\boat\boat.component.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\customer\deletecustomermodal.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\customer\editcustomer.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\customer\savecustomer.component.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\order\deleteordermodal.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\deletemodal\deletemodal.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\order\editorder.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\order\order.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\dashboard\components\postplace\postplace.component.ts" />

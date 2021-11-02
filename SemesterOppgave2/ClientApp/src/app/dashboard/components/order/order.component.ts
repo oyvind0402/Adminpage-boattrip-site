@@ -3,9 +3,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Order } from '../../../models/order';
 import { OrderService } from '../../../_services/order.service';
-import { OrderModal } from './deleteordermodal';
-
-
+import { DeleteModal } from '../deletemodal/deletemodal';
 
 @Component({
   templateUrl: 'order.html',
@@ -31,8 +29,8 @@ export class OrderComponent {
 
 
   showModalAndDelete(id: number) {
-    const modalRef = this.modalService.open(OrderModal);
-    modalRef.componentInstance.order = this.deletedOrder;
+    const modalRef = this.modalService.open(DeleteModal);
+    modalRef.componentInstance.info = this.deletedOrder;
     modalRef.result.then(result => {
       if (result == 'Delete') {
         this.orderService.delete(id).subscribe(() => {

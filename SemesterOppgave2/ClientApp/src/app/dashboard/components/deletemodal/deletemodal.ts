@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  templateUrl: 'deleteordermodal.html'
+  templateUrl: 'deletemodal.html'
 })
-export class OrderModal {
-  order: string;
+export class DeleteModal {
+  info: string;
   constructor(public modal: NgbActiveModal) { }
 }

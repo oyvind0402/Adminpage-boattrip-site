@@ -24,14 +24,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { EditBoatComponent } from './dashboard/components/boat/editboat.component';
 import { SaveBoatComponent } from './dashboard/components/boat/saveboat.component';
-import { BoatModal } from './dashboard/components/boat/deleteboatmodal';
 
-import { CustomerModal } from './dashboard/components/customer/deletecustomermodal';
 import { SaveCustomerComponent } from './dashboard/components/customer/savecustomer.component';
 import { EditCustomerComponent } from './dashboard/components/customer/editcustomer.component';
 
-import { OrderModal } from './dashboard/components/order/deleteordermodal';
 import { EditOrderComponent } from './dashboard/components/order/editorder.component';
+import { DeleteModal } from './dashboard/components/deletemodal/deletemodal';
 
 
 @NgModule({
@@ -42,19 +40,17 @@ import { EditOrderComponent } from './dashboard/components/order/editorder.compo
     NavMenu,
     AppFooter,
     NavMenu,
+    DeleteModal,
 
     CustomerComponent,
     EditCustomerComponent,
     SaveCustomerComponent,
-    CustomerModal,
 
     BoatComponent,
     EditBoatComponent,
     SaveBoatComponent,
-    BoatModal,
 
     OrderComponent,
-    OrderModal,
 
     RouteComponent,
     EditOrderComponent,
@@ -71,6 +67,6 @@ import { EditOrderComponent } from './dashboard/components/order/editorder.compo
   ],
   providers: [CustomerService, BoatService, RouteService, TerminalService, OrderService, PostPlaceService],
   bootstrap: [AppComponent],
-  entryComponents: [BoatModal, CustomerModal, OrderModal],
+  entryComponents: [DeleteModal],
 })
 export class AppModule { }

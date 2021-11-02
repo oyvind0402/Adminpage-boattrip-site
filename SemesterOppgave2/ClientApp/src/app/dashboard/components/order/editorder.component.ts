@@ -72,7 +72,7 @@ export class EditOrderComponent {
       //arrivalterminal
       this.form.patchValue({ arrivalterminalname: order.arrivalTerminalName });
       this.form.patchValue({ arrivalterminalcity: order.arrivalTerminalCity });
-      this.form.patchValue({ arrivalterminalzipcode: order.arrivalTerminalZipcode });
+      this.form.patchValue({ arrivalterminalzipcode: order.arrivalTerminalZipCode });
       this.form.patchValue({ arrivalterminalstreet: order.arrivalTerminalStreet });
 
       //departureterminal
@@ -113,7 +113,7 @@ export class EditOrderComponent {
     //arrivalterminal
     editedOrder.arrivalTerminalName = this.form.value.arrivalterminalname;
     editedOrder.arrivalTerminalCity = this.form.value.arrivalterminalcity;
-    editedOrder.arrivalTerminalZipcode = this.form.value.arrivalterminalzipcode;
+    editedOrder.arrivalTerminalZipCode = this.form.value.arrivalterminalzipcode;
     editedOrder.arrivalTerminalStreet = this.form.value.arrivalterminalstreet;
 
     //departureterminal

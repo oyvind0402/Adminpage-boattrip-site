@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Boat } from '../../../models/Boat';
 import { BoatService } from '../../../_services/boat.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
-import { BoatModal } from './deleteboatmodal';
+import { DeleteModal } from '../deletemodal/deletemodal';
 
 @Component({
   templateUrl: 'boat.html',
@@ -32,8 +32,8 @@ export class BoatComponent {
   }
 
   showModalAndDelete(id: number) {
-    const modalRef = this.modalService.open(BoatModal);
-    modalRef.componentInstance.boatName = this.deletedBoat;
+    const modalRef = this.modalService.open(DeleteModal);
+    modalRef.componentInstance.info = this.deletedBoat;
     modalRef.result.then(result => {
       if (result == 'Delete') {
         this.boatService.delete(id).subscribe(() => {
