@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -6,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
 import { Terminal } from '../../../models/terminal';
 import { TerminalService } from '../../../_services/terminal.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   templateUrl: 'saveterminal.html'

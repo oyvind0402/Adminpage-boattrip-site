@@ -55,6 +55,7 @@ export class EditCustomerComponent {
       this.form.patchValue({ city: customer.city });
     }, (error: HttpErrorResponse) => {
       if (error.status == 401) {
+        alert("Your session timed out, please log in again.");
         this.cookieService.delete(".AdventureWorks.Session");
         this.router.navigate(['/home']);
       }

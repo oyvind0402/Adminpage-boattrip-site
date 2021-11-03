@@ -51,6 +51,11 @@ export class RouteComponent {
           if (error.status == 404) {
             alert("Couldn't delete that route, it's a part of another table (order) as a foreign key! Delete all the orders containing this route first to be able to delete this route!");
           }
+          if (error.status == 401) {
+            alert("Your session has timed out. Please log in again");
+            this.cookieService.delete(".AdventureWorks.Session");
+            this.router.navigate(['/home']);
+          }
         });
       }
       this.router.navigate(['/route']);
@@ -66,9 +71,16 @@ export class RouteComponent {
 
 
   loadAllRoutes() {
-    this.routeService.getAll().subscribe(route => { this.routes = route; });
-    console.log(this.routes); 
-
+    this.routeService.getAll().subscribe(route => {
+      this.routes = route;
+    }, (error: HttpErrorResponse) => {
+      if (error.status == 401) {
+        alert("Your session has timed out. Please log in again");
+        this.cookieService.delete(".AdventureWorks.Session");
+        this.router.navigate(['/home']);
+      }
+    }
+    );
   }
 
 }

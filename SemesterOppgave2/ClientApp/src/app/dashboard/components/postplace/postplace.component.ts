@@ -52,6 +52,11 @@ export class PostPlaceComponent {
           if (error.status == 404) {
             alert("Couldn't delete that postplace, it's a part of another table (customer or terminal) as a foreign key! Delete all the entries containing this postplace first to be able to delete this postplace!");
           }
+          if (error.status == 401) {
+            alert("Your session has timed out. Please log in again");
+            this.cookieService.delete(".AdventureWorks.Session");
+            this.router.navigate(['/home']);
+          }
         });
       }
       this.router.navigate(['/postplace']);
@@ -70,8 +75,14 @@ export class PostPlaceComponent {
   loadAllPostPlaces() {
     this.postPlaceService.getAll().subscribe(postplace => {
       this.postplaces = postplace;
-      console.log(this.postplaces);
-    });
+    }, (error: HttpErrorResponse) => {
+      if (error.status == 401) {
+        alert("Your session has timed out. Please log in again");
+        this.cookieService.delete(".AdventureWorks.Session");
+        this.router.navigate(['/home']);
+      }
+    }
+    );
     
 
   }

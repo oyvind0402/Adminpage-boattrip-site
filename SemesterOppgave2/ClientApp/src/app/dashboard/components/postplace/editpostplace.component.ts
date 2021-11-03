@@ -35,7 +35,6 @@ export class EditPostplaceComponent {
         this.router.navigate(['/home']);
       }
     }
-    
     );
   }
 

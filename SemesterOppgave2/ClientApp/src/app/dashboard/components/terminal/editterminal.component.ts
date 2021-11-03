@@ -43,7 +43,7 @@ export class EditTerminalComponent {
       console.log(terminal);
     }, (error: HttpErrorResponse) => {
       if (error.status == 401) {
-        alert("Your session has timed out. Please log in again");
+        alert("Your session timed out, please log in again.");
         this.cookieService.delete(".AdventureWorks.Session");
         this.router.navigate(['/home']);
       }

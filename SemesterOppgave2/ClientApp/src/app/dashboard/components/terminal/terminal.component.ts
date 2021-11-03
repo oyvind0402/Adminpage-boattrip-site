@@ -31,7 +31,13 @@ export class TerminalComponent {
     this.terminalService.getOne(id).subscribe((terminal) => {
       this.deletedTerminal = terminal.street + ", " + terminal.zipCode + " " + terminal.city;
       this.showModalAndDelete(id);
-    }, error => console.log(error)
+    }, (error: HttpErrorResponse) => {
+      if (error.status == 401) {
+        alert("Your session has timed out. Please log in again");
+        this.cookieService.delete(".AdventureWorks.Session");
+        this.router.navigate(['/home']);
+      }
+    }
     );
   }
 
@@ -45,6 +51,11 @@ export class TerminalComponent {
         }, (error: HttpErrorResponse) => {
           if (error.status == 404) {
             alert("Couldn't delete that terminal, it's a part of another table (route) as a foreign key! Delete all the routes containing this terminal first to be able to delete this terminal!");
+          }
+          if (error.status == 401) {
+            alert("Your session has timed out. Please log in again");
+            this.cookieService.delete(".AdventureWorks.Session");
+            this.router.navigate(['/home']);
           }
         });
       }

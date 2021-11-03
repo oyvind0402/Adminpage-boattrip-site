@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -6,6 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Order } from '../../../models/order';
 import { OrderService } from '../../../_services/order.service';
 import { DeleteModal } from '../deletemodal/deletemodal';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   templateUrl: 'order.html',

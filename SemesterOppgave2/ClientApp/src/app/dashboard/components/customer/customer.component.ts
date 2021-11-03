@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -6,6 +5,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { Customer } from '../../../models/customer';
 import { CustomerService } from '../../../_services/customer.service';
 import { DeleteModal } from '../deletemodal/deletemodal';
+import { HttpErrorResponse } from '@angular/common/http';
+
 
 @Component({
   templateUrl: 'customer.html',
@@ -46,10 +47,21 @@ export class CustomerComponent {
           if (error.status == 404) {
             alert("Couldn't delete that customer, it's a part of another table (order) as a foreign key! Delete all the orders containing this customer first to be able to delete this customer!");
           }
+          if (error.status == 401) {
+            alert("Your session has timed out. Please log in again");
+            this.cookieService.delete(".AdventureWorks.Session");
+            this.router.navigate(['/home']);
+          }
         });
       }
       this.router.navigate(['/customer'])
-    }, error => console.log(error)
+    }, (error: HttpErrorResponse) => {
+      if (error.status == 401) {
+        alert("Your session has timed out. Please log in again");
+        this.cookieService.delete(".AdventureWorks.Session");
+        this.router.navigate(['/home']);
+      }
+    }
     );
   }
 

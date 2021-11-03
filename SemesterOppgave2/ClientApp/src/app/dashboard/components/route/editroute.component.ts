@@ -92,7 +92,6 @@ export class EditRouteComponent {
         this.router.navigate(['/home']);
       }
     }
-   
     );
 
   }
