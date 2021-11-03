@@ -1,60 +1,59 @@
 <app-nav-menu></app-nav-menu>
 <main class="container">
-  <div class="col-md-4">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label>First name</label>
-        <input formControlName="firstname" />
-        <p class="alert alert-warning" [hidden]="form.controls.firstname.valid || (form.controls.firstname.pristine)">
-          First name is invalid!
-        </p>
-      </div>
-      <div class="form-group">
-        <label>Last name</label>
-        <input formControlName="lastname" />
-        <p class="alert alert-warning" [hidden]="form.controls.lastname.valid || (form.controls.lastname.pristine)">
-          Last name is invalid!
-        </p>
-      </div>
-      <div class="form-group">
-        <label>Phone number</label>
-        <input formControlName="phonenr" />
-        <p class="alert alert-warning" [hidden]="form.controls.phonenr.valid || (form.controls.phonenr.pristine)">
-          Phone number is invalid!
-        </p>
-      </div>
-      <div class="form-group">
-        <label>Email</label>
-        <input formControlName="email" />
-        <p class="alert alert-warning" [hidden]="form.controls.email.valid || (form.controls.email.pristine)">
-          Email is invalid!
-        </p>
-      </div>
-      <div class="form-group">
-        <label>Street</label>
-        <input formControlName="street" />
-        <p class="alert alert-warning" [hidden]="form.controls.street.valid || (form.controls.street.pristine)">
-          Street is invalid!
-        </p>
-      </div>
-      <div class="form-group">
-        <label>Zip Code</label>
-        <input formControlName="zipCode" />
-        <p class="alert alert-warning" [hidden]="form.controls.zipCode.valid || (form.controls.zipCode.pristine)">
-          Zip Code is invalid!
-        </p>
-      </div>
-      <div class="form-group">
-        <label>City</label>
-        <input formControlName="city" />
-        <p class="alert alert-warning" [hidden]="form.controls.city.valid || (form.controls.city.pristine)">
-          City is invalid!
-        </p>
-      </div>
-      <div class="form-group">
-        <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Save</button>
-        <button class="btn btn-default" routerLink="/customer">Back</button>
-      </div>
-    </form>
-  </div>
+  <button class="btn-back" routerLink="/customer">Back</button>
+  <h1 class="align-bootstrap">Add customer</h1>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group col-md-6 inline-blk">
+      <label>First name</label>
+      <input formControlName="firstname" />
+      <p class="alert alert-warning" [hidden]="form.controls.firstname.valid || (form.controls.firstname.pristine)">
+        First name is invalid!
+      </p>
+    </div>
+    <div class="form-group col-md-6 inline-blk">
+      <label>Last name</label>
+      <input formControlName="lastname" />
+      <p class="alert alert-warning" [hidden]="form.controls.lastname.valid || (form.controls.lastname.pristine)">
+        Last name is invalid!
+      </p>
+    </div>
+    <div class="form-group col-md-4 inline-blk">
+      <label>Phone number</label>
+      <input formControlName="phonenr" />
+      <p class="alert alert-warning" [hidden]="form.controls.phonenr.valid || (form.controls.phonenr.pristine)">
+        Phone number is invalid!
+      </p>
+    </div>
+    <div class="form-group col-md-8 inline-blk">
+      <label>Email</label>
+      <input formControlName="email" />
+      <p class="alert alert-warning" [hidden]="form.controls.email.valid || (form.controls.email.pristine)">
+        Email is invalid!
+      </p>
+    </div>
+    <div class="form-group col-md-6 inline-blk">
+      <label>Street</label>
+      <input formControlName="street" />
+      <p class="alert alert-warning" [hidden]="form.controls.street.valid || (form.controls.street.pristine)">
+        Street is invalid!
+      </p>
+    </div>
+    <div class="form-group col-md-2 inline-blk">
+      <label>Zip Code</label>
+      <input formControlName="zipCode" />
+      <p class="alert alert-warning" [hidden]="form.controls.zipCode.valid || (form.controls.zipCode.pristine)">
+        Zip Code is invalid!
+      </p>
+    </div>
+    <div class="form-group col-md-4 inline-blk">
+      <label>City</label>
+      <input formControlName="city" />
+      <p class="alert alert-warning" [hidden]="form.controls.city.valid || (form.controls.city.pristine)">
+        City is invalid!
+      </p>
+    </div>
+    <div class="form-group center-content">
+      <button type="submit" [disabled]="!form.valid" class="align-bootstrap">Save</button>
+    </div>
+  </form>
 </main>

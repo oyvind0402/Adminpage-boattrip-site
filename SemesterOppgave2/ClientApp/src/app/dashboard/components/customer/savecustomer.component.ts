@@ -9,7 +9,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertBox } from '../alertmodal/alertmodal';
 
 @Component({
-  templateUrl: 'savecustomer.html'
+  templateUrl: 'savecustomer.html',
 })
 
 export class SaveCustomerComponent {

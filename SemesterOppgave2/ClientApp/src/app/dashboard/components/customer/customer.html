@@ -1,14 +1,15 @@
 <app-nav-menu></app-nav-menu>
 <main>
   <div class="content">
-    <h2>Customers:</h2>
-    <button class="btn btn-add" [routerLink]="['/savecustomer']">New customer</button>
+    <button class="btn-back" routerLink="/admin">Back</button>
+    <h1 class="align-bootstrap">Customers</h1>
+    <button class="align-bootstrap" [routerLink]="['/savecustomer']">New customer</button>
     <table class="table table-customer">
       <thead>
         <tr>
           <th>First name</th>
           <th>Last name</th>
-          <th>Phonenumber</th>
+          <th>Phone nr</th>
           <th>Email</th>
           <th>Street name</th>
           <th>Zipcode</th>
@@ -21,13 +22,13 @@
         <tr *ngFor="let customer of customers">
           <td label="First name">{{customer.firstname}}</td>
           <td label="Last name">{{customer.lastname}}</td>
-          <td label="Phonenumber">{{customer.phonenr}}</td>
+          <td label="Phone nr">{{customer.phonenr}}</td>
           <td label="Email">{{customer.email}}</td>
           <td label="Street name">{{customer.street}}</td>
           <td label="Zipcode">{{customer.zipCode}}</td>
           <td label="City">{{customer.city}}</td>
-          <td><button class="btn btn-endre" [routerLink]="['/editcustomer', customer.id]">Edit</button></td>
-          <td><button class="btn btn-slett" (click)="deleteCustomer(customer.id)">Delete</button></td>
+          <td class="nullable right-content"><button class="btn-sm" [routerLink]="['/editcustomer', customer.id]">Edit</button></td>
+          <td class="nullable"><button class="btn-alt btn-sm" (click)="deleteCustomer(customer.id)">Delete</button></td>
         </tr>
       </tbody>
     </table>
