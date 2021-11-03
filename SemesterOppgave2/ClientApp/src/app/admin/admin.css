@@ -14,27 +14,13 @@
 
 button {
   flex: 1 0 28%;
-  height: 50px;
+  min-height: 50px;
   margin-top: 25px;
   margin-right: 50px;
-
   width: 300px;
-  background: rgb(41, 50, 65);
   padding: 10px 40px;
-  color: rgb(224, 251, 252);
-  text-transform: uppercase;
-  font-weight: 700;
-  font-family: "Montserrat", Arial, sans-serif;
-  cursor: pointer;
-  font-size: 1.2rem;
   text-align: center;
 }
-
-  button:hover {
-    background: rgba(152, 193, 217, 0.15);
-    border: 2px solid rgb(41, 50, 65);
-    color: rgb(41, 50, 65);
-  }
 
 .btn-logg-ut{
     margin-top: 75px;

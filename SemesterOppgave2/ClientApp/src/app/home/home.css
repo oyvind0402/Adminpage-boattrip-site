@@ -1,73 +1,46 @@
-main {
-    width: 70%;
-    margin: 0 auto;
-}
-
 h1 {
     text-align: center;
-    margin: 20px 0;
 }
 
 #login-form {
-    max-width: 400px;
-    margin: 0 auto;
+    max-width: 25rem;
+    margin: calc(10vh + var(--padding-100)) auto;
 }
 
 .form-div {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 2fr;
-  margin-bottom: 20px;
+  margin-bottom: var(--padding-150);
 }
-  .form-div label {
-    font-family: "Montserrat", Arial, sans-serif;
-    color: rgb(61, 90, 128);
-    font-weight: 500;
-    font-size: 1.2rem;
-    float: left;
-  }
-.form-div input {
-  font-family: "Montserrat", Arial, sans-serif;
-  font-size: 1.2rem;
-  margin-right: 0px;
-  float: right;
-  width: 260px;
-}
-  .form-div .email-error {
-    color: red;
-  }
 
-  .form-div .password-error {
-    color: red;
-  }
+.form-div label {
+  color: var(--blue-700);
+  font-weight: 500;
+  font-size: var(--font-size-500);
+  float: left;
+}
+
+.form-div input {
+  font-size: var(--font-size-500);
+  margin-right: 0;
+  float: right;
+  width: 16rem;
+}
+
+.form-div .email-error, .form-div .password-error {
+  color: var(--accent-500);
+}
 
 .form-div-btn {
   width: 100%;
   text-align: center;
 }
 
-button {
-  background: rgb(41, 50, 65);
-  padding: 10px 40px;
-  color: rgb(224, 251, 252);
-  text-transform: uppercase;
-  font-weight: 700;
-  font-family: "Montserrat", Arial, sans-serif;
-  cursor: pointer;
-  font-size: 1.5rem;
-  text-align: center;
-  margin: 20px auto;
-}
-
-  button:hover {
-    background: rgba(152, 193, 217, 0.15);
-    border: 2px solid rgb(41, 50, 65);
-    color: rgb(41, 50, 65);
-  }
-
 @media only screen and (max-width: 500px) {
-  h1 {
-    text-align: left;
+  main {
+    text-align: center;
+    padding: var(--padding-100);
   }
 
   .form-div {
@@ -75,10 +48,7 @@ button {
     grid-template-columns: 1fr;
   }
     .form-div input {
-      width: 230px;
+      margin: auto;
+      width: clamp(5rem, 18rem, calc(100vw - 2rem));
     }
-
-  .form-div-btn {
-    text-align: left;
-  }
 }

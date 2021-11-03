@@ -38,12 +38,60 @@ html {
     font-family: var(--font-default);
 }
 
+body {
+    background: var(--white);
+}
+
+main {
+  margin: auto;
+  padding: var(--padding-200);
+  max-width: 90rem;
+}
+
+h1, h2, h3 {
+    color: var(--blue-700);
+    margin-bottom: var(--padding-100);
+}
+
+
 a {
   color: var(--accent-500);
 }
 
 code {
   color: var(--blue-700);
+}
+
+input {
+  display: block;
+  width: 100%;
+  font-family: var(--font-accent);
+  background: var(--white);
+  border: unset;
+  color: rgba(var(--blue-700-v), 0.7);
+  font-size: var(--font-size-400);
+  border-bottom: var(--font-size-200) solid rgba(var(--blue-300-v), 0.15);
+  background-image: linear-gradient(var(--blue-700), var(--blue-700));
+  background-size: 0% var(--font-size-200);
+  background-position: 0% calc(100% + var(--font-size-200));
+  background-repeat: no-repeat;
+  transition: background 0.3s linear;
+}
+
+  input:focus {
+    border-bottom-color: rgba(var(--blue-300-v), 0.15);
+    outline: var(--blue-700);
+    background-size: 100% var(--font-size-200);
+  }
+
+ label {
+  display: block;
+  text-transform: uppercase;
+  color: var(--blue-500);
+  font-family: var(--font-accent);
+  font-weight: 500;
+  font-size: var(--font-size-400);
+  margin-bottom: 0;
 }
 
 .loader {
@@ -61,8 +109,21 @@ code {
 }
 
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+button {
+  all: unset;
+  cursor: pointer;
+  font-family: var(--font-accent);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--white);
+  background-color: var(--blue-700);
+  border: solid 0.2rem var(--blue-700);
+  padding: var(--padding-100) var(--padding-200);
+}
+
+button:hover, button:focus {
+  color: var(--blue-700);
+  background-color: var(--white);
 }

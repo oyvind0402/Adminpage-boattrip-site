@@ -1,5 +1,5 @@
 <app-nav-menu></app-nav-menu>
-<div *ngIf="admin">
+<main *ngIf="admin">
   <div class="knapper-oversikt">
     <button class="visKnapper" [routerLink]="['/customer']">Customers</button>
     <button class="visKnapper" [routerLink]="['/postplace']">Post Places</button>
@@ -9,4 +9,4 @@
     <button class="visKnapper" [routerLink]="['/route']">Routes</button>
     <button class="btn-logg-ut" (click)="logOut()">Log out</button>
   </div>
-</div>
+</main>
