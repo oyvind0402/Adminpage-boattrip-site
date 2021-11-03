@@ -6,6 +6,7 @@ import { Order } from '../../../models/order';
 import { OrderService } from '../../../_services/order.service';
 import { DeleteModal } from '../deletemodal/deletemodal';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AlertBox } from '../alertmodal/alertmodal';
 
 @Component({
   templateUrl: 'order.html',
@@ -27,7 +28,9 @@ export class OrderComponent {
       this.showModalAndDelete(id);
     }, (error: HttpErrorResponse) => {
       if (error.status == 401) {
-        alert("Your session timed out, please log in again.");
+        const alertRef = this.modalService.open(AlertBox);
+        alertRef.componentInstance.body = "Your session timed out, please log in again.";
+        alertRef.componentInstance.title = "Session timeout";
         this.cookieService.delete(".AdventureWorks.Session");
         this.router.navigate(['/home']);
       }
@@ -45,7 +48,9 @@ export class OrderComponent {
           this.loadAllOrders();
         }, (error: HttpErrorResponse) => {
           if (error.status == 401) {
-            alert("Your session timed out, please log in again.");
+            const alertRef = this.modalService.open(AlertBox);
+            alertRef.componentInstance.body = "Your session timed out, please log in again.";
+            alertRef.componentInstance.title = "Session timeout";
             this.cookieService.delete(".AdventureWorks.Session");
             this.router.navigate(['/home']);
           }
@@ -63,7 +68,9 @@ export class OrderComponent {
       this.orders = order;
     }, (error: HttpErrorResponse) => {
       if (error.status == 401) {
-        alert("Your session timed out, please log in again.");
+        const alertRef = this.modalService.open(AlertBox);
+        alertRef.componentInstance.body = "Your session timed out, please log in again.";
+        alertRef.componentInstance.title = "Session timeout";
         this.cookieService.delete(".AdventureWorks.Session");
         this.router.navigate(['/home']);
       }

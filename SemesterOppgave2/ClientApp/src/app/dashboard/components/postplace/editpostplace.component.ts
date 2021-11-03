@@ -6,6 +6,8 @@ import { error } from 'protractor';
 import { PostPlace } from '../../../models/postPlace';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AlertBox } from '../alertmodal/alertmodal';
 
 
 @Component({
@@ -20,7 +22,7 @@ export class EditPostplaceComponent {
     city: ["", Validators.compose([Validators.required, Validators.pattern("[0-9a-zA-ZøæåØÆÅ. \\-]{2,30}")])]
   }
 
-  constructor(private postPlaceService: PostPlaceService, private router: Router, fb: FormBuilder, private route: ActivatedRoute, private cookieService: CookieService) {
+  constructor(private postPlaceService: PostPlaceService, private router: Router, fb: FormBuilder, private route: ActivatedRoute, private cookieService: CookieService, private modalService: NgbModal) {
     this.form = fb.group(this.validation);
   }
 
@@ -30,7 +32,9 @@ export class EditPostplaceComponent {
       this.form.patchValue({ city: postplace.city });
     }, (error: HttpErrorResponse) => {
       if (error.status == 401) {
-        alert("Your session has timed out. Please log in again");
+        const alertRef = this.modalService.open(AlertBox);
+        alertRef.componentInstance.body = "Your session timed out, please log in again.";
+        alertRef.componentInstance.title = "Session timeout";
         this.cookieService.delete(".AdventureWorks.Session");
         this.router.navigate(['/home']);
       }
@@ -47,7 +51,15 @@ export class EditPostplaceComponent {
 
     this.postPlaceService.edit(editedPostPlace).subscribe(() => {
       this.router.navigate(['/postplace']); // double check the route
-    }, 
+    }, (error: HttpErrorResponse) => {
+      if (error.status == 401) {
+        const alertRef = this.modalService.open(AlertBox);
+        alertRef.componentInstance.body = "Your session timed out, please log in again.";
+        alertRef.componentInstance.title = "Session timeout";
+        this.cookieService.delete(".AdventureWorks.Session");
+        this.router.navigate(['/home']);
+      }
+    }
     );
   }
 
@@ -61,7 +73,9 @@ export class EditPostplaceComponent {
       console.log(params);
     }, (error: HttpErrorResponse) => {
       if (error.status == 401) {
-        alert("Your session has timed out. Please log in again");
+        const alertRef = this.modalService.open(AlertBox);
+        alertRef.componentInstance.body = "Your session timed out, please log in again.";
+        alertRef.componentInstance.title = "Session timeout";
         this.cookieService.delete(".AdventureWorks.Session");
         this.router.navigate(['/home']);
       }

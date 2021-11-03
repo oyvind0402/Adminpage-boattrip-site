@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Route } from '../../../models/route';
 import { RouteService } from '../../../_services/route.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AlertBox } from '../alertmodal/alertmodal';
 
 @Component({
   templateUrl: 'saveroute.html'
@@ -38,7 +40,7 @@ export class SaveRouteComponent {
   }
 
 
-  constructor(private orderService: RouteService, private router: Router, private fb: FormBuilder, private cookieService: CookieService) {
+  constructor(private orderService: RouteService, private router: Router, private fb: FormBuilder, private cookieService: CookieService, private modalService: NgbModal) {
     this.form = fb.group(this.validation);
   }
 
@@ -71,7 +73,9 @@ export class SaveRouteComponent {
       this.router.navigate(['/route']);
     }, (error: HttpErrorResponse) => {
       if (error.status == 401) {
-        alert("Your session has timed out. Please log in again");
+        const alertRef = this.modalService.open(AlertBox);
+        alertRef.componentInstance.body = "Your session timed out, please log in again.";
+        alertRef.componentInstance.title = "Session timeout";
         this.cookieService.delete(".AdventureWorks.Session");
         this.router.navigate(['/home']);
       }

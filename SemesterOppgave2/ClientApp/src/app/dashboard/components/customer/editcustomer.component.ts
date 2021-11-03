@@ -5,6 +5,8 @@ import { Customer } from '../../../models/customer';
 import { CustomerService } from '../../../_services/customer.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AlertBox } from '../alertmodal/alertmodal';
 
 @Component({
   templateUrl: 'editcustomer.html'
@@ -39,7 +41,7 @@ export class EditCustomerComponent {
   }
 
 
-  constructor(private customerService: CustomerService, private router: Router, private fb: FormBuilder, private route: ActivatedRoute, private cookieService: CookieService) {
+  constructor(private customerService: CustomerService, private router: Router, private fb: FormBuilder, private route: ActivatedRoute, private cookieService: CookieService, private modalService: NgbModal) {
     this.form = fb.group(this.validation);
   }
 
@@ -55,7 +57,9 @@ export class EditCustomerComponent {
       this.form.patchValue({ city: customer.city });
     }, (error: HttpErrorResponse) => {
       if (error.status == 401) {
-        alert("Your session timed out, please log in again.");
+        const alertRef = this.modalService.open(AlertBox);
+        alertRef.componentInstance.body = "Your session timed out, please log in again.";
+        alertRef.componentInstance.title = "Session timeout";
         this.cookieService.delete(".AdventureWorks.Session");
         this.router.navigate(['/home']);
       }
@@ -82,8 +86,9 @@ export class EditCustomerComponent {
       this.router.navigate(['/customer']);
     }, (error: HttpErrorResponse) => {
       if (error.status == 401) {
-        alert("Your session timed out, please log in again.");
-        this.cookieService.delete(".AdventureWorks.Session");
+        const alertRef = this.modalService.open(AlertBox);
+        alertRef.componentInstance.body = "Your session timed out, please log in again.";
+        alertRef.componentInstance.title = "Session timeout";        this.cookieService.delete(".AdventureWorks.Session");
         this.router.navigate(['/home']);
       }
     }

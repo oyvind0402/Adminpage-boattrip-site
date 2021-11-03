@@ -42,6 +42,7 @@ import { SaveRouteComponent } from './dashboard/components/route/saveroute.compo
 
 import { SaveTerminalComponent } from './dashboard/components/terminal/saveterminal.component';
 import { CookieService } from 'ngx-cookie-service';
+import { AlertBox } from './dashboard/components/alertmodal/alertmodal';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { CookieService } from 'ngx-cookie-service';
     AppFooter,
     NavMenu,
     DeleteModal,
+    AlertBox,
 
     CustomerComponent,
     EditCustomerComponent,
@@ -90,6 +92,6 @@ import { CookieService } from 'ngx-cookie-service';
   ],
   providers: [CustomerService, BoatService, RouteService, TerminalService, OrderService, PostPlaceService, CookieService],
   bootstrap: [AppComponent],
-  entryComponents: [DeleteModal],
+  entryComponents: [DeleteModal, AlertBox],
 })
 export class AppModule { }

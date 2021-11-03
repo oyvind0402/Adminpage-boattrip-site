@@ -5,6 +5,8 @@ import { PostPlaceService } from '../../../_services/postPlace.service';
 import { PostPlace } from '../../../models/postPlace';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AlertBox } from '../alertmodal/alertmodal';
 
 
 @Component({
@@ -19,7 +21,7 @@ export class SavePostPlaceComponent {
     city: ["", Validators.compose([Validators.required, Validators.pattern("[0-9a-zA-ZøæåØÆÅ. \\-]{2,30}")])]
   }
 
-  constructor(private postPlaceService: PostPlaceService, private router: Router, fb: FormBuilder, private route: ActivatedRoute, private cookieService: CookieService) {
+  constructor(private postPlaceService: PostPlaceService, private router: Router, fb: FormBuilder, private route: ActivatedRoute, private cookieService: CookieService, private modalService: NgbModal) {
     this.form = fb.group(this.validation);
   }
 
@@ -33,10 +35,14 @@ export class SavePostPlaceComponent {
       this.router.navigate(['/postplace']);
     }, (error: HttpErrorResponse) => {
       if (error.status == 400) {
-        alert("Couldn't save that postplace, there's a postplace with the same ZipCode that already exists!");
+        const alertRef = this.modalService.open(AlertBox);
+        alertRef.componentInstance.body = "Couldn't save that postplace, there's a postplace with the same ZipCode that already exists!";
+        alertRef.componentInstance.title = "ZipCode already exists";
       }
       if (error.status == 401) {
-        alert("Your session has timed out. Please log in again");
+        const alertRef = this.modalService.open(AlertBox);
+        alertRef.componentInstance.body = "Your session timed out, please log in again.";
+        alertRef.componentInstance.title = "Session timeout";
         this.cookieService.delete(".AdventureWorks.Session");
         this.router.navigate(['/home']);
       }

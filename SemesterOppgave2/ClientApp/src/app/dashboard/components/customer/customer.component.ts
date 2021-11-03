@@ -6,6 +6,7 @@ import { Customer } from '../../../models/customer';
 import { CustomerService } from '../../../_services/customer.service';
 import { DeleteModal } from '../deletemodal/deletemodal';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AlertBox } from '../alertmodal/alertmodal';
 
 
 @Component({
@@ -28,7 +29,9 @@ export class CustomerComponent {
       this.showModalAndDelete(id);
     }, (error: HttpErrorResponse) => {
       if (error.status == 401) {
-        alert("Your session timed out, please log in again.");
+        const alertRef = this.modalService.open(AlertBox);
+        alertRef.componentInstance.body = "Your session timed out, please log in again.";
+        alertRef.componentInstance.title = "Session timeout";
         this.cookieService.delete(".AdventureWorks.Session");
         this.router.navigate(['/home']);
       }
@@ -45,23 +48,21 @@ export class CustomerComponent {
           this.loadAllCustomers();
         }, (error: HttpErrorResponse) => {
           if (error.status == 404) {
-            alert("Couldn't delete that customer, it's a part of another table (order) as a foreign key! Delete all the orders containing this customer first to be able to delete this customer!");
+            const alertRef = this.modalService.open(AlertBox);
+            alertRef.componentInstance.body = "Couldn't delete that customer, it's a part of another table (order) as a foreign key! Delete all the orders containing this customer first to be able to delete this customer!";
+            alertRef.componentInstance.title = "Deletion not valid";
           }
           if (error.status == 401) {
-            alert("Your session has timed out. Please log in again");
+            const alertRef = this.modalService.open(AlertBox);
+            alertRef.componentInstance.body = "Your session timed out, please log in again.";
+            alertRef.componentInstance.title = "Session timeout";
             this.cookieService.delete(".AdventureWorks.Session");
             this.router.navigate(['/home']);
           }
         });
       }
       this.router.navigate(['/customer'])
-    }, (error: HttpErrorResponse) => {
-      if (error.status == 401) {
-        alert("Your session has timed out. Please log in again");
-        this.cookieService.delete(".AdventureWorks.Session");
-        this.router.navigate(['/home']);
-      }
-    }
+    }, error => console.log(error)
     );
   }
 
@@ -71,7 +72,9 @@ export class CustomerComponent {
       this.customers = customer;
     }, (error: HttpErrorResponse) => {
       if (error.status == 401) {
-        alert("Your session timed out, please log in again.");
+        const alertRef = this.modalService.open(AlertBox);
+        alertRef.componentInstance.body = "Your session timed out, please log in again.";
+        alertRef.componentInstance.title = "Session timeout";
         this.cookieService.delete(".AdventureWorks.Session");
         this.router.navigate(['/home']);
       }

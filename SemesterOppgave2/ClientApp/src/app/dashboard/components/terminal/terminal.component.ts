@@ -6,6 +6,7 @@ import { Terminal } from '../../../models/terminal';
 import { TerminalService } from '../../../_services/terminal.service';
 import { DeleteModal } from '../deletemodal/deletemodal';
 import { CookieService } from 'ngx-cookie-service';
+import { AlertBox } from '../alertmodal/alertmodal';
 
 
 
@@ -33,7 +34,9 @@ export class TerminalComponent {
       this.showModalAndDelete(id);
     }, (error: HttpErrorResponse) => {
       if (error.status == 401) {
-        alert("Your session has timed out. Please log in again");
+        const alertRef = this.modalService.open(AlertBox);
+        alertRef.componentInstance.body = "Your session timed out, please log in again.";
+        alertRef.componentInstance.title = "Session timeout";
         this.cookieService.delete(".AdventureWorks.Session");
         this.router.navigate(['/home']);
       }
@@ -60,13 +63,7 @@ export class TerminalComponent {
         });
       }
       this.router.navigate(['/terminal']);
-    }, (error: HttpErrorResponse) => {
-      if (error.status == 401) {
-        alert("Your session has timed out. Please log in again");
-        this.cookieService.delete(".AdventureWorks.Session");
-        this.router.navigate(['/home']);
-      }
-    }
+    }, error => console.log(error)
     );
    
   }

@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { DeleteModal } from '../deletemodal/deletemodal';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { AlertBox } from '../alertmodal/alertmodal';
 
 @Component({
   templateUrl: 'boat.html',
@@ -31,7 +32,9 @@ export class BoatComponent {
       this.showModalAndDelete(id);
     }, (error: HttpErrorResponse) => {
       if (error.status == 401) {
-        alert("Your session timed out, please log in again.");
+        const alertRef = this.modalService.open(AlertBox);
+        alertRef.componentInstance.body = "Your session timed out, please log in again.";
+        alertRef.componentInstance.title = "Session timeout";
         this.cookieService.delete(".AdventureWorks.Session");
         this.router.navigate(['/home']);
       }
@@ -48,10 +51,14 @@ export class BoatComponent {
           this.loadAllBoats();
         }, (error: HttpErrorResponse) => {
           if (error.status == 404) {
-            alert("Couldn't delete that boat, it's a part of another table (route) as a foreign key! Delete all the routes containing this boat first to be able to delete this boat!");
+            const alertRef = this.modalService.open(AlertBox);
+            alertRef.componentInstance.body = "Couldn't delete that boat, it's a part of another table(route) as a foreign key! Delete all the routes containing this boat first to be able to delete this boat!";
+            alertRef.componentInstance.title = "Deletion not valid";
           }
           if (error.status == 401) {
-            alert("Your session timed out, please log in again.");
+            const alertRef = this.modalService.open(AlertBox);
+            alertRef.componentInstance.body = "Your session timed out, please log in again.";
+            alertRef.componentInstance.title = "Session timeout";
             this.cookieService.delete(".AdventureWorks.Session");
             this.router.navigate(['/home']);
           }
@@ -67,7 +74,9 @@ export class BoatComponent {
       this.boats = boat;
     }, (error: HttpErrorResponse) => {
       if (error.status == 401) {
-        alert("Your session timed out, please log in again.");
+        const alertRef = this.modalService.open(AlertBox);
+        alertRef.componentInstance.body = "Your session timed out, please log in again.";
+        alertRef.componentInstance.title = "Session timeout";
         this.cookieService.delete(".AdventureWorks.Session");
         this.router.navigate(['/home']);
       }
