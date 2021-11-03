@@ -4,6 +4,8 @@ import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms'
 import { PostPlaceService } from '../../../_services/postPlace.service';
 import { error } from 'protractor';
 import { PostPlace } from '../../../models/postPlace';
+import { CookieService } from 'ngx-cookie-service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -18,7 +20,7 @@ export class EditPostplaceComponent {
     city: ["", Validators.compose([Validators.required, Validators.pattern("[0-9a-zA-ZøæåØÆÅ. \\-]{2,30}")])]
   }
 
-  constructor(private postPlaceService: PostPlaceService, private router: Router, fb: FormBuilder, private route: ActivatedRoute) {
+  constructor(private postPlaceService: PostPlaceService, private router: Router, fb: FormBuilder, private route: ActivatedRoute, private cookieService: CookieService) {
     this.form = fb.group(this.validation);
   }
 
@@ -26,7 +28,14 @@ export class EditPostplaceComponent {
     this.postPlaceService.getOne(id).subscribe(postplace => {
       this.form.patchValue({ id: postplace.zipCode });
       this.form.patchValue({ city: postplace.city });
-    }, error => console.log(error)
+    }, (error: HttpErrorResponse) => {
+      if (error.status == 401) {
+        alert("Your session has timed out. Please log in again");
+        this.cookieService.delete(".AdventureWorks.Session");
+        this.router.navigate(['/home']);
+      }
+    }
+    
     );
   }
 
@@ -39,7 +48,7 @@ export class EditPostplaceComponent {
 
     this.postPlaceService.edit(editedPostPlace).subscribe(() => {
       this.router.navigate(['/postplace']); // double check the route
-    }, error => console.log(error)
+    }, 
     );
   }
 
@@ -51,7 +60,13 @@ export class EditPostplaceComponent {
     this.route.params.subscribe((params) => {
       this.fetchPostPlace(params.id);
       console.log(params);
-    }, error => console.log(error)
+    }, (error: HttpErrorResponse) => {
+      if (error.status == 401) {
+        alert("Your session has timed out. Please log in again");
+        this.cookieService.delete(".AdventureWorks.Session");
+        this.router.navigate(['/home']);
+      }
+    }
     );
   }
 }

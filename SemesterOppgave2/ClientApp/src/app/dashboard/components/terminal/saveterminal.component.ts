@@ -1,7 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CookieService } from 'ngx-cookie-service';
 import { Terminal } from '../../../models/terminal';
 import { TerminalService } from '../../../_services/terminal.service';
 
@@ -28,7 +30,7 @@ export class SaveTerminalComponent {
     ]
   }
 
-  constructor(private terminalService: TerminalService, private fb: FormBuilder, private router: Router) {
+  constructor(private terminalService: TerminalService, private fb: FormBuilder, private router: Router, private cookieService: CookieService) {
     this.form = fb.group(this.validation);
   }
 
@@ -42,7 +44,13 @@ export class SaveTerminalComponent {
 
     this.terminalService.save(newTerminal).subscribe(() => {
       this.router.navigate(['/terminal']);
-    }, error => console.log(error)
+    }, (error: HttpErrorResponse) => {
+      if (error.status == 401) {
+        alert("Your session has timed out. Please log in again");
+        this.cookieService.delete(".AdventureWorks.Session");
+        this.router.navigate(['/home']);
+      }
+    }
     );
   }
 

@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CookieService } from 'ngx-cookie-service';
 import { Route } from '../../../models/route';
 import { RouteService } from '../../../_services/route.service';
 import { DeleteModal } from '../deletemodal/deletemodal';
@@ -21,7 +22,7 @@ export class RouteComponent {
   }
 
 
-  constructor(private routeService: RouteService, private modalService: NgbModal, private router: Router) {
+  constructor(private routeService: RouteService, private modalService: NgbModal, private router: Router, private cookieService : CookieService) {
 
   }
 
@@ -29,7 +30,13 @@ export class RouteComponent {
     this.routeService.getOne(id).subscribe((route) => {
       this.deletedRoute = route.boatName + ": from " + route.arrivalTerminalName + "-" + route.departureTerminalName;
       this.showModalAndDelete(id);
-    }, error => console.log(error)
+    }, (error: HttpErrorResponse) => {
+      if (error.status == 401) {
+        alert("Your session has timed out. Please log in again");
+        this.cookieService.delete(".AdventureWorks.Session");
+        this.router.navigate(['/home']);
+      }
+    }
     );
   }
 
@@ -47,7 +54,13 @@ export class RouteComponent {
         });
       }
       this.router.navigate(['/route']);
-    }, error => console.log(error)
+    }, (error: HttpErrorResponse) => {
+      if (error.status == 401) {
+        alert("Your session has timed out. Please log in again");
+        this.cookieService.delete(".AdventureWorks.Session");
+        this.router.navigate(['/home']);
+      }
+    }
     );
   }
 

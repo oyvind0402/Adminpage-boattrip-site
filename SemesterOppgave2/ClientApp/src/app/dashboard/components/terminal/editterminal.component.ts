@@ -1,6 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { Terminal } from '../../../models/terminal';
 import { TerminalService } from '../../../_services/terminal.service';
 
@@ -27,7 +29,7 @@ export class EditTerminalComponent {
     ]
   }
 
-  constructor(private terminalService: TerminalService, private route: ActivatedRoute, private fb: FormBuilder, private router: Router) {
+  constructor(private terminalService: TerminalService, private route: ActivatedRoute, private fb: FormBuilder, private router: Router, private cookieService : CookieService) {
     this.form = fb.group(this.validation);
   }
 
@@ -39,7 +41,13 @@ export class EditTerminalComponent {
       this.form.patchValue({ city: terminal.city });
       this.form.patchValue({ zipCode: terminal.zipCode });
       console.log(terminal);
-    }, error => console.log(error)
+    }, (error: HttpErrorResponse) => {
+      if (error.status == 401) {
+        alert("Your session has timed out. Please log in again");
+        this.cookieService.delete(".AdventureWorks.Session");
+        this.router.navigate(['/home']);
+      }
+    }
     );
   }
 
@@ -54,7 +62,13 @@ export class EditTerminalComponent {
 
     this.terminalService.edit(editedTerminal).subscribe(() => {
       this.router.navigate(['/terminal']);
-    }, error => console.log(error)
+    }, (error: HttpErrorResponse) => {
+      if (error.status == 401) {
+        alert("Your session has timed out. Please log in again");
+        this.cookieService.delete(".AdventureWorks.Session");
+        this.router.navigate(['/home']);
+      }
+    }
     );
   }
 

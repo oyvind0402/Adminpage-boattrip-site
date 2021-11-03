@@ -4,6 +4,7 @@ import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms'
 import { PostPlaceService } from '../../../_services/postPlace.service';
 import { PostPlace } from '../../../models/postPlace';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class SavePostPlaceComponent {
     city: ["", Validators.compose([Validators.required, Validators.pattern("[0-9a-zA-ZøæåØÆÅ. \\-]{2,30}")])]
   }
 
-  constructor(private postPlaceService: PostPlaceService, private router: Router, fb: FormBuilder, private route: ActivatedRoute) {
+  constructor(private postPlaceService: PostPlaceService, private router: Router, fb: FormBuilder, private route: ActivatedRoute, private cookieService: CookieService) {
     this.form = fb.group(this.validation);
   }
 
@@ -33,7 +34,13 @@ export class SavePostPlaceComponent {
     }, (error: HttpErrorResponse) => {
       if (error.status == 400) {
         alert("Couldn't save that postplace, there's a postplace with the same ZipCode that already exists!");
+      } else if (error.status == 401) {
+        alert("Your session has timed out. Please log in again");
+        this.cookieService.delete(".AdventureWorks.Session");
+        this.router.navigate(['/home']);
       }
+    
+   
     });
   }
 

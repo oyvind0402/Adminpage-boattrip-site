@@ -5,6 +5,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Terminal } from '../../../models/terminal';
 import { TerminalService } from '../../../_services/terminal.service';
 import { DeleteModal } from '../deletemodal/deletemodal';
+import { CookieService } from 'ngx-cookie-service';
+
 
 
 @Component({
@@ -21,7 +23,7 @@ export class TerminalComponent {
   }
 
 
-  constructor(private terminalService: TerminalService, private modalService: NgbModal, private router: Router) {
+  constructor(private terminalService: TerminalService, private modalService: NgbModal, private router: Router, private cookieService: CookieService) {
 
   }
 
@@ -47,15 +49,28 @@ export class TerminalComponent {
         });
       }
       this.router.navigate(['/terminal']);
-    }, error => console.log(error)
+    }, (error: HttpErrorResponse) => {
+      if (error.status == 401) {
+        alert("Your session has timed out. Please log in again");
+        this.cookieService.delete(".AdventureWorks.Session");
+        this.router.navigate(['/home']);
+      }
+    }
+    );
     );
   }
 
 
   loadAllTerminals() {
-    this.terminalService.getAll().subscribe(terminal => {
-      this.terminals = terminal;
-    });
+    this.terminalService.getAll().subscribe(t => {
+      this.terminals = t;
+    }, (error: HttpErrorResponse) => {
+      if (error.status == 401) {
+        alert("Your session has timed out. Please log in again");
+        this.cookieService.delete(".AdventureWorks.Session");
+        this.router.navigate(['/home']);
+      }
+    }
+    );
   }
-
 }
