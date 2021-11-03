@@ -53,10 +53,14 @@ export class TerminalComponent {
           this.loadAllTerminals();
         }, (error: HttpErrorResponse) => {
           if (error.status == 404) {
-            alert("Couldn't delete that terminal, it's a part of another table (route) as a foreign key! Delete all the routes containing this terminal first to be able to delete this terminal!");
+            const alertRef = this.modalService.open(AlertBox);
+            alertRef.componentInstance.body = "Couldn't delete that terminal, it's a part of another table (route) as a foreign key! Delete all the routes containing this terminal first to be able to delete this terminal!";
+            alertRef.componentInstance.title = "Deletion not valid";
           }
           if (error.status == 401) {
-            alert("Your session has timed out. Please log in again");
+            const alertRef = this.modalService.open(AlertBox);
+            alertRef.componentInstance.body = "Your session timed out, please log in again.";
+            alertRef.componentInstance.title = "Session timeout";
             this.cookieService.delete(".AdventureWorks.Session");
             this.router.navigate(['/home']);
           }
@@ -74,7 +78,9 @@ export class TerminalComponent {
       this.terminals = t;
     }, (error: HttpErrorResponse) => {
       if (error.status == 401) {
-        alert("Your session has timed out. Please log in again");
+        const alertRef = this.modalService.open(AlertBox);
+        alertRef.componentInstance.body = "Your session timed out, please log in again.";
+        alertRef.componentInstance.title = "Session timeout";
         this.cookieService.delete(".AdventureWorks.Session");
         this.router.navigate(['/home']);
       }
