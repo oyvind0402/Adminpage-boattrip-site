@@ -14,14 +14,24 @@ export class Admin {
   @Input()
   admin: boolean = false;
 
-  constructor(private _http: HttpClient, private router: Router, private cookieService: CookieService) { }
+  constructor(private _http: HttpClient, private router: Router, private cookieService: CookieService, private boatService: BoatService) { }
 
   ngOnInit() {
+    this.boatService.getAll().subscribe(() => {
+
+    }, (error: HttpErrorResponse) => {
+      if (error.status == 401) {
+        this.cookieService.delete(".AdventureWorks.Session");
+        this.admin = false;
+        this.router.navigate(['/home']);
+      }
+    }
+    );
     if (this.cookieService.check(".AdventureWorks.Session")) {
       this.admin = true;
     } else {
       this.admin = false;
-      this.router.navigate(['/']);
+      this.router.navigate(['/home']);
     }
   }
 }
