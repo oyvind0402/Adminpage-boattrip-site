@@ -7,13 +7,13 @@
         <label>Email</label>
         <input class="form-item" formControlName="email" placeholder="Email" />
         <span></span>
-        <span class="email-error" [hidden]="form.controls.email.valid || (form.controls.email.pristine)">Not valid email!</span>
+        <span class="alert alert-warning" [hidden]="form.controls.email.valid || (form.controls.email.pristine)">Invalid email!</span>
       </div>
       <div class="form-div">
         <label>Password</label>
         <input class="form-item" type="password" formControlName="password" placeholder="Password" required />
         <span></span>
-        <span class="password-error" [hidden]="form.controls.password.valid || (form.controls.password.pristine)">Not valid password!</span>
+        <span class="alert alert-warning" [hidden]="form.controls.password.valid || (form.controls.password.pristine)">Invalid password!</span>
       </div>
       <div class="form-div-btn">
         <button type="submit" [disabled]="!form.valid" class="submit-btn">Login</button>

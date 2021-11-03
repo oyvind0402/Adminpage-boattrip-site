@@ -23,7 +23,6 @@ h1 {
   font-size: var(--font-size-500);
   margin-right: 0;
   float: right;
-  width: 16rem;
 }
 
 .form-div .email-error, .form-div .password-error {
@@ -44,14 +43,12 @@ h1 {
   .form-div {
     display: grid;
     grid-template-columns: 1fr;
+    width: clamp(5rem, 18rem, calc(100vw - 2rem));
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .form-div:first-of-type {
     margin-bottom: var(--padding-200);
-  }
-
-  .form-div input {
-    margin: auto;
-    width: clamp(5rem, 18rem, calc(100vw - 2rem));
   }
 }
