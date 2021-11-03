@@ -1,4 +1,50 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --black: rgb(10, 12, 16);
+  --blue-700: rgb(41, 50, 65);
+  --blue-700-v: 41, 50, 65;
+  --blue-500: rgb(61, 90, 128);
+  --blue-300: rgb(152, 193, 217);
+  --blue-300-v: 152, 193, 217;
+  --blue-100: rgb(224, 251, 252);
+  --white: rgb(246, 254, 254);
+  --accent-500: rgb(238, 108, 77);
+  --accent-500-v: 238, 108, 77;
+  --borderradius-100: 7px;
+  --shadow-700: 2px 2px 10px rgba(var(--blue-700-v), 0.5);
+  --shadow-300: 0 0 10px rgba(var(--blue-300-v), 0.25);
+  --padding-025: calc(var(--padding-100) * 0.25);
+  --padding-050: calc(var(--padding-100) * 0.5);
+  --padding-100: 1rem;
+  --padding-150: calc(var(--padding-100) * 1.5);
+  --padding-200: calc(var(--padding-100) * 2);
+  --padding-300: calc(var(--padding-100) * 3);
+  --padding-400: calc(var(--padding-100) * 4);
+  --footer-height: 5rem;
+  --font-size-200: 0.4rem;
+  --font-size-300: 0.8rem;
+  --font-size-350: 0.9rem;
+  --font-size-400: 1rem;
+  --font-size-500: 1.2rem;
+  --font-size-600: 1.4rem;
+  --font-default: Roboto, Arial, sans-serif;
+  --font-accent: "Montserrat", Arial, sans-serif;
+  --img-size-500: 6rem;
+  --nav-item-height: 5rem;
+  --nav-height: 8rem;
+  --nav-height-sm: 6rem;
+}
+
+html {
+    font-family: var(--font-default);
+}
+
+a {
+  color: var(--accent-500);
+}
+
+code {
+  color: var(--blue-700);
+}
 
 .loader {
   height: 100vh;
@@ -14,14 +60,6 @@
     width: auto;
 }
 
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
-}
-
-code {
-  color: #e01a76;
-}
 
 .btn-primary {
   color: #fff;

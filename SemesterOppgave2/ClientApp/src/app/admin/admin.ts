@@ -30,6 +30,7 @@ export class Admin {
       this.admin = true;
     } else {
       this.admin = false;
+      this.router.navigate(['/']);
     }
   }
 }

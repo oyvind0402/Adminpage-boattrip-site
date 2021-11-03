@@ -58,6 +58,7 @@ export class Home {
     );
     if (this.cookieService.check(".AdventureWorks.Session")) {
       this.admin = true;
+      this.router.navigate(['/admin']);
     } else {
       this.admin = false;
     }
