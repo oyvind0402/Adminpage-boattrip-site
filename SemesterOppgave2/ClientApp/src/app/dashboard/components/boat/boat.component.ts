@@ -5,6 +5,7 @@ import { BoatService } from '../../../_services/boat.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { DeleteModal } from '../deletemodal/deletemodal';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   templateUrl: 'boat.html',
@@ -20,7 +21,7 @@ export class BoatComponent {
   }
 
 
-  constructor(private boatService: BoatService, private router: Router, private modalService: NgbModal) {
+  constructor(private boatService: BoatService, private router: Router, private modalService: NgbModal, private cookieService: CookieService) {
 
   }
 
@@ -28,7 +29,13 @@ export class BoatComponent {
     this.boatService.getOne(id).subscribe((boat) => {
       this.deletedBoat = boat.boatName;
       this.showModalAndDelete(id);
-    }, error => console.log(error)
+    }, (error: HttpErrorResponse) => {
+      if (error.status == 401) {
+        alert("Your session timed out, please log in again.");
+        this.cookieService.delete(".AdventureWorks.Session");
+        this.router.navigate(['/home']);
+      }
+    }
     );
   }
 
@@ -43,6 +50,11 @@ export class BoatComponent {
           if (error.status == 404) {
             alert("Couldn't delete that boat, it's a part of another table (route) as a foreign key! Delete all the routes containing this boat first to be able to delete this boat!");
           }
+          if (error.status == 401) {
+            alert("Your session timed out, please log in again.");
+            this.cookieService.delete(".AdventureWorks.Session");
+            this.router.navigate(['/home']);
+          }
         });
       }
       this.router.navigate(['/boat']);
@@ -53,7 +65,14 @@ export class BoatComponent {
   loadAllBoats() {
     this.boatService.getAll().subscribe(boat => {
       this.boats = boat;
-    });
+    }, (error: HttpErrorResponse) => {
+      if (error.status == 401) {
+        alert("Your session timed out, please log in again.");
+        this.cookieService.delete(".AdventureWorks.Session");
+        this.router.navigate(['/home']);
+      }
+    }
+    );
     console.log(this.boats); 
   }
 }

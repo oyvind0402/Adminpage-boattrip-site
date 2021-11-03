@@ -25,7 +25,13 @@ export class CustomerComponent {
     this.customerService.getOne(id).subscribe((customer) => {
       this.deletedCustomer = customer.firstname + " " + customer.lastname;
       this.showModalAndDelete(id);
-    }, error => console.log(error)
+    }, (error: HttpErrorResponse) => {
+      if (error.status == 401) {
+        alert("Your session timed out, please log in again.");
+        this.cookieService.delete(".AdventureWorks.Session");
+        this.router.navigate(['/home']);
+      }
+    }
     );
   }
 
@@ -53,11 +59,11 @@ export class CustomerComponent {
       this.customers = customer;
     }, (error: HttpErrorResponse) => {
       if (error.status == 401) {
+        alert("Your session timed out, please log in again.");
         this.cookieService.delete(".AdventureWorks.Session");
         this.router.navigate(['/home']);
       }
     }
     );
   }
-
 }

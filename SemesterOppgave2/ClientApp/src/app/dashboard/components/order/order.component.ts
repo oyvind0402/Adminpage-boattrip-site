@@ -1,6 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CookieService } from 'ngx-cookie-service';
 import { Order } from '../../../models/order';
 import { OrderService } from '../../../_services/order.service';
 import { DeleteModal } from '../deletemodal/deletemodal';
@@ -18,12 +20,18 @@ export class OrderComponent {
     this.loadAllOrders();
   }
 
-  constructor(private orderService: OrderService, private router: Router, private modalService: NgbModal) { }
+  constructor(private cookieService: CookieService, private orderService: OrderService, private router: Router, private modalService: NgbModal) { }
   deleteOrder(id: number) {
     this.orderService.getOne(id).subscribe((order) => {
       this.deletedOrder = order.departureTerminalName + "-" + order.arrivalTerminalName;
       this.showModalAndDelete(id);
-    }, error => console.log(error)
+    }, (error: HttpErrorResponse) => {
+      if (error.status == 401) {
+        alert("Your session timed out, please log in again.");
+        this.cookieService.delete(".AdventureWorks.Session");
+        this.router.navigate(['/home']);
+      }
+    }
     );
   }
 
@@ -35,7 +43,13 @@ export class OrderComponent {
       if (result == 'Delete') {
         this.orderService.delete(id).subscribe(() => {
           this.loadAllOrders();
-        }, error => console.log(error)
+        }, (error: HttpErrorResponse) => {
+          if (error.status == 401) {
+            alert("Your session timed out, please log in again.");
+            this.cookieService.delete(".AdventureWorks.Session");
+            this.router.navigate(['/home']);
+          }
+        }
         );
       }
       this.router.navigate(['/order'])
@@ -47,9 +61,14 @@ export class OrderComponent {
   loadAllOrders() {
     this.orderService.getAll().subscribe(order => {
       this.orders = order;
-    });
-    
-
+    }, (error: HttpErrorResponse) => {
+      if (error.status == 401) {
+        alert("Your session timed out, please log in again.");
+        this.cookieService.delete(".AdventureWorks.Session");
+        this.router.navigate(['/home']);
+      }
+    }
+    );
   }
 
 }

@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
 import { Customer } from '../../../models/customer';
 import { CustomerService } from '../../../_services/customer.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   templateUrl: 'editcustomer.html'
@@ -37,7 +39,7 @@ export class EditCustomerComponent {
   }
 
 
-  constructor(private customerService: CustomerService, private router: Router, private fb: FormBuilder, private route: ActivatedRoute) {
+  constructor(private customerService: CustomerService, private router: Router, private fb: FormBuilder, private route: ActivatedRoute, private cookieService: CookieService) {
     this.form = fb.group(this.validation);
   }
 
@@ -51,7 +53,12 @@ export class EditCustomerComponent {
       this.form.patchValue({ street: customer.street });
       this.form.patchValue({ zipCode: customer.zipCode });
       this.form.patchValue({ city: customer.city });
-    }, error => console.log(error)
+    }, (error: HttpErrorResponse) => {
+      if (error.status == 401) {
+        this.cookieService.delete(".AdventureWorks.Session");
+        this.router.navigate(['/home']);
+      }
+    }
     );
 
   }
@@ -72,7 +79,13 @@ export class EditCustomerComponent {
 
     this.customerService.edit(editedCustomer).subscribe(() => {
       this.router.navigate(['/customer']);
-    }, error => console.log(error)
+    }, (error: HttpErrorResponse) => {
+      if (error.status == 401) {
+        alert("Your session timed out, please log in again.");
+        this.cookieService.delete(".AdventureWorks.Session");
+        this.router.navigate(['/home']);
+      }
+    }
     );
   }
 

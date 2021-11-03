@@ -1,6 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { Order } from '../../../models/order';
 import { OrderService } from '../../../_services/order.service';
 
@@ -51,7 +53,7 @@ export class SaveOrderComponent {
   }
 
 
-  constructor(private orderService: OrderService, private router: Router, private fb: FormBuilder) {
+  constructor(private orderService: OrderService, private router: Router, private fb: FormBuilder, private cookieService: CookieService) {
     this.form = fb.group(this.validation);
   }
 
@@ -95,7 +97,13 @@ export class SaveOrderComponent {
 
     this.orderService.save(newOrder).subscribe(() => {
       this.router.navigate(['/order']);
-    }, error => console.log(error)
+    }, (error: HttpErrorResponse) => {
+      if (error.status == 401) {
+        alert("Your session timed out, please log in again.");
+        this.cookieService.delete(".AdventureWorks.Session");
+        this.router.navigate(['/home']);
+      }
+    }
     );
   }
 
