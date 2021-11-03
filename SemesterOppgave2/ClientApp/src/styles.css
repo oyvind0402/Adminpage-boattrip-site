@@ -127,3 +127,7 @@ button:hover, button:focus {
   color: var(--blue-700);
   background-color: var(--white);
 }
+
+  button.btn-sm {
+    padding: var(--padding-050) var(--padding-100);
+  }
