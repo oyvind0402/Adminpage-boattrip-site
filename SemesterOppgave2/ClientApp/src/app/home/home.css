@@ -12,12 +12,12 @@ h1 {
   display: grid;
   grid-template-columns: 1fr 2fr;
   margin-bottom: var(--padding-150);
-  align-items: last baseline;
+  align-items: flex-end;
 }
 
-  .form-div label {
-    float: left;
-  }
+.form-div label {
+  float: left;
+}
 
 .form-div input {
   font-size: var(--font-size-500);
@@ -45,8 +45,13 @@ h1 {
     display: grid;
     grid-template-columns: 1fr;
   }
-    .form-div input {
-      margin: auto;
-      width: clamp(5rem, 18rem, calc(100vw - 2rem));
-    }
+
+  .form-div:first-of-type {
+    margin-bottom: var(--padding-200);
+  }
+
+  .form-div input {
+    margin: auto;
+    width: clamp(5rem, 18rem, calc(100vw - 2rem));
+  }
 }
