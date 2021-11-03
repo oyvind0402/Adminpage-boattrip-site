@@ -242,10 +242,22 @@ namespace SemesterOppgave2.DAL
             try
             {
                 PostPlaces postPlace = await _db.PostPlaces.FindAsync(zipCode);
-                _db.PostPlaces.Remove(postPlace);
-                await _db.SaveChangesAsync();
-                _log.LogInformation("Postplace with ZipCode: " + zipCode + " deleted!");
+                //if posrt place is a part of Customer or Terminal you will not be able to delete it
+                var checkPostPlaceInCustomer = await _db.Customers.FirstOrDefaultAsync(c => c.Postplace.ZipCode == postPlace.ZipCode);
+                var checkPostPlaceInTerminal = await _db.Terminals.FirstOrDefaultAsync(t => t.TerminalAddress.ZipCode == postPlace.ZipCode);
+
+                if(checkPostPlaceInCustomer ==null && checkPostPlaceInTerminal == null)
+                {
+                    _db.PostPlaces.Remove(postPlace);
+                    await _db.SaveChangesAsync();
+                    _log.LogInformation("Postplace with ZipCode: " + zipCode + " deleted!");
                 return true;
+
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch
             {
@@ -352,10 +364,23 @@ namespace SemesterOppgave2.DAL
             try
             {
                 Boats boat = await _db.Boats.FindAsync(id);
-                _db.Boats.Remove(boat);
-                await _db.SaveChangesAsync();
-                _log.LogInformation("Boat with id: " + id + " deleted!");
-                return true;
+
+                var checkBoatInRoute = await _db.Routes.FirstOrDefaultAsync(r => r.Boat.BoatName == boat.BoatName);
+
+                if(checkBoatInRoute == null)
+                {
+                    _db.Boats.Remove(boat);
+                    await _db.SaveChangesAsync();
+                    _log.LogInformation("Boat with id: " + id + " deleted!");
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+               
+               
             }
             catch
             {
@@ -469,10 +494,24 @@ namespace SemesterOppgave2.DAL
             try
             {
                 var terminal = await _db.Terminals.FindAsync(id);
-                _db.Terminals.Remove(terminal);
-                await _db.SaveChangesAsync();
-                _log.LogInformation("Terminal with id: " + id + " deleted!");
-                return true;
+                var checkArrivalTerminalInRoute = await _db.Routes.FirstOrDefaultAsync(r => r.ArrivalPlace.TerminalName == terminal.TerminalName);
+                var checkDepartureTerminalInRoute = await _db.Routes.FirstOrDefaultAsync(r => r.DeparturePlace.TerminalName == terminal.TerminalName);
+                // checks if terminal is a part of routes to be able to delete
+                if(checkArrivalTerminalInRoute== null && checkDepartureTerminalInRoute == null)
+                {
+                    _db.Terminals.Remove(terminal);
+                    await _db.SaveChangesAsync();
+                    _log.LogInformation("Terminal with id: " + id + " deleted!");
+                    return true;
+
+                }
+                else
+                {
+                    return false;
+                }
+
+               
+                
             }
             catch
             {
@@ -765,10 +804,21 @@ namespace SemesterOppgave2.DAL
             try
             {
                 Routes route = await _db.Routes.FindAsync(id);
-                _db.Routes.Remove(route);
-                await _db.SaveChangesAsync();
-                _log.LogInformation("Route with id:" + id + " deleted!");
-                return true;
+                var checkRoutesInOrder = await _db.Routes.FirstOrDefaultAsync(r => r.DepartureTime == route.DepartureTime
+                && r.DeparturePlace.TerminalName == route.DeparturePlace.TerminalName
+                && r.ArrivalPlace.TerminalName == route.ArrivalPlace.TerminalName);
+
+                if(checkRoutesInOrder == null)
+                {
+                    _db.Routes.Remove(route);
+                    await _db.SaveChangesAsync();
+                    _log.LogInformation("Route with id:" + id + " deleted!");
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch
             {
