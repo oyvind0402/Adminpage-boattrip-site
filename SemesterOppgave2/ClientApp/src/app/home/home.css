@@ -12,14 +12,12 @@ h1 {
   display: grid;
   grid-template-columns: 1fr 2fr;
   margin-bottom: var(--padding-150);
+  align-items: last baseline;
 }
 
-.form-div label {
-  color: var(--blue-700);
-  font-weight: 500;
-  font-size: var(--font-size-500);
-  float: left;
-}
+  .form-div label {
+    float: left;
+  }
 
 .form-div input {
   font-size: var(--font-size-500);

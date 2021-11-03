@@ -1,27 +1,27 @@
 <app-nav-menu></app-nav-menu>
-<div class="container">
+<main class="container">
   <div class="col-md-4">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <input class="form-control" formControlName="id" type="hidden" />
       <div class="form-group">
-        <label>Boatname</label>
+        <label>Boat name</label>
         <input class="form-control" formControlName="boatName" />
         <p class="alert alert-warning" [hidden]="form.controls.boatName.valid || (form.controls.boatName.pristine)">
-          Boatname isnt valid!
+          Boatname is invalid!
         </p>
       </div>
       <div class="form-group">
         <label>Capacity</label>
         <input class="form-control" type="number" formControlName="capacity" />
         <p class="alert alert-warning" [hidden]="form.controls.capacity.valid || (form.controls.capacity.pristine)">
-          Capacity isnt valid!
+          Capacity is invalid!
         </p>
       </div>
       <div class="form-group">
         <label>Ticketprice</label>
         <input class="form-control" type="number" formControlName="ticketPrice" />
         <p class="alert alert-warning" [hidden]="form.controls.ticketPrice.valid || (form.controls.ticketPrice.pristine)">
-          Ticketprice isnt valid!
+          Ticketprice is invalid!
         </p>
       </div>
       <div class="form-group">
@@ -30,4 +30,4 @@
       </div>
     </form>
   </div>
-</div>
+</main>
