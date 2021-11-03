@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -39,11 +40,15 @@ export class RouteComponent {
       if (result == 'Delete') {
         this.routeService.delete(id).subscribe(() => {
           this.loadAllRoutes();
-        }, error => console.log(error)
-        );
+        }, (error: HttpErrorResponse) => {
+          if (error.status == 404) {
+            alert("Couldn't delete that route, it's a part of another table (order) as a foreign key! Delete all the orders containing this route first to be able to delete this route!");
+          }
+        });
       }
       this.router.navigate(['/route']);
-    });
+    }, error => console.log(error)
+    );
   }
 
 

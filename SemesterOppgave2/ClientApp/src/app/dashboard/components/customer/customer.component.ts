@@ -37,7 +37,7 @@ export class CustomerComponent {
           this.loadAllCustomers();
         }, (error: HttpErrorResponse) => {
           if (error.status == 404) {
-            alert("Couldn't delete that customer, it's a part of another table (order) as a foreign key! Delete all the orders with this customer first to be able to delete this customer!");
+            alert("Couldn't delete that customer, it's a part of another table (order) as a foreign key! Delete all the orders containing this customer first to be able to delete this customer!");
           }
         });
       }

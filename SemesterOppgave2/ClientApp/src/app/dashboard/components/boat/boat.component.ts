@@ -4,6 +4,7 @@ import { Boat } from '../../../models/Boat';
 import { BoatService } from '../../../_services/boat.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { DeleteModal } from '../deletemodal/deletemodal';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   templateUrl: 'boat.html',
@@ -38,11 +39,15 @@ export class BoatComponent {
       if (result == 'Delete') {
         this.boatService.delete(id).subscribe(() => {
           this.loadAllBoats();
-        }, error => console.log(error)
-        );
+        }, (error: HttpErrorResponse) => {
+          if (error.status == 404) {
+            alert("Couldn't delete that boat, it's a part of another table (route) as a foreign key! Delete all the routes containing this boat first to be able to delete this boat!");
+          }
+        });
       }
       this.router.navigate(['/boat']);
-    });
+    }, error => console.log(error)
+    );
   }
 
   loadAllBoats() {

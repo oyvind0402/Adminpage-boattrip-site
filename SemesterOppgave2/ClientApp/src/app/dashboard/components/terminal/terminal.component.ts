@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -39,11 +40,15 @@ export class TerminalComponent {
       if (result == 'Delete') {
         this.terminalService.delete(id).subscribe(() => {
           this.loadAllTerminals();
-        }, error => console.log(error)
-        );
+        }, (error: HttpErrorResponse) => {
+          if (error.status == 404) {
+            alert("Couldn't delete that terminal, it's a part of another table (route) as a foreign key! Delete all the routes containing this terminal first to be able to delete this terminal!");
+          }
+        });
       }
       this.router.navigate(['/terminal']);
-    });
+    }, error => console.log(error)
+    );
   }
 
 
