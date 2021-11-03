@@ -26,7 +26,7 @@ export class Home {
     ]
   };
 
-  constructor(private _http: HttpClient, private router: Router, private fb: FormBuilder, private cookieService: CookieService, private boatService: BoatService) {
+  constructor(private _http: HttpClient, private router: Router, private fb: FormBuilder, private cookieService: CookieService) {
     this.form = fb.group(this.validering);
   }
 
@@ -47,15 +47,6 @@ export class Home {
   }
 
   ngOnInit() {
-    this.boatService.getAll().subscribe(() => {
-
-    }, (error: HttpErrorResponse) => {
-      if (error.status == 401) {
-        this.cookieService.delete(".AdventureWorks.Session");
-        this.admin = false;
-      }
-    }
-    );
     if (this.cookieService.check(".AdventureWorks.Session")) {
       this.admin = true;
       this.router.navigate(['/admin']);
