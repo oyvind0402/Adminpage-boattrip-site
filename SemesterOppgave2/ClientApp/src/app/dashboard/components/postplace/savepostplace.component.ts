@@ -3,6 +3,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
 import { PostPlaceService } from '../../../_services/postPlace.service';
 import { PostPlace } from '../../../models/postPlace';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -28,9 +29,12 @@ export class SavePostPlaceComponent {
     console.log(newPostPlace);
 
     this.postPlaceService.save(newPostPlace).subscribe(() => {
-     this.router.navigate(['/postplace']);
-    }, error => console.log(error)
-    );
+      this.router.navigate(['/postplace']);
+    }, (error: HttpErrorResponse) => {
+      if (error.status == 400) {
+        alert("Couldn't save that postplace, there's a postplace with the same ZipCode that already exists!");
+      }
+    });
   }
 
   onSubmit() {

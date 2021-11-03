@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -39,8 +40,11 @@ export class PostPlaceComponent {
       if (result == 'Delete') {
         this.postPlaceService.delete(id).subscribe(() => {
           this.loadAllPostPlaces();
-        }, error => console.log(error)
-        );
+        }, (error: HttpErrorResponse) => {
+          if (error.status == 404) {
+            alert("Couldn't delete that postplace, it's a part of another table (customer or terminal) as a foreign key! Delete all the entries containing this postplace first to be able to delete this postplace!");
+          }
+        });
       }
       this.router.navigate(['/postplace']);
     }, error => console.log(error)
