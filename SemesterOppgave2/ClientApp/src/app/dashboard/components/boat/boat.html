@@ -1,14 +1,15 @@
 <app-nav-menu></app-nav-menu>
 <main>
   <div class="content">
-    <h2>Boats:</h2>
-    <button class="btn btn-add" [routerLink]="['/saveboat']">New boat</button>
+    <button class="btn-back" routerLink="/admin">Back</button>
+    <h1 class="align-bootstrap">Boats</h1>
+    <button class="align-bootstrap" [routerLink]="['/saveboat']">New boat</button>
     <table class="table table-boat">
       <thead>
         <tr>
-          <th>Boatname</th>
+          <th>Boat name</th>
           <th>Capacity</th>
-          <th>Ticketprice</th>
+          <th>Ticket price</th>
           <th></th>
           <th></th>
         </tr>
@@ -17,9 +18,9 @@
         <tr *ngFor="let boat of boats">
           <td label="Boatname">{{boat.boatName}}</td>
           <td label="Capacity">{{boat.capacity}}</td>
-          <td label="Ticketprice">{{boat.ticketPrice}}</td>
-          <td><button class="btn btn-endre" [routerLink]="['/editboat', boat.id]">Edit</button></td>
-          <td><button class="btn btn-slett" (click)="deleteBoat(boat.id)">Delete</button></td>
+          <td label="Ticket price">kr {{boat.ticketPrice}},-</td>
+          <td class="nullable right-content"><button class="btn-sm" [routerLink]="['/editboat', boat.id]">Edit</button></td>
+          <td class="nullable"><button class="btn-alt btn-sm" (click)="deleteBoat(boat.id)">Delete</button></td>
         </tr>
       </tbody>
     </table>
