@@ -41,6 +41,7 @@ import { SaveRouteComponent } from './dashboard/components/route/saveroute.compo
 
 
 import { SaveTerminalComponent } from './dashboard/components/terminal/saveterminal.component';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @NgModule({
@@ -87,7 +88,7 @@ import { SaveTerminalComponent } from './dashboard/components/terminal/savetermi
     AppRoutingModule,
     NgbModule,
   ],
-  providers: [CustomerService, BoatService, RouteService, TerminalService, OrderService, PostPlaceService],
+  providers: [CustomerService, BoatService, RouteService, TerminalService, OrderService, PostPlaceService, CookieService],
   bootstrap: [AppComponent],
   entryComponents: [DeleteModal],
 })

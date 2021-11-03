@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from '../user';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class Home {
     ]
   };
 
-  constructor( private _http: HttpClient, private router: Router, private fb: FormBuilder) {
+  constructor(private _http: HttpClient, private router: Router, private fb: FormBuilder, private cookieService: CookieService) {
     this.form = fb.group(this.validering);
   }
 
@@ -45,7 +46,7 @@ export class Home {
   }
 
   ngOnInit() {
-    if (sessionStorage.getItem("admin")) {
+    if (this.cookieService.check(".AdventureWorks.Session")) {
       this.admin = true;
     } else {
       this.admin = false;

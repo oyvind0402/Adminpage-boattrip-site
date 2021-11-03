@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CookieService } from 'ngx-cookie-service';
 import { Customer } from '../../../models/customer';
 import { CustomerService } from '../../../_services/customer.service';
 import { DeleteModal } from '../deletemodal/deletemodal';
@@ -18,8 +19,8 @@ export class CustomerComponent {
   ngOnInit() {
     this.loadAllCustomers();
   }
-  
-  constructor(private customerService: CustomerService, private router: Router, private modalService: NgbModal) { }
+
+  constructor(private customerService: CustomerService, private router: Router, private modalService: NgbModal, private cookieService: CookieService) { }
   deleteCustomer(id: number) {
     this.customerService.getOne(id).subscribe((customer) => {
       this.deletedCustomer = customer.firstname + " " + customer.lastname;
@@ -50,7 +51,13 @@ export class CustomerComponent {
   loadAllCustomers() {
     this.customerService.getAll().subscribe(customer => {
       this.customers = customer;
-    });
+    }, (error: HttpErrorResponse) => {
+      if (error.status == 401) {
+        this.cookieService.delete(".AdventureWorks.Session");
+        this.router.navigate(['/home']);
+      }
+    }
+    );
   }
 
 }
