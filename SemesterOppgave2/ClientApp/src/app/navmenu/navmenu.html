@@ -1,13 +1,15 @@
 <nav class="header">
   <div class="site-logo">
-    <a routerLink="/"><img class="nav-logo-img" src="../../assets/Logo.png" /></a>
+    <a *ngIf="admin" routerLink="/admin"><img class="nav-logo-img" src="../../assets/Logo.png" /></a>
+    <a *ngIf="!admin" routerLink="/"><img class="nav-logo-img" src="../../assets/Logo.png" /></a>
   </div>
   <ul class="nav-list">
     <li class="nav-list-item">
-      <a class="nav-list-link" routerLink="/home">Home</a>
+      <a class="nav-list-link" routerLink="/admin">Admin</a>
     </li>
     <li class="nav-list-item">
-      <a class="nav-list-link" routerLink="/admin">Admin</a>
+      <a class="nav-list-link" routerLink="/home" *ngIf="!admin">Log in</a>
+      <button class="nav-list-link" *ngIf="admin" (click)="logOut()">Log out</button>
     </li>
   </ul>
 </nav>

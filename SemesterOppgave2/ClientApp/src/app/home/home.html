@@ -1,5 +1,6 @@
-<main>
-  <div *ngIf="!admin">
+<app-nav-menu></app-nav-menu>
+<main *ngIf="!admin">
+  <div>
     <h1>Log in</h1>
     <form id="login-form" [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="form-div">
@@ -14,12 +15,11 @@
         <span></span>
         <span class="password-error" [hidden]="form.controls.password.valid || (form.controls.password.pristine)">Not valid password!</span>
       </div>
-      <div class="form-div-btn" >
+      <div class="form-div-btn">
         <button type="submit" [disabled]="!form.valid" class="submit-btn">Login</button>
       </div>
     </form>
   </div>
-  <div *ngIf="admin">
-    <h1>Welcome back Admin!</h1>
+  <div *ngIf="admin" onload="$window.location.href = '/#/admin'; $window.location.reload();">
   </div>
 </main>

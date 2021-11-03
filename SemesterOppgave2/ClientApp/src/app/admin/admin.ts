@@ -1,6 +1,6 @@
+import { Component, Input, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service'
 import { BoatService } from '../_services/boat.service';
@@ -11,18 +11,10 @@ import { BoatService } from '../_services/boat.service';
 })
 
 export class Admin {
-  admin: boolean;
+  @Input()
+  admin: boolean = false;
 
   constructor(private _http: HttpClient, private router: Router, private cookieService: CookieService, private boatService: BoatService) { }
-
-  logOut() {
-    this._http.get("api/boattrip/logout").subscribe(() => {
-      this.cookieService.delete(".AdventureWorks.Session");
-      this.admin = false;
-      this.router.navigate(['/home']);
-    }, error => console.log(error)
-    );
-  }
 
   ngOnInit() {
     this.boatService.getAll().subscribe(() => {
