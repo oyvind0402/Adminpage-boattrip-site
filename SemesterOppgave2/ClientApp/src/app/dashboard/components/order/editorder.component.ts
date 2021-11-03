@@ -103,12 +103,10 @@ export class EditOrderComponent {
       this.form.patchValue({ city: order.city });
       */
     }, (error: HttpErrorResponse) => {
-      (error: HttpErrorResponse) => {
-        if (error.status == 401) {
-          alert("Your session timed out, please log in again.");
-          this.cookieService.delete(".AdventureWorks.Session");
-          this.router.navigate(['/home']);
-        }
+      if (error.status == 401) {
+        alert("Your session timed out, please log in again.");
+        this.cookieService.delete(".AdventureWorks.Session");
+        this.router.navigate(['/home']);
       }
     }
     );
