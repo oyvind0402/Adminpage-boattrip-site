@@ -154,6 +154,15 @@ export class EditOrderComponent {
         }, error => console.log(error)
         );
       });
+    }, (error: HttpErrorResponse) => {
+      /* If authentication error (timeout / not logging) */
+      if (error.status == 401) {
+        const alertRef = this.modalService.open(AlertBox);
+        alertRef.componentInstance.body = "Your session timed out, please log in again.";
+        alertRef.componentInstance.title = "Session timeout";
+        this.cookieService.delete(".AdventureWorks.Session");
+        this.router.navigate(['/home']);
+      }
     });
   }
 }
