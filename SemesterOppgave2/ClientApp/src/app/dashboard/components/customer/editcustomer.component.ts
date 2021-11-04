@@ -85,8 +85,6 @@ export class EditCustomerComponent {
     editedCustomer.city = this.postplacechosen.city;
     editedCustomer.zipCode = this.postplacechosen.zipCode;
 
-    console.log(editedCustomer);
-
     this.customerService.edit(editedCustomer).subscribe(() => {
       this.router.navigate(['/customer']);
     }, (error: HttpErrorResponse) => {

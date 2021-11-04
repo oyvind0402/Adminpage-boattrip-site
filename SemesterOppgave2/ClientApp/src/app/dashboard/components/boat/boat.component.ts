@@ -86,6 +86,5 @@ export class BoatComponent {
       }
     }
     );
-    console.log(this.boats); 
   }
 }

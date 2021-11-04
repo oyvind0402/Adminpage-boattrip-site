@@ -71,7 +71,6 @@ export class EditPostplaceComponent {
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.fetchPostPlace(params.id);
-      console.log(params);
     }, (error: HttpErrorResponse) => {
       if (error.status == 401) {
         /* If authentication error (timeout / not logging) */

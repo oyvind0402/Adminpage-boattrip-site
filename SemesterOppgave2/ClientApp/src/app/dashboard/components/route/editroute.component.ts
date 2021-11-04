@@ -102,8 +102,6 @@ export class EditRouteComponent {
     editedRoute.capacity = this.boat.capacity;
     editedRoute.ticketPrice = this.boat.ticketPrice;
 
-    console.log(editedRoute);
-
     this.routeService.edit(editedRoute).subscribe(() => {
       this.router.navigate(['/route']);
     }, (error: HttpErrorResponse) => {

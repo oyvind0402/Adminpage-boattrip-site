@@ -40,8 +40,6 @@ export class SaveBoatComponent {
     newBoat.capacity = this.form.value.capacity;
     newBoat.ticketPrice = this.form.value.ticketPrice;
 
-    console.log(newBoat);
-
     this.boatService.save(newBoat).subscribe(() => {
       this.router.navigate(['/boat']);
     }, (error: HttpErrorResponse) => {

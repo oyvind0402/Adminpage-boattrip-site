@@ -30,7 +30,6 @@ export class SavePostPlaceComponent {
     const newPostPlace = new PostPlace();
     newPostPlace.zipCode = this.form.value.zipcode
     newPostPlace.city = this.form.value.city
-    console.log(newPostPlace);
 
     this.postPlaceService.save(newPostPlace).subscribe(() => {
       this.router.navigate(['/postplace']);

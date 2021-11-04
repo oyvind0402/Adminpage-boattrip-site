@@ -42,7 +42,6 @@ export class SaveTerminalComponent {
     newTerminal.terminalName = this.form.value.terminalName;
     newTerminal.city = this.form.value.city;
     newTerminal.zipCode = this.form.value.zipCode;
-    console.log(newTerminal);
 
     this.terminalService.save(newTerminal).subscribe(() => {
       this.router.navigate(['/terminal']);
