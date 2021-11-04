@@ -544,7 +544,7 @@ namespace SemesterOppgave2.DAL
                     editedTerminal.TerminalAddress = checkPostPlace;
                 } else
                 {
-                    return false;
+                    editedTerminal.TerminalAddress.City = terminal.City;
                 }
                 await _db.SaveChangesAsync();
                 _log.LogInformation(terminal.ToString() + " edited!");
