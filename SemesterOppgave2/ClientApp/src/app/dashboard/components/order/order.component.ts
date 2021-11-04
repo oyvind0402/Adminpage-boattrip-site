@@ -10,7 +10,7 @@ import { AlertBox } from '../alertmodal/alertmodal';
 
 @Component({
   templateUrl: 'order.html',
-  styleUrls: ['./order.css'],
+  styleUrls: ['../dblists.css'],
 })
 
 export class OrderComponent {

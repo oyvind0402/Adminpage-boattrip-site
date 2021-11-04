@@ -1,8 +1,9 @@
 <app-nav-menu></app-nav-menu>
-<div>
+<main>
   <div class="content">
-    <h2>Order:</h2>
-    <!--<button class="btn btn-add" [routerLink]="['/saveorder']">New order</button>-->
+    <button class="btn-back" routerLink="/admin">Back</button>
+    <h1 class="align-bootstrap">Orders</h1>
+    <button class="align-bootstrap" [routerLink]="['/saveorder']">New order</button>
     <table class="table table-order">
       <thead>
         <tr>
@@ -10,8 +11,8 @@
           <th>Arrival</th>
           <th>Customer</th>
           <th>Boat</th>
-          <th>Ticket Amount</th>
-          <th>Total Price</th>
+          <th>Ticket amount</th>
+          <th>Total price</th>
           <th></th>
           <th></th>
         </tr>
@@ -22,12 +23,12 @@
           <td label="Arrival">{{order.arrivalTerminalName}} <br /> {{order.arrivalTime}}</td>
           <td label="Customer">{{order.firstname}} {{order.lastname}}</td>
           <td label="Boat">{{order.boatName}}</td>
-          <td label="Ticket Amount">{{order.ticketAmount}}</td>
-          <td label="Total Price">{{order.totalPrice}}</td>
-          <td><button class="btn btn-endre" [routerLink]="['/editorder', order.id]">Edit</button></td>
-          <td><button class="btn btn-slett" (click)="deleteOrder(order.id)">Delete</button></td>
+          <td label="Ticket amount">{{order.ticketAmount}}</td>
+          <td label="Total price">kr {{order.totalPrice}},-</td>
+          <td class="nullable right-content"><button class="btn-sm" [routerLink]="['/editorder', order.id]">Edit</button></td>
+          <td class="nullable"><button class="btn-alt btn-sm" (click)="deleteOrder(order.id)">Delete</button></td>
         </tr>
       </tbody>
     </table>
   </div>
-</div>
+</main>

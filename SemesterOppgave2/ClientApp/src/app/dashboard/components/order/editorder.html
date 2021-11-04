@@ -1,30 +1,29 @@
 <app-nav-menu></app-nav-menu>
-<div class="container">
-  <div class="col-md-4">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <input class="form-control" formControlName="id" type="hidden" />
+<main class="container">
+    <button class="btn-back" routerLink="/order">Back</button>
+    <h1 class="align-bootstrap">Edit Order</h1>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-      <!--Order-->
-      <div class="form-group">
-        <label>Ticket amount</label>
-        <input class="form-control" type="number" formControlName="ticketamount" />
-        <p class="alert alert-warning" [hidden]="form.controls.ticketamount.valid || (form.controls.ticketamount.pristine)">
-          Ticket amount isnt valid!
-        </p>
-      </div>
-      <div class="form-group">
-        <label>Total price</label>
-        <input class="form-control" type="number" formControlName="totalprice" />
-        <p class="alert alert-warning" [hidden]="form.controls.totalprice.valid || (form.controls.totalprice.pristine)">
-          Total price isnt valid!
-        </p>
-      </div>
+    <!--Order-->
+    <input formControlName="id" type="hidden" />
+    <div class="form-group inline-blk col-md-6">
+      <label>Ticket amount</label>
+      <input type="number" formControlName="ticketamount" />
+      <p class="alert alert-warning" [hidden]="form.controls.ticketamount.valid || (form.controls.ticketamount.pristine)">
+        Ticket amount is invalid!
+      </p>
+    </div>
+    <div class="form-group inline-blk col-md-6">
+      <label>Total price</label>
+      <input type="number" formControlName="totalprice" />
+      <p class="alert alert-warning" [hidden]="form.controls.totalprice.valid || (form.controls.totalprice.pristine)">
+        Total price is invalid!
+      </p>
+    </div>
 
-      <!--Submit-->
-      <div class="form-group">
-        <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Edit</button>
-        <button class="btn btn-default" routerLink="/order">Back</button>
-      </div>
-    </form>
-  </div>
-</div>
+    <!--Submit-->
+    <div class="form-group center-content">
+      <button type="submit" [disabled]="!form.valid" class="align-bootstrap">Edit</button>
+    </div>
+  </form>
+</main>

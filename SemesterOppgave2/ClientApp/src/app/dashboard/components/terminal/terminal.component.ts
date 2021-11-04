@@ -12,7 +12,7 @@ import { AlertBox } from '../alertmodal/alertmodal';
 
 @Component({
   templateUrl: 'terminal.html',
-  styleUrls: ['terminal.css'],
+  styleUrls: ['../dblists.css'],
 })
 
 export class TerminalComponent {

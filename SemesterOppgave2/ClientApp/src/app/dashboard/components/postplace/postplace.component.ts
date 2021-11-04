@@ -11,7 +11,7 @@ import { DeleteModal } from '../deletemodal/deletemodal';
 
 @Component({
   templateUrl: 'postplace.html',
-  styleUrls: ['postplace.css'],
+  styleUrls: ['../dblists.css'],
 })
 
 export class PostPlaceComponent {

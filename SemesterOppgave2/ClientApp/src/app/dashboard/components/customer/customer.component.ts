@@ -11,7 +11,7 @@ import { AlertBox } from '../alertmodal/alertmodal';
 
 @Component({
   templateUrl: 'customer.html',
-  styleUrls: ['./customer.css'],
+  styleUrls: ['../dblists.css'],
 })
 
 export class CustomerComponent {

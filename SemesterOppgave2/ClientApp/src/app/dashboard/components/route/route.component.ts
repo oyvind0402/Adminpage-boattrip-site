@@ -11,7 +11,7 @@ import { DeleteModal } from '../deletemodal/deletemodal';
 
 @Component({
   templateUrl: 'route.html',
-  styleUrls: ['route.css'],
+  styleUrls: ['../dblists.css'],
 })
 
 export class RouteComponent {
