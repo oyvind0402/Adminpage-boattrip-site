@@ -23,6 +23,15 @@ At times, two dependencies will not be installed automatically, despite being in
 Please, be patient, as it will take some time for the project to load.
 
 ## Functionality choices 
+### Validation
+Holbergs båter serves a Norwegian customer base, and therefore only accepts Norwegian phone numbers, either with or without the country code.
+
+Since terminals can be in other countries, zip codes from Norway, Sweden, Germany and Denmark are accepted.
+
+Dates are in the format of "DD-MM-YYYY" (30-12-2030). As specified in the previous assignment, all boats depart at 09:00, and trips that are automatically generated in `DBInit.cs` normally last one day.
+
+Ticketamount can only be up to 9999 tickets. Totalprice of the trip cannot exceed 7 digits (9999999).
+
 ### Cascading deletion
 To be able to delete rows/objects that are used as a foreign key in another table, cascading deletion needs to be enabled in the database. For customers, for example, it entails deleting both the customer and all orders it is a part of, which we thought would be a desirable feature for an administrator. However, we thought that this would be problematic for our database when it comes to, for instance, deleting a postplace, because that would entail deleting every customer and terminal that postplace is a part of. Consequently, that would also delete every order the deleted customer is a part of, as well as every route the terminal is a part of. In summary, it would snowball out of control.
 

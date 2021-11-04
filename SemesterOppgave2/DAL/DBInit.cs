@@ -42,10 +42,10 @@ namespace SemesterOppgave2.DAL
                 var customer1 = new Customers { Firstname = "Eivind", Lastname = "Ekeberg", Street = "Osloveien 12", Phonenr = "21111111", Email = "eivind-ekeberg@gmail.com", Postplace = postplace1 };
                 var customer2 = new Customers { Firstname = "Lina", Lastname = "Hekkestad", Street = "Trondheimvei 12", Phonenr = "22222222", Email = "lina-hekkestad@gmail.com", Postplace = postplace2 };
                 var customer3 = new Customers { Firstname = "Håkon", Lastname = "Håkonsen", Street = "Kristiandsandgata 12", Phonenr = "33333333", Email = "haakon-haakonsen@gmail.com", Postplace = postplace3 };
-                var customer4 = new Customers { Firstname = "Vebjørn", Lastname = "Olsen", Street = "Aalesundgata 12", Phonenr = "44444444", Email = "v-olsen@gmail.com", Postplace = postplace4 };
+                var customer4 = new Customers { Firstname = "Vebjørn", Lastname = "Olsen", Street = "Aalesundgata 12", Phonenr = "+4744444444", Email = "v-olsen@gmail.com", Postplace = postplace4 };
                 var customer5 = new Customers { Firstname = "Kjetil", Lastname = "Hansen", Street = "Stavangerveien 12", Phonenr = "55555555", Email = "kjetil-hansen@gmail.com", Postplace = postplace5 };
                 var customer6 = new Customers { Firstname = "Maria", Lastname = "Berg", Street = "Bodovei 12A", Phonenr = "66666666", Email = "maria-berg@gmail.com", Postplace = postplace6 };
-                var customer7 = new Customers { Firstname = "Jon", Lastname = "Lund", Street = "Lillhammergata 12", Phonenr = "77777777", Email = "jon-lund@gmail.com", Postplace = postplace7 };
+                var customer7 = new Customers { Firstname = "Jon", Lastname = "Lund", Street = "Lillhammergata 12", Phonenr = "+4777777777", Email = "jon-lund@gmail.com", Postplace = postplace7 };
                 Customers[] customers = { customer1, customer2, customer3, customer4, customer5, customer6, customer7 };
 
                 context.Customers.Add(customer1);
@@ -81,10 +81,10 @@ namespace SemesterOppgave2.DAL
                 context.PostPlaces.Add(postplaceHel);
 
                 //Terminal
-                var Terminal1 = new Terminals { TerminalName = "Oslo", Street = "Schweigaards gate 1", TerminalAddress = postplaceOslo };
-                var Terminal2 = new Terminals { TerminalName = "Kiel", Street = "Kiel kai", TerminalAddress = postplaceKiel };
-                var Terminal3 = new Terminals { TerminalName = "Bergen", Street = "Sundts gate 1", TerminalAddress = postplaceBer };
-                var Terminal4 = new Terminals { TerminalName = "Helsinki", Street = "Hietalahdenranta 14", TerminalAddress = postplaceHel };
+                var Terminal1 = new Terminals { TerminalName = "Aker Brygge", Street = "Schweigaards gate 1", TerminalAddress = postplaceOslo };
+                var Terminal2 = new Terminals { TerminalName = "Kiel Pier", Street = "Kiel kai", TerminalAddress = postplaceKiel };
+                var Terminal3 = new Terminals { TerminalName = "Bergen Brygge", Street = "Sundts gate 1", TerminalAddress = postplaceBer };
+                var Terminal4 = new Terminals { TerminalName = "Helsinki Satama", Street = "Hietalahdenranta 14", TerminalAddress = postplaceHel };
 
                 context.Terminals.Add(Terminal1);
                 context.Terminals.Add(Terminal2);

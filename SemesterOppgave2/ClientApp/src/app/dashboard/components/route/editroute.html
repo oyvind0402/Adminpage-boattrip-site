@@ -9,14 +9,14 @@
     <!--Route-->
     <div class="form-group inline-blk col-md-4">
       <label>Departure Time</label>
-      <input formControlName="departuretime" />
+      <input formControlName="departuretime" placeholder="30-12-2030" />
       <p class="alert alert-warning" [hidden]="form.controls.departuretime.valid || (form.controls.departuretime.pristine)">
         Departure time is invalid!
       </p>
     </div>
     <div class="form-group inline-blk col-md-4">
       <label>Arrival Time</label>
-      <input formControlName="arrivaltime" />
+      <input formControlName="arrivaltime" placeholder="31-12-2030" />
       <p class="alert alert-warning" [hidden]="form.controls.arrivaltime.valid || (form.controls.arrivaltime.pristine)">
         Arrival time is invalid!
       </p>

@@ -6,49 +6,49 @@
       <input formControlName="id" type="hidden" />
       <div class="form-group col-md-6 inline-blk">
         <label>First name</label>
-        <input formControlName="firstname" />
+        <input formControlName="firstname" placeholder="Jane" />
         <p class="alert alert-warning" [hidden]="form.controls.firstname.valid || (form.controls.firstname.pristine)">
           First name is invalid!
         </p>
       </div>
       <div class="form-group col-md-6 inline-blk">
         <label>Last name</label>
-        <input formControlName="lastname" />
+        <input formControlName="lastname" placeholder="Doe" />
         <p class="alert alert-warning" [hidden]="form.controls.lastname.valid || (form.controls.lastname.pristine)">
           Last name is invalid!
         </p>
       </div>
       <div class="form-group col-md-4 inline-blk">
         <label>Phone number</label>
-        <input formControlName="phonenr" />
+        <input formControlName="phonenr" placeholder="+4787654321" />
         <p class="alert alert-warning" [hidden]="form.controls.phonenr.valid || (form.controls.phonenr.pristine)">
           Phone number is invalid!
         </p>
       </div>
       <div class="form-group col-md-8 inline-blk">
         <label>Email</label>
-        <input formControlName="email" />
+        <input formControlName="email" placeholder="jane-doe@company.com" />
         <p class="alert alert-warning" [hidden]="form.controls.email.valid || (form.controls.email.pristine)">
           Email is invalid!
         </p>
       </div>
       <div class="form-group col-md-6 inline-blk">
         <label>Street</label>
-        <input formControlName="street" />
+        <input formControlName="street" placeholder="Janedoestreet 24" />
         <p class="alert alert-warning" [hidden]="form.controls.street.valid || (form.controls.street.pristine)">
           Street is invalid!
         </p>
       </div>
       <div class="form-group col-md-2 inline-blk">
         <label>Zip Code</label>
-        <input formControlName="zipCode" />
+        <input formControlName="zipCode" placeholder="1234" />
         <p class="alert alert-warning" [hidden]="form.controls.zipCode.valid || (form.controls.zipCode.pristine)">
           Zip code is invalid!
         </p>
       </div>
       <div class="form-group col-md-4 inline-blk">
         <label>City</label>
-        <input  formControlName="city" />
+        <input  formControlName="city" placeholder="Cityofdoom" />
         <p class="alert alert-warning" [hidden]="form.controls.city.valid || (form.controls.city.pristine)">
           City is invalid!
         </p>

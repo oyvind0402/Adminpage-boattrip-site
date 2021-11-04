@@ -6,7 +6,7 @@
 
     <div class="form-group inline-blk col-md-6">
       <label>Zipcode</label>
-      <input formControlName="zipcode" />
+      <input formControlName="zipcode" placeholder="1234" />
       <p class="alert alert-warning" [hidden]="form.controls.zipcode.valid || (form.controls.zipcode.pristine)">
         Zipcode is invalid!
       </p>
@@ -14,7 +14,7 @@
 
     <div class="form-group inline-blk col-md-6">
       <label>City</label>
-      <input formControlName="city" />
+      <input formControlName="city" placeholder="Cityofdoom" />
       <p class="alert alert-warning" [hidden]="form.controls.city.valid || (form.controls.city.pristine)">
         City is invalid!
       </p>

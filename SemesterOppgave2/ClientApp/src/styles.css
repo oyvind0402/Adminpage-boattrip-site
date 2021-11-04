@@ -3,6 +3,7 @@
   --blue-700: rgb(41, 50, 65);
   --blue-700-v: 41, 50, 65;
   --blue-500: rgb(61, 90, 128);
+  --blue-500-v: 61, 90, 128;
   --blue-300: rgb(152, 193, 217);
   --blue-300-v: 152, 193, 217;
   --blue-100: rgb(224, 251, 252);
@@ -80,6 +81,10 @@ input {
   background-position: 0% calc(100% + var(--font-size-200));
   background-repeat: no-repeat;
   transition: background 0.3s linear;
+}
+
+input::placeholder {
+    color: rgba(var(--blue-500-v), 0.5);
 }
 
   input:focus {

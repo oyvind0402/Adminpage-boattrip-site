@@ -6,14 +6,14 @@
     <input formControlName="id" type="hidden" />
     <div class="form-group inline-blk col-md-6">
       <label>Terminal name</label>
-      <input formControlName="terminalName" />
+      <input formControlName="terminalName" placeholder="Cityofdoom harbor" />
       <p class="alert alert-warning" [hidden]="form.controls.terminalName.valid || (form.controls.terminalName.pristine)">
         Terminal name is invalid!
       </p>
     </div>
     <div class="form-group inline-blk col-md-6">
       <label>Street</label>
-      <input formControlName="street" />
+      <input formControlName="street" placeholder="Doomstreet 24" />
       <p class="alert alert-warning" [hidden]="form.controls.street.valid || (form.controls.street.pristine)">
         Street is invalid!
       </p>

@@ -5,28 +5,28 @@
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-group col-md-6">
       <label>Terminal name</label>
-      <input formControlName="terminalName" />
+      <input formControlName="terminalName" placeholder="Cityofdoom harbor" />
       <p class="alert alert-warning" [hidden]="form.controls.terminalName.valid || (form.controls.terminalName.pristine)">
         Terminal name is invalid!
       </p>
     </div>
     <div class="form-group inline-blk col-md-5">
       <label>Street</label>
-      <input formControlName="street" />
+      <input formControlName="street" placeholder="Doomstreet 24" />
       <p class="alert alert-warning" [hidden]="form.controls.street.valid || (form.controls.street.pristine)">
         Street is invalid!
       </p>
     </div>
     <div class="form-group inline-blk col-md-4">
       <label>City</label>
-      <input formControlName="city" />
+      <input formControlName="city" placeholder="Cityofdoom" />
       <p class="alert alert-warning" [hidden]="form.controls.city.valid || (form.controls.city.pristine)">
         City is invalid!
       </p>
     </div>
     <div class="form-group inline-blk col-md-3">
       <label>Zip Code</label>
-      <input formControlName="zipCode" />
+      <input formControlName="zipCode" placeholder="1234" />
       <p class="alert alert-warning" [hidden]="form.controls.zipCode.valid || (form.controls.zipCode.pristine)">
         Zip Code is invalid!
       </p>

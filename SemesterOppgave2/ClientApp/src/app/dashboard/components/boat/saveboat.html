@@ -6,7 +6,7 @@
     <input formControlName="id" type="hidden" />
     <div class="form-group inline-blk col-md-6">
       <label>Boat name</label>
-      <input formControlName="boatName" />
+      <input formControlName="boatName" placeholder="Fjordboat" />
       <p class="alert alert-warning" [hidden]="form.controls.boatName.valid || (form.controls.boatName.pristine)">
         Boat name is invalid!
       </p>
