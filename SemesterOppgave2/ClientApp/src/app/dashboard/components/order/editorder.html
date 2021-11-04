@@ -2,28 +2,42 @@
 <main class="container">
     <button class="btn-back" routerLink="/order">Back</button>
     <h1 class="align-bootstrap">Edit Order</h1>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-    <!--Order-->
-    <input formControlName="id" type="hidden" />
-    <div class="form-group inline-blk col-md-6">
-      <label>Ticket amount</label>
-      <input type="number" formControlName="ticketamount" />
-      <p class="alert alert-warning" [hidden]="form.controls.ticketamount.valid || (form.controls.ticketamount.pristine)">
-        Ticket amount is invalid!
-      </p>
-    </div>
-    <div class="form-group inline-blk col-md-6">
-      <label>Total price</label>
-      <input type="number" formControlName="totalprice" />
-      <p class="alert alert-warning" [hidden]="form.controls.totalprice.valid || (form.controls.totalprice.pristine)">
-        Total price is invalid!
-      </p>
-    </div>
+      <!--Order-->
+      <input formControlName="id" type="hidden" />
+      <div class="form-group inline-blk col-md-6">
+        <label>Ticket amount</label>
+        <input type="number" formControlName="ticketamount" />
+        <p class="alert alert-warning" [hidden]="form.controls.ticketamount.valid || (form.controls.ticketamount.pristine)">
+          Ticket amount is invalid!
+        </p>
+      </div>
+      <div class="form-group inline-blk col-md-6">
+        <label>Total price</label>
+        <input type="number" formControlName="totalprice" />
+        <p class="alert alert-warning" [hidden]="form.controls.totalprice.valid || (form.controls.totalprice.pristine)">
+          Total price is invalid!
+        </p>
+      </div>
+      <!--Route-->
+      <div class="form-group col-md-6 inline-blk">
+        <label>Route</label>
+        <select formControlName="route" (ngModelChange)="changeRoute($event)">
+          <option *ngFor="let route of routes" [ngValue]="route">{{route.departureTerminalName}} -> {{route.arrivalTerminalName}}. Departure: {{route.departureTime}}</option>
+        </select>
+      </div>
+      <!--Customer-->
+      <div class="form-group col-md-6 inline-blk">
+        <label>Customer</label>
+        <select formControlName="customer" (ngModelChange)="changeCustomer($event)">
+          <option *ngFor="let customer of customers" [ngValue]="customer">{{customer.firstname}} {{customer.lastname}}</option>
+        </select>
+      </div>
 
-    <!--Submit-->
-    <div class="form-group center-content">
-      <button type="submit" [disabled]="!form.valid" class="align-bootstrap">Save</button>
-    </div>
-  </form>
+      <!--Submit-->
+      <div class="form-group center-content">
+        <button type="submit" [disabled]="!form.valid" class="align-bootstrap">Save</button>
+      </div>
+    </form>
 </main>

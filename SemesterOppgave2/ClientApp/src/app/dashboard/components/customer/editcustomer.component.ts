@@ -7,6 +7,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertBox } from '../alertmodal/alertmodal';
+import { PostPlace } from '../../../models/postPlace';
+import { PostPlaceService } from '../../../_services/postPlace.service';
 
 @Component({
   templateUrl: 'editcustomer.html',
@@ -14,6 +16,8 @@ import { AlertBox } from '../alertmodal/alertmodal';
 
 export class EditCustomerComponent {
   form: FormGroup;
+  postplaces: Array<PostPlace>;
+  postplacechosen: PostPlace;
 
   /*Validation patterns*/
   validation = {
@@ -33,29 +37,24 @@ export class EditCustomerComponent {
     street: [
       '', Validators.compose([Validators.required, Validators.pattern("[0-9a-zA-ZøæåØÆÅ. \\-]{2,50}")])
     ],
-    zipCode: [
-      '', Validators.compose([Validators.required, Validators.pattern("[1-9][0-9]{4}|[0-9]{4}|[1-9]{1}[0-9]{2}( )[0-9]{2}")])
-    ],
-    city: [
-      '', Validators.compose([Validators.required, Validators.pattern("[0-9a-zA-ZøæåØÆÅ. \\-]{2,30}")])
-    ]
+    postplace: ['']
   }
 
 
-  constructor(private customerService: CustomerService, private router: Router, private fb: FormBuilder, private route: ActivatedRoute, private cookieService: CookieService, private modalService: NgbModal) {
+  constructor(private customerService: CustomerService, private postPlaceService: PostPlaceService, private router: Router, private fb: FormBuilder, private route: ActivatedRoute, private cookieService: CookieService, private modalService: NgbModal) {
     this.form = fb.group(this.validation);
   }
 
   fetchCustomer(id: number) {
     this.customerService.getOne(id).subscribe(customer => {
+      this.postplacechosen = this.postplaces.find(p => p.zipCode == customer.zipCode);
       this.form.patchValue({ id: customer.id });
       this.form.patchValue({ firstname: customer.firstname });
       this.form.patchValue({ lastname: customer.lastname });
       this.form.patchValue({ phonenr: customer.phonenr });
       this.form.patchValue({ email: customer.email });
       this.form.patchValue({ street: customer.street });
-      this.form.patchValue({ zipCode: customer.zipCode });
-      this.form.patchValue({ city: customer.city });
+      this.form.patchValue({ postplace: this.postplacechosen });
     }, (error: HttpErrorResponse) => {
       /* If authentication error (timeout / not logging) */
       if (error.status == 401) {
@@ -70,6 +69,10 @@ export class EditCustomerComponent {
 
   }
 
+  changePostplace(event) {
+    this.postplacechosen = event;
+  }
+
   editCustomer() {
     
     const editedCustomer = new Customer();
@@ -79,8 +82,8 @@ export class EditCustomerComponent {
     editedCustomer.phonenr = this.form.value.phonenr;
     editedCustomer.email = this.form.value.email;
     editedCustomer.street = this.form.value.street;
-    editedCustomer.city = this.form.value.city;
-    editedCustomer.zipCode = this.form.value.zipCode;
+    editedCustomer.city = this.postplacechosen.city;
+    editedCustomer.zipCode = this.postplacechosen.zipCode;
 
     console.log(editedCustomer);
 
@@ -103,8 +106,12 @@ export class EditCustomerComponent {
   }
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
-      this.fetchCustomer(params.id);
+    this.postPlaceService.getAll().subscribe((postplaces) => {
+      this.postplaces = postplaces;
+      this.route.params.subscribe((params) => {
+        this.fetchCustomer(params.id);
+      }, error => console.log(error)
+      );
     }, error => console.log(error)
     );
   }

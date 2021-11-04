@@ -7,6 +7,10 @@ import { CookieService } from 'ngx-cookie-service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertBox } from '../alertmodal/alertmodal';
+import { Boat } from '../../../models/boat';
+import { Terminal } from '../../../models/terminal';
+import { TerminalService } from '../../../_services/terminal.service';
+import { BoatService } from '../../../_services/boat.service';
 
 @Component({
   templateUrl: 'editroute.html'
@@ -15,6 +19,11 @@ import { AlertBox } from '../alertmodal/alertmodal';
 export class EditRouteComponent {
   form: FormGroup;
   currentRoute: Route;
+  boat: Boat;
+  departureTerminal: Terminal;
+  arrivalTerminal: Terminal;
+  boats: Array<Boat>;
+  terminals: Array<Terminal>;
 
   /*Validation patterns*/
   validation = {
@@ -22,15 +31,21 @@ export class EditRouteComponent {
     departuretime: ['', Validators.compose([Validators.required, Validators.pattern("[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}")])],
     arrivaltime: ['', Validators.compose([Validators.required, Validators.pattern("[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}")])],
     ticketsleft: [0, Validators.compose([Validators.required, Validators.pattern("[0-9]{1,4}")])],
+    boat: [''],
+    departureTerminal: [''],
+    arrivalTerminal: ['']
   }
 
-  constructor(private routeService: RouteService, private router: Router, private fb: FormBuilder, private route: ActivatedRoute, private cookieService: CookieService, private modalService: NgbModal) {
+  constructor(private routeService: RouteService, private terminalService: TerminalService, private boatService: BoatService, private router: Router, private fb: FormBuilder, private route: ActivatedRoute, private cookieService: CookieService, private modalService: NgbModal) {
     this.form = fb.group(this.validation);
   }
 
-  fetchOrder(id: number) {
+  fetchRoute(id: number) {
     this.routeService.getOne(id).subscribe(route => {
       this.currentRoute = route;
+      this.boat = this.boats.find(b => b.boatName == route.boatName);
+      this.arrivalTerminal = this.terminals.find(t => t.terminalName == route.arrivalTerminalName && t.street == route.arrivalTerminalStreet);
+      this.departureTerminal = this.terminals.find(t => t.terminalName == route.departureTerminalName && t.street == route.departureTerminalStreet);
 
       this.form.patchValue({ id: route.id });
 
@@ -40,21 +55,12 @@ export class EditRouteComponent {
       this.form.patchValue({ ticketsleft: route.ticketsLeft });
 
       //arrivalterminal
-      this.form.patchValue({ arrivalterminalname: route.arrivalTerminalName });
-      this.form.patchValue({ arrivalterminalcity: route.arrivalTerminalCity });
-      this.form.patchValue({ arrivalterminalzipcode: route.arrivalTerminalZipCode });
-      this.form.patchValue({ arrivalterminalstreet: route.arrivalTerminalStreet });
-
+      this.form.patchValue({ arrivalTerminal: this.arrivalTerminal });
       //departureterminal
-      this.form.patchValue({ departureterminalname: route.departureTerminalName });
-      this.form.patchValue({ departureterminalcity: route.departureTerminalCity });
-      this.form.patchValue({ departureterminalzipcode: route.departureTerminalZipCode });
-      this.form.patchValue({ departureterminalstreet: route.departureTerminalStreet });
-
+      this.form.patchValue({ departureTerminal: this.departureTerminal });
       //boat
-      this.form.patchValue({ boatName: route.boatName });
-      this.form.patchValue({ capacity: route.capacity });
-      this.form.patchValue({ ticketPrice: route.ticketPrice });
+      this.form.patchValue({ boat: this.boat });
+
     }, (error: HttpErrorResponse) => {
       /* If authentication error (timeout / not logging) */
       if (error.status == 401) {
@@ -69,7 +75,7 @@ export class EditRouteComponent {
 
   }
 
-  editOrder() {
+  editRoute() {
     
     const editedRoute = new Route();
 
@@ -80,21 +86,23 @@ export class EditRouteComponent {
     editedRoute.ticketsLeft = this.form.value.ticketsleft;
 
     //arrivalterminal
-    editedRoute.arrivalTerminalName = this.currentRoute.arrivalTerminalName;
-    editedRoute.arrivalTerminalCity = this.currentRoute.arrivalTerminalCity;
-    editedRoute.arrivalTerminalZipCode = this.currentRoute.arrivalTerminalZipCode;
-    editedRoute.arrivalTerminalStreet = this.currentRoute.arrivalTerminalStreet;
+    editedRoute.arrivalTerminalName = this.arrivalTerminal.terminalName;
+    editedRoute.arrivalTerminalCity = this.arrivalTerminal.city;
+    editedRoute.arrivalTerminalZipCode = this.arrivalTerminal.zipCode;
+    editedRoute.arrivalTerminalStreet = this.arrivalTerminal.street;
 
     //departureterminal
-    editedRoute.departureTerminalName = this.currentRoute.departureTerminalName;
-    editedRoute.departureTerminalCity = this.currentRoute.departureTerminalCity;
-    editedRoute.departureTerminalZipCode = this.currentRoute.departureTerminalZipCode;
-    editedRoute.departureTerminalStreet = this.currentRoute.departureTerminalStreet;
+    editedRoute.departureTerminalName = this.departureTerminal.terminalName;
+    editedRoute.departureTerminalCity = this.departureTerminal.city;
+    editedRoute.departureTerminalZipCode = this.departureTerminal.zipCode;
+    editedRoute.departureTerminalStreet = this.departureTerminal.street;
 
     //boat
-    editedRoute.boatName = this.currentRoute.boatName;
-    editedRoute.capacity = this.currentRoute.capacity;
-    editedRoute.ticketPrice = this.currentRoute.ticketPrice;
+    editedRoute.boatName = this.boat.boatName;
+    editedRoute.capacity = this.boat.capacity;
+    editedRoute.ticketPrice = this.boat.ticketPrice;
+
+    console.log(editedRoute);
 
     this.routeService.edit(editedRoute).subscribe(() => {
       this.router.navigate(['/route']);
@@ -111,14 +119,32 @@ export class EditRouteComponent {
     );
   }
 
+  changeBoat(event) {
+    this.boat = event;
+  }
+
+  changeArrTerminal(event) {
+    this.arrivalTerminal = event;
+  }
+
+  changeDepTerminal(event) {
+    this.departureTerminal = event;
+  }
+
   onSubmit() {
-    this.editOrder();
+    this.editRoute();
   }
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
-      this.fetchOrder(params.id);
-    }, error => console.log(error)
-    );
+    this.terminalService.getAll().subscribe((terminals) => {
+      this.terminals = terminals;
+      this.boatService.getAll().subscribe((boats) => {
+        this.boats = boats;
+        this.route.params.subscribe((params) => {
+          this.fetchRoute(params.id);
+        }, error => console.log(error)
+        );
+      });
+    });
   }
 }

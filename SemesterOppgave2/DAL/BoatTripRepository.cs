@@ -544,7 +544,7 @@ namespace SemesterOppgave2.DAL
                     editedTerminal.TerminalAddress = checkPostPlace;
                 } else
                 {
-                    editedTerminal.TerminalAddress.City = terminal.City;
+                    editedTerminal.TerminalAddress = checkPostPlace;
                 }
                 await _db.SaveChangesAsync();
                 _log.LogInformation(terminal.ToString() + " edited!");
@@ -705,100 +705,19 @@ namespace SemesterOppgave2.DAL
                 route.ArrivalTime = editedRoute.ArrivalTime;
                 route.TicketsLeft = editedRoute.TicketsLeft;
 
-                var checkBoat = await _db.Boats.FirstOrDefaultAsync(b => b.BoatName == editedRoute.BoatName);
-                //If the boat for the route doesnt exist we create a new one:
-                if (checkBoat == null)
-                {
-                    checkBoat = new Boats
-                    {
-                        BoatName = editedRoute.BoatName,
-                        Capacity = editedRoute.Capacity,
-                        TicketPrice = editedRoute.TicketPrice
-                    };
-                    route.Boat = checkBoat;
-                }
-                else
-                {
-                    route.Boat.BoatName = editedRoute.BoatName;
-                    route.Boat.Capacity = editedRoute.Capacity;
-                    route.Boat.TicketPrice = editedRoute.TicketPrice;
-                }
+                var boat = await _db.Boats.FirstOrDefaultAsync(b => b.BoatName == editedRoute.BoatName);
+                var depTerminal = await _db.Terminals.FirstOrDefaultAsync(t => t.TerminalName == editedRoute.DepartureTerminalName && t.Street == editedRoute.DepartureTerminalStreet);
+                var arrTerminal = await _db.Terminals.FirstOrDefaultAsync(t => t.TerminalName == editedRoute.ArrivalTerminalName && t.Street == editedRoute.ArrivalTerminalStreet);
 
-                var checkDepartureTerminal = await _db.Terminals.FirstOrDefaultAsync(t => t.TerminalName == editedRoute.DepartureTerminalName && t.Street == editedRoute.DepartureTerminalStreet);
-                if (checkDepartureTerminal == null)
-                {
-                    checkDepartureTerminal = new Terminals
-                    {
-                        Street = editedRoute.DepartureTerminalStreet,
-                        TerminalName = editedRoute.DepartureTerminalName
-                    };
-
-                    //If the postplace for the non existant departure terminal for the route doesnt exist we create a new one:
-                    var checkDepTerminalPostPlace = await _db.PostPlaces.FindAsync(editedRoute.DepartureTerminalZipCode);
-                    if (checkDepTerminalPostPlace == null)
-                    {
-                        checkDepTerminalPostPlace = new PostPlaces
-                        {
-                            ZipCode = editedRoute.DepartureTerminalZipCode,
-                            City = editedRoute.DepartureTerminalCity
-                        };
-                        checkDepartureTerminal.TerminalAddress = checkDepTerminalPostPlace;
-                    }
-                    else
-                    {
-                        checkDepartureTerminal.TerminalAddress.City = editedRoute.DepartureTerminalCity;
-                        checkDepartureTerminal.TerminalAddress.ZipCode = editedRoute.DepartureTerminalZipCode;
-                    }
-                    route.DeparturePlace = checkDepartureTerminal;
-                }
-                else
-                {
-                    route.DeparturePlace.Street = editedRoute.DepartureTerminalStreet;
-                    route.DeparturePlace.TerminalName = editedRoute.DepartureTerminalName;
-                    route.DeparturePlace.TerminalAddress.City = editedRoute.DepartureTerminalCity;
-                    route.DeparturePlace.TerminalAddress.ZipCode = editedRoute.DepartureTerminalZipCode;
-                }
-
-                var checkArrivalTerminal = await _db.Terminals.FirstOrDefaultAsync(t => t.TerminalName == editedRoute.ArrivalTerminalName && t.Street == editedRoute.ArrivalTerminalStreet);
-                if (checkArrivalTerminal == null)
-                {
-                    checkArrivalTerminal = new Terminals
-                    {
-                        Street = editedRoute.ArrivalTerminalStreet,
-                        TerminalName = editedRoute.ArrivalTerminalName
-                    };
-
-                    //If the postplace for the nonexistant arrival terminal for the route doesnt exist we create a new one:
-                    var checkArrTerminalPostPlace = await _db.PostPlaces.FindAsync(editedRoute.ArrivalTerminalZipCode);
-                    if (checkArrTerminalPostPlace == null)
-                    {
-                        checkArrTerminalPostPlace = new PostPlaces
-                        {
-                            ZipCode = editedRoute.ArrivalTerminalZipCode,
-                            City = editedRoute.ArrivalTerminalCity
-                        };
-                        checkArrivalTerminal.TerminalAddress = checkArrTerminalPostPlace;
-                    }
-                    else
-                    {
-                        checkArrivalTerminal.TerminalAddress.City = editedRoute.ArrivalTerminalCity;
-                        checkArrivalTerminal.TerminalAddress.ZipCode = editedRoute.ArrivalTerminalZipCode;
-                    }
-                    route.ArrivalPlace = checkArrivalTerminal;
-                }
-                else
-                {
-                    route.ArrivalPlace.Street = editedRoute.ArrivalTerminalStreet;
-                    route.ArrivalPlace.TerminalName = editedRoute.ArrivalTerminalName;
-                    route.ArrivalPlace.TerminalAddress.City = editedRoute.ArrivalTerminalCity;
-                    route.ArrivalPlace.TerminalAddress.ZipCode = editedRoute.ArrivalTerminalZipCode;
-                }
+                route.Boat = boat;
+                route.ArrivalPlace = arrTerminal;
+                route.DeparturePlace = depTerminal;
                 
                 await _db.SaveChangesAsync();
                 _log.LogInformation(editedRoute.ToString() + " edited!");
                 return true;
             }
-            catch (Exception e)
+            catch
             {
                 return false;
             }
@@ -994,262 +913,13 @@ namespace SemesterOppgave2.DAL
                 order.TicketAmount = editedOrder.TicketAmount;
                 order.TotalPrice = editedOrder.TotalPrice;
 
-                //Checking if the route already exists by comparing the values of all relevant fields in the editedOrder to routes in the database:
-                var checkRoute = await _db.Routes.FirstOrDefaultAsync(r => r.ArrivalTime == editedOrder.ArrivalTime && r.DepartureTime == editedOrder.DepartureTime && r.ArrivalPlace.TerminalName == editedOrder.ArrivalTerminalName && r.DeparturePlace.TerminalName == editedOrder.DepartureTerminalName);
+                var route = await _db.Routes.FirstOrDefaultAsync(r => r.DepartureTime == editedOrder.DepartureTime
+                && r.DeparturePlace.TerminalName == editedOrder.DepartureTerminalName
+                && r.ArrivalPlace.TerminalName == editedOrder.ArrivalTerminalName);
+                var customer = await _db.Customers.FirstOrDefaultAsync(c => c.Email == editedOrder.Email);
 
-                //If the route doesnt already exist we create a new one:
-                if (checkRoute == null)
-                {
-                    checkRoute = new Routes
-                    {
-                        ArrivalTime = editedOrder.ArrivalTime,
-                        DepartureTime = editedOrder.DepartureTime,
-                        TicketsLeft = editedOrder.TicketsLeft
-                    };
-
-                    var checkBoat = await _db.Boats.FirstOrDefaultAsync(b => b.BoatName == editedOrder.BoatName);
-                    //If the boat for the non existant route doesnt exist we create a new one:
-                    if (checkBoat == null)
-                    {
-                        checkBoat = new Boats
-                        {
-                            BoatName = editedOrder.BoatName,
-                            Capacity = editedOrder.Capacity,
-                            TicketPrice = editedOrder.TicketPrice
-                        };
-                        checkRoute.Boat = checkBoat;
-                    }   
-                    else
-                    {   
-                        checkRoute.Boat.BoatName = editedOrder.BoatName;
-                        checkRoute.Boat.Capacity = editedOrder.Capacity;
-                        checkRoute.Boat.TicketPrice = editedOrder.TicketPrice;
-                    }
-
-                    //If the departure terminal for the non existant route doesnt exist we create a new one:
-                    var checkDepartureTerminal = await _db.Terminals.FirstOrDefaultAsync(t => t.TerminalName == editedOrder.DepartureTerminalName && t.Street == editedOrder.DepartureTerminalStreet);
-                    if(checkDepartureTerminal == null)
-                    {
-                        checkDepartureTerminal = new Terminals
-                        {
-                            Street = editedOrder.DepartureTerminalStreet,
-                            TerminalName = editedOrder.DepartureTerminalName
-                        };
-
-                        //If the postplace for the non existant departure terminal for the non existant route doesnt exist we create a new one:
-                        var checkDepTerminalPostPlace = await _db.PostPlaces.FindAsync(editedOrder.DepartureTerminalZipCode);
-                        if(checkDepTerminalPostPlace == null)
-                        {
-                            checkDepTerminalPostPlace = new PostPlaces
-                            {
-                                ZipCode = editedOrder.DepartureTerminalZipCode,
-                                City = editedOrder.DepartureTerminalCity
-                            };
-                            checkDepartureTerminal.TerminalAddress = checkDepTerminalPostPlace;
-                        }
-                        else
-                        {
-                            checkDepartureTerminal.TerminalAddress.City = editedOrder.DepartureTerminalCity;
-                            checkDepartureTerminal.TerminalAddress.ZipCode = editedOrder.DepartureTerminalZipCode;
-                        }
-                        checkRoute.DeparturePlace = checkDepartureTerminal;
-                    } 
-                    else
-                    {
-                        checkRoute.DeparturePlace.Street = editedOrder.DepartureTerminalStreet;
-                        checkRoute.DeparturePlace.TerminalName = editedOrder.DepartureTerminalName;
-                        checkRoute.DeparturePlace.TerminalAddress.City = editedOrder.DepartureTerminalCity;
-                        checkRoute.DeparturePlace.TerminalAddress.ZipCode = editedOrder.DepartureTerminalZipCode;
-                    }
-
-                    //If the arrival terminal for the non existant route doesnt exist we create a new one:
-                    var checkArrivalTerminal = await _db.Terminals.FirstOrDefaultAsync(t => t.TerminalName == editedOrder.ArrivalTerminalName && t.Street == editedOrder.ArrivalTerminalStreet);
-                    if(checkArrivalTerminal == null)
-                    {
-                        checkArrivalTerminal = new Terminals
-                        {
-                            Street = editedOrder.ArrivalTerminalStreet,
-                            TerminalName = editedOrder.ArrivalTerminalName
-                        };
-
-                        //If the postplace for the nonexistant arrival terminal for the non existant route doesnt exist we create a new one:
-                        var checkArrTerminalPostPlace = await _db.PostPlaces.FindAsync(editedOrder.ArrivalTerminalZipCode);
-                        if (checkArrTerminalPostPlace == null)
-                        {
-                            checkArrTerminalPostPlace = new PostPlaces
-                            {
-                                ZipCode = editedOrder.ArrivalTerminalZipCode,
-                                City = editedOrder.ArrivalTerminalCity
-                            };
-                            checkArrivalTerminal.TerminalAddress = checkArrTerminalPostPlace;
-                        }
-                        else
-                        {
-                            checkArrivalTerminal.TerminalAddress.City = editedOrder.ArrivalTerminalCity;
-                            checkArrivalTerminal.TerminalAddress.ZipCode = editedOrder.ArrivalTerminalZipCode;
-                        }
-                        checkRoute.ArrivalPlace = checkArrivalTerminal;
-                    }
-                    else
-                    {
-                        checkRoute.ArrivalPlace.Street = editedOrder.ArrivalTerminalStreet;
-                        checkRoute.ArrivalPlace.TerminalName = editedOrder.ArrivalTerminalName;
-                        checkRoute.ArrivalPlace.TerminalAddress.City = editedOrder.ArrivalTerminalCity;
-                        checkRoute.ArrivalPlace.TerminalAddress.ZipCode = editedOrder.ArrivalTerminalZipCode;
-                    }
-                    order.Route = checkRoute;
-                }
-                else
-                {
-                    order.Route.ArrivalTime = editedOrder.ArrivalTime;
-                    order.Route.DepartureTime = editedOrder.DepartureTime;
-                    order.Route.TicketsLeft = editedOrder.TicketsLeft;
-
-                    //Checking if the boat exists:
-                    var checkBoat = await _db.Boats.FirstOrDefaultAsync(b => b.BoatName == editedOrder.BoatName);
-                    if (checkBoat == null)
-                    {
-                        checkBoat = new Boats
-                        {
-                            BoatName = editedOrder.BoatName,
-                            Capacity = editedOrder.Capacity,
-                            TicketPrice = editedOrder.TicketPrice
-                        };
-                        order.Route.Boat = checkBoat;
-                    }
-                    else
-                    {
-                        order.Route.Boat.BoatName = editedOrder.BoatName;
-                        order.Route.Boat.Capacity = editedOrder.Capacity;
-                        order.Route.Boat.TicketPrice = editedOrder.TicketPrice;
-                    }
-
-                    //Checking if the departure terminal exists:
-                    var checkDepartureTerminal = await _db.Terminals.FirstOrDefaultAsync(t => t.TerminalName == editedOrder.DepartureTerminalName && t.Street == editedOrder.DepartureTerminalStreet);
-                    if (checkDepartureTerminal == null)
-                    {
-                        checkDepartureTerminal = new Terminals
-                        {
-                            Street = editedOrder.DepartureTerminalStreet,
-                            TerminalName = editedOrder.DepartureTerminalName
-                        };
-                        //Checking if the postplace for the departure terminal exists:
-                        var checkDepTerminalPostPlace = await _db.PostPlaces.FindAsync(editedOrder.DepartureTerminalZipCode);
-                        if (checkDepTerminalPostPlace == null)
-                        {
-                            checkDepTerminalPostPlace = new PostPlaces
-                            {
-                                ZipCode = editedOrder.DepartureTerminalZipCode,
-                                City = editedOrder.DepartureTerminalCity
-                            };
-                            checkDepartureTerminal.TerminalAddress = checkDepTerminalPostPlace;
-                        }
-                        else
-                        {
-                            checkDepartureTerminal.TerminalAddress.City = editedOrder.DepartureTerminalCity;
-                            checkDepartureTerminal.TerminalAddress.ZipCode = editedOrder.DepartureTerminalZipCode;
-                        }
-                        order.Route.DeparturePlace = checkDepartureTerminal;
-                    }
-                    else
-                    {
-                        order.Route.DeparturePlace.Street = editedOrder.DepartureTerminalStreet;
-                        order.Route.DeparturePlace.TerminalName = editedOrder.DepartureTerminalName;
-                        order.Route.DeparturePlace.TerminalAddress.City = editedOrder.DepartureTerminalCity;
-                        order.Route.DeparturePlace.TerminalAddress.ZipCode = editedOrder.DepartureTerminalZipCode;
-                    }
-
-                    //Checking if arrival terminal exists:
-                    var checkArrivalTerminal = await _db.Terminals.FirstOrDefaultAsync(t => t.TerminalName == editedOrder.ArrivalTerminalName && t.Street == editedOrder.ArrivalTerminalStreet);
-                    if (checkArrivalTerminal == null)
-                    {
-                        checkArrivalTerminal = new Terminals
-                        {
-                            Street = editedOrder.ArrivalTerminalStreet,
-                            TerminalName = editedOrder.ArrivalTerminalName
-                        };
-
-                        //Checking if the postplace for the arrival terminal exists:
-                        var checkArrTerminalPostPlace = await _db.PostPlaces.FindAsync(editedOrder.ArrivalTerminalZipCode);
-                        if (checkArrTerminalPostPlace == null)
-                        {
-                            checkArrTerminalPostPlace = new PostPlaces
-                            {
-                                ZipCode = editedOrder.ArrivalTerminalZipCode,
-                                City = editedOrder.ArrivalTerminalCity
-                            };
-                            checkArrivalTerminal.TerminalAddress = checkArrTerminalPostPlace;
-                        }
-                        else
-                        {
-                            checkArrivalTerminal.TerminalAddress.City = editedOrder.ArrivalTerminalCity;
-                            checkArrivalTerminal.TerminalAddress.ZipCode = editedOrder.ArrivalTerminalZipCode;
-                        }
-                        order.Route.ArrivalPlace = checkArrivalTerminal;
-                    }
-                    else
-                    {
-                        order.Route.ArrivalPlace.Street = editedOrder.ArrivalTerminalStreet;
-                        order.Route.ArrivalPlace.TerminalName = editedOrder.ArrivalTerminalName;
-                        order.Route.ArrivalPlace.TerminalAddress.City = editedOrder.ArrivalTerminalCity;
-                        order.Route.ArrivalPlace.TerminalAddress.ZipCode = editedOrder.ArrivalTerminalZipCode;
-                    }
-                }
-
-                //Checking if the customer exists:
-                var checkCustomer = await _db.Customers.FirstOrDefaultAsync(c => c.Email == editedOrder.Email);
-                if(checkCustomer == null)
-                {
-                    checkCustomer = new Customers
-                    {
-                        Firstname = editedOrder.Firstname,
-                        Lastname = editedOrder.Lastname,
-                        Email = editedOrder.Email,
-                        Phonenr = editedOrder.Phonenr,
-                        Street = editedOrder.Street
-                    };
-                    //Checking if the postplace exists:
-                    var checkCustomerPostPlace = await _db.PostPlaces.FindAsync(editedOrder.ZipCode);
-                    if(checkCustomerPostPlace == null)
-                    {
-                        checkCustomerPostPlace = new PostPlaces
-                        {
-                            ZipCode = editedOrder.ZipCode,
-                            City = editedOrder.City
-                        };
-                        checkCustomer.Postplace = checkCustomerPostPlace;
-                    } else
-                    {
-                        checkCustomer.Postplace.City = editedOrder.City;
-                        checkCustomer.Postplace.ZipCode = editedOrder.ZipCode;
-                    }
-                    order.Customer = checkCustomer;
-                } 
-                else
-                {
-                    order.Customer.Firstname = editedOrder.Firstname;
-                    order.Customer.Lastname = editedOrder.Lastname;
-                    order.Customer.Email = editedOrder.Email;
-                    order.Customer.Phonenr = editedOrder.Phonenr;
-                    order.Customer.Street = editedOrder.Street;
-
-                    //Checking if the postplace exists:
-                    var checkCustomerPostPlace = await _db.PostPlaces.FindAsync(editedOrder.ZipCode);
-                    if (checkCustomerPostPlace == null)
-                    {
-                        checkCustomerPostPlace = new PostPlaces
-                        {
-                            ZipCode = editedOrder.ZipCode,
-                            City = editedOrder.City
-                        };
-                        order.Customer.Postplace = checkCustomerPostPlace;
-                    }
-                    else
-                    {
-                        order.Customer.Postplace.City = editedOrder.City;
-                        order.Customer.Postplace.ZipCode = editedOrder.ZipCode;
-                    }
-                }
+                order.Route = route;
+                order.Customer = customer;
                 
                 await _db.SaveChangesAsync();
                 _log.LogInformation(editedOrder.ToString() + " edited!");

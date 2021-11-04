@@ -39,19 +39,11 @@
           Street is invalid!
         </p>
       </div>
-      <div class="form-group col-md-2 inline-blk">
-        <label>Zip Code</label>
-        <input formControlName="zipCode" placeholder="1234" />
-        <p class="alert alert-warning" [hidden]="form.controls.zipCode.valid || (form.controls.zipCode.pristine)">
-          Zip code is invalid!
-        </p>
-      </div>
-      <div class="form-group col-md-4 inline-blk">
-        <label>City</label>
-        <input  formControlName="city" placeholder="Cityofdoom" />
-        <p class="alert alert-warning" [hidden]="form.controls.city.valid || (form.controls.city.pristine)">
-          City is invalid!
-        </p>
+      <div class="form-group col-md-6 inline-blk">
+        <label>Post place</label>
+        <select formControlName="postplace" (ngModelChange)="changePostplace($event)">
+          <option *ngFor="let postplace of postplaces" [ngValue]="postplace">{{postplace.city}} - {{postplace.zipCode}}</option>
+        </select>
       </div>
       <div class="form-group center-content">
         <button type="submit" [disabled]="!form.valid">Save</button>

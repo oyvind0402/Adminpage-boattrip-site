@@ -9,6 +9,7 @@
         <tr>
           <th>Departure</th>
           <th>Arrival</th>
+          <th>Boat</th>
           <th>Tickets left</th>
           <th></th>
           <th></th>
@@ -18,6 +19,7 @@
         <tr *ngFor="let route of routes">
           <td label="Departure">{{route.departureTerminalName}} <br />{{route.departureTime}}</td>
           <td label="Arrival">{{route.arrivalTerminalName}}<br />{{route.arrivalTime}}</td>
+          <td label="Boat">{{route.boatName}}</td>
           <td label="Tickets left">{{route.ticketsLeft}}</td>
           <td class="nullable right-content"><button class="btn-sm" [routerLink]="['/editroute', route.id]">Edit</button></td>
           <td class="nullable"><button class="btn-sm btn-alt" (click)="deleteRoute(route.id)">Delete</button></td>

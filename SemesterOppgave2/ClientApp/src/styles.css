@@ -83,6 +83,20 @@ input {
   transition: background 0.3s linear;
 }
 
+select {
+  background-color: white;
+  border-radius: 4px;
+  border: solid rgba(var(--blue-300-v), 0.5);
+  display: inline-block;
+  line-height: 1.5em;
+}
+
+select option:checked {
+    background: var(--blue-700);
+    color: var(--white);
+}
+
+
 input::placeholder {
     color: rgba(var(--blue-500-v), 0.5);
 }

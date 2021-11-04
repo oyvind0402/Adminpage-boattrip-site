@@ -28,6 +28,27 @@
         Ticket(s) left is invalid!
       </p>
     </div>
+    <!--Boat-->
+    <div class="form-group col-md-4 inline-blk">
+      <label>Boat</label>
+      <select formControlName="boat" (ngModelChange)="changeBoat($event)">
+        <option *ngFor="let boat of boats" [ngValue]="boat">{{boat.boatName}}</option>
+      </select>
+    </div>
+    <!--Departure terminal-->
+    <div class="form-group col-md-4 inline-blk" >
+      <label>Departure terminal</label>
+      <select formControlName="departureTerminal" (ngModelChange)="changeDepTerminal($event)">
+        <option *ngFor="let terminal of terminals" [ngValue]="terminal">{{terminal.terminalName}}</option>
+      </select>
+    </div>
+    <!--Arrival terminal-->
+    <div class="form-group col-md-4 inline-blk">
+      <label>Arrival terminal</label>
+      <select formControlName="arrivalTerminal" (ngModelChange)="changeArrTerminal($event)">
+        <option *ngFor="let terminal of terminals" [ngValue]="terminal">{{terminal.terminalName}}</option>
+      </select>
+    </div>
 
     <!--Submit-->
     <div class="form-group center-content">
