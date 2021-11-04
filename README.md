@@ -24,7 +24,7 @@ Please, be patient, as it will take some time for the project to load.
 
 ## Functionality choices 
 ### Validation
-Holbergs båter serves a Norwegian customer base, and therefore only accepts Norwegian phone numbers, either with or without the country code.
+Holbergs båter serves a Norwegian customer base, and therefore only accepts Norwegian phone numbers, either with or without the country code (+4712345678 or 12345678).
 
 Since terminals can be in other countries, zip codes from Norway, Sweden, Germany and Denmark are accepted.
 
@@ -41,4 +41,4 @@ We have thus turned cascading deletion off for post places, terminals, boats, ro
 We decided that there should not be a possibility to save a new order as an admin, because we believe that functionality should be strictly for the customer. 
 
 ### No editing of foreign-key data
-We also made it so that when you click to edit a route or an order - you can only edit the route and order specific values. If the admin wishes to edit the customer of an order it can just go to customers to edit that specific customer and it will also be edited in the order automatically.
+We also made it so that when you click to edit a route or an order - you can only edit the route and order specific values. If the admin wishes to edit the customer of an order it can just go to customers to edit that specific customer and it will also be edited in the order automatically. If one would wish to swap to a different foreign key entitiy, like a customer, that is a function we added by putting all customers/postplaces/routes/boats/terminals in dropdown lists for the appropriate edit components.
