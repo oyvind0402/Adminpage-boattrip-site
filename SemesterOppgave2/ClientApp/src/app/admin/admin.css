@@ -1,45 +1,38 @@
-.knapper-div {
-  align-items: center;
-}
-
-
 .knapper-oversikt {
-  display: flex;
-  flex-wrap: wrap;
   width: 60%;
-  padding: 0px 0px 5px 5px;
-  margin: 20px auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: auto;
 }
 
 
 button {
-  flex: 1 0 28%;
-  min-height: 50px;
-  margin-top: 25px;
-  margin-right: 50px;
-  width: 300px;
-  padding: 10px 40px;
-  text-align: center;
-}
-
-.btn-logg-ut{
-    margin-top: 75px;
-    margin-bottom: 50px;
+  margin: var(--padding-100) var(--padding-150);
 }
 
 @media only screen and (max-width: 1000px) {
+  .knapper-oversikt {
+    width: 90%;
+  }
+
   button {
-    flex: 1 0 100%;
+      font-size: calc(var(--font-size-200) + 2vw);
   }
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 650px) {
+  button {
+    margin: var(--padding-100) var(--padding-050);
+  }
 
   .knapper-oversikt {
-    width: 75%;
-  }
-  button {
-    flex: 1 0 100%;
+    width: 80%;
+    grid-template-columns: 1fr;
   }
 }
 
+@media only screen and (max-width: 370px) {
+  .knapper-oversikt {
+    width: 100%;
+  }
+}

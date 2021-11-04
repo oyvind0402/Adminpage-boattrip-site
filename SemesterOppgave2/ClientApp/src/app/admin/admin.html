@@ -1,11 +1,11 @@
 <app-nav-menu></app-nav-menu>
 <main *ngIf="admin">
   <div class="knapper-oversikt">
+    <button class="visKnapper" [routerLink]="['/order']">Orders</button>
+    <button class="visKnapper" [routerLink]="['/route']">Routes</button>
     <button class="visKnapper" [routerLink]="['/customer']">Customers</button>
     <button class="visKnapper" [routerLink]="['/postplace']">Post Places</button>
-    <button class="visKnapper" [routerLink]="['/order']">Orders</button>
     <button class="visKnapper" [routerLink]="['/boat']">Boats</button>
     <button class="visKnapper" [routerLink]="['/terminal']">Terminals</button>
-    <button class="visKnapper" [routerLink]="['/route']">Routes</button>
   </div>
 </main>
