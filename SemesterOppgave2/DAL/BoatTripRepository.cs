@@ -113,9 +113,9 @@ namespace SemesterOppgave2.DAL
             try
             {
                 Customers customer = await _db.Customers.FindAsync(id);
-                //If the customer is a part of any orders we dont delete it
-                var checkCustomerInOrder = await _db.Orders.FirstOrDefaultAsync(c => c.Customer.Email == customer.Email);
-                if(checkCustomerInOrder == null)
+                //If the customer is a part of any orders we also delete all the orders:
+                var checkCustomersInOrder = await _db.Orders.Where(o => o.Customer == customer).ToListAsync();
+                if(checkCustomersInOrder.Count < 1)
                 {
                     _db.Customers.Remove(customer);
                     await _db.SaveChangesAsync();
@@ -123,9 +123,24 @@ namespace SemesterOppgave2.DAL
                     return true;
                 } else
                 {
-                    return false;
+                    List<Customers> customers = new List<Customers>();
+                    foreach(Orders order in checkCustomersInOrder)
+                    {
+                        if (!customers.Contains(order.Customer))
+                        {
+                            customers.Add(order.Customer);
+                        }
+                        _db.Orders.Remove(order);
+                        _log.LogInformation("Order with id: " + order.Id + " deleted!"); 
+                    }
+                    foreach(Customers customer1 in customers)
+                    {
+                        _db.Customers.Remove(customer1);
+                        _log.LogInformation("Customer with id: " + customer1.Id + " deleted!");
+                    }
+                    await _db.SaveChangesAsync();
+                    return true;
                 }
-                
             }
             catch
             {
@@ -252,7 +267,6 @@ namespace SemesterOppgave2.DAL
                     await _db.SaveChangesAsync();
                     _log.LogInformation("Postplace with ZipCode: " + zipCode + " deleted!");
                 return true;
-
                 }
                 else
                 {
@@ -804,9 +818,9 @@ namespace SemesterOppgave2.DAL
             try
             {
                 Routes route = await _db.Routes.FindAsync(id);
-                var checkRoutesInOrder = await _db.Routes.FirstOrDefaultAsync(r => r.DepartureTime == route.DepartureTime
-                && r.DeparturePlace.TerminalName == route.DeparturePlace.TerminalName
-                && r.ArrivalPlace.TerminalName == route.ArrivalPlace.TerminalName);
+                var checkRoutesInOrder = await _db.Orders.FirstOrDefaultAsync(o => o.Route.DepartureTime == route.DepartureTime
+                && o.Route.DeparturePlace.TerminalName == route.DeparturePlace.TerminalName
+                && o.Route.ArrivalPlace.TerminalName == route.ArrivalPlace.TerminalName);
 
                 if(checkRoutesInOrder == null)
                 {
@@ -860,7 +874,7 @@ namespace SemesterOppgave2.DAL
                 }).ToListAsync();
                 return allOrders;
             }
-            catch (Exception e)
+            catch
             {
                 return null;
             }
@@ -959,7 +973,7 @@ namespace SemesterOppgave2.DAL
                 _log.LogInformation("Order with id: " + newOrder.Id + " saved!");
                 return true;
             }
-            catch (Exception e)
+            catch
             {
                 return false;
             }
