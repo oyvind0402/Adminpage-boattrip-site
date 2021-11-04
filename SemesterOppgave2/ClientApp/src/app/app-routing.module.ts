@@ -11,7 +11,6 @@ import { SaveCustomerComponent } from './dashboard/components/customer/savecusto
 
 import { OrderComponent } from './dashboard/components/order/order.component';
 import { EditOrderComponent } from './dashboard/components/order/editorder.component';
-import { SaveOrderComponent } from './dashboard/components/order/saveorder.component';
 
 import { PostPlaceComponent } from './dashboard/components/postplace/postplace.component';
 import { RouteComponent } from './dashboard/components/route/route.component';
@@ -28,7 +27,6 @@ import { SaveRouteComponent } from './dashboard/components/route/saveroute.compo
 const appRoots: Routes = [
   { path: 'order', component: OrderComponent },
   { path: 'editorder/:id', component: EditOrderComponent },
-  { path: 'saveorder', component: SaveOrderComponent },
 
   { path: 'boat', component: BoatComponent },
   { path: 'editboat/:id', component: EditBoatComponent },

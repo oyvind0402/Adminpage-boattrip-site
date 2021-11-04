@@ -1,11 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from '../user';
+import { User } from '../models/user';
 import { CookieService } from 'ngx-cookie-service';
-import { BoatService } from '../_services/boat.service';
-import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({

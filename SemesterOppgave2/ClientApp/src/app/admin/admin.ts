@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -11,7 +11,6 @@ import { BoatService } from '../_services/boat.service';
 })
 
 export class Admin {
-  @Input()
   admin: boolean = false;
 
   constructor(private _http: HttpClient, private router: Router, private cookieService: CookieService, private boatService: BoatService) { }

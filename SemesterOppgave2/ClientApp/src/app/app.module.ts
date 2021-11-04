@@ -21,25 +21,17 @@ import { OrderComponent } from './dashboard/components/order/order.component';
 import { PostPlaceService } from './_services/postPlace.service';
 import { PostPlaceComponent } from './dashboard/components/postplace/postplace.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { EditBoatComponent } from './dashboard/components/boat/editboat.component';
 import { SaveBoatComponent } from './dashboard/components/boat/saveboat.component';
-
 import { SaveCustomerComponent } from './dashboard/components/customer/savecustomer.component';
 import { EditCustomerComponent } from './dashboard/components/customer/editcustomer.component';
-
 import { EditOrderComponent } from './dashboard/components/order/editorder.component';
-import { SaveOrderComponent } from './dashboard/components/order/saveorder.component';
-
 import { DeleteModal } from './dashboard/components/deletemodal/deletemodal';
 import { EditTerminalComponent } from './dashboard/components/terminal/editterminal.component';
-
 import { SavePostPlaceComponent } from './dashboard/components/postplace/savepostplace.component';
 import { EditPostplaceComponent } from './dashboard/components/postplace/editpostplace.component';
 import { EditRouteComponent } from './dashboard/components/route/editroute.component';
 import { SaveRouteComponent } from './dashboard/components/route/saveroute.component';
-
-
 import { SaveTerminalComponent } from './dashboard/components/terminal/saveterminal.component';
 import { CookieService } from 'ngx-cookie-service';
 import { AlertBox } from './dashboard/components/alertmodal/alertmodal';
@@ -66,7 +58,6 @@ import { AlertBox } from './dashboard/components/alertmodal/alertmodal';
 
     OrderComponent,
     EditOrderComponent,
-    SaveOrderComponent,
 
     RouteComponent,
     EditRouteComponent,

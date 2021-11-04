@@ -101,7 +101,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\models\route.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\terminal.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\navmenu\navmenu.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\user.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\user.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\_services\boat.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\_services\customer.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\_services\order.service.ts" />
