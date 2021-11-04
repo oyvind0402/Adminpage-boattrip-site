@@ -1,8 +1,9 @@
 <app-nav-menu></app-nav-menu>
-<div>
+<main>
   <div class="content">
-    <h2>Terminal:</h2>
-    <button class="btn btn-add" [routerLink]="['/saveterminal']">New terminal</button>
+    <button class="btn-back" routerLink="/admin">Back</button>
+    <h1 class="align-bootstrap">Terminals</h1>
+    <button class="align-bootstrap" [routerLink]="['/saveterminal']">New terminal</button>
     <table class="table table-terminal">
       <thead>
         <tr>
@@ -20,13 +21,13 @@
           <td label="Street">{{terminal.street}}</td>
           <td label="ZipCode">{{terminal.zipCode}}</td>
           <td label="City">{{terminal.city}}</td>
-          <td><button class="btn btn-endre" [routerLink]="['/editterminal', terminal.id]">Edit</button></td>
-          <td><button class="btn btn-slett" (click)="deleteTerminal(terminal.id)">Delete</button></td>
+          <td class="nullable right-content"><button class="btn-sm" [routerLink]="['/editterminal', terminal.id]">Edit</button></td>
+          <td class="nullable"><button class="btn-alt btn-sm" (click)="deleteTerminal(terminal.id)">Delete</button></td>
         </tr>
       </tbody>
     </table>
   </div>
-</div>
+</main>
 
 
 
