@@ -23,7 +23,6 @@ export class BoatComponent {
 
 
   constructor(private boatService: BoatService, private router: Router, private modalService: NgbModal, private cookieService: CookieService) {
-
   }
 
   deleteBoat(id: number) {
@@ -31,6 +30,7 @@ export class BoatComponent {
       this.deletedBoat = boat.boatName;
       this.showModalAndDelete(id);
     }, (error: HttpErrorResponse) => {
+      /* If authentication error (timeout / not logging) */
       if (error.status == 401) {
         const alertRef = this.modalService.open(AlertBox);
         alertRef.componentInstance.body = "Your session timed out, please log in again.";
@@ -46,15 +46,18 @@ export class BoatComponent {
     const modalRef = this.modalService.open(DeleteModal);
     modalRef.componentInstance.info = this.deletedBoat;
     modalRef.result.then(result => {
+      /* If delete button pressed */
       if (result == 'Delete') {
         this.boatService.delete(id).subscribe(() => {
           this.loadAllBoats();
         }, (error: HttpErrorResponse) => {
+          /* Handles foreign/key deletion (no cascade delete)*/
           if (error.status == 404) {
             const alertRef = this.modalService.open(AlertBox);
             alertRef.componentInstance.body = "Couldn't delete that boat, it's a part of another table(route) as a foreign key! Delete all the routes containing this boat first to be able to delete this boat!";
             alertRef.componentInstance.title = "Deletion not valid";
           }
+          /* If authentication error (timeout / not logging) */
           if (error.status == 401) {
             const alertRef = this.modalService.open(AlertBox);
             alertRef.componentInstance.body = "Your session timed out, please log in again.";
@@ -73,6 +76,7 @@ export class BoatComponent {
     this.boatService.getAll().subscribe(boat => {
       this.boats = boat;
     }, (error: HttpErrorResponse) => {
+      /* If authentication error (timeout / not logging) */
       if (error.status == 401) {
         const alertRef = this.modalService.open(AlertBox);
         alertRef.componentInstance.body = "Your session timed out, please log in again.";

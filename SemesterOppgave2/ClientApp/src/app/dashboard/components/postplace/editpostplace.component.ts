@@ -17,6 +17,7 @@ import { AlertBox } from '../alertmodal/alertmodal';
 export class EditPostplaceComponent {
   form: FormGroup;
 
+  /* Validation patterns */
   validation = {
     id: [""],
     city: ["", Validators.compose([Validators.required, Validators.pattern("[0-9a-zA-ZøæåØÆÅ. \\-]{2,30}")])]
@@ -31,6 +32,7 @@ export class EditPostplaceComponent {
       this.form.patchValue({ id: postplace.zipCode });
       this.form.patchValue({ city: postplace.city });
     }, (error: HttpErrorResponse) => {
+      /* If authentication error (timeout / not logging) */
       if (error.status == 401) {
         const alertRef = this.modalService.open(AlertBox);
         alertRef.componentInstance.body = "Your session timed out, please log in again.";
@@ -47,11 +49,10 @@ export class EditPostplaceComponent {
     editedPostPlace.zipCode = this.form.value.id
     editedPostPlace.city = this.form.value.city
 
-    console.log(editedPostPlace);
-
     this.postPlaceService.edit(editedPostPlace).subscribe(() => {
       this.router.navigate(['/postplace']); // double check the route
     }, (error: HttpErrorResponse) => {
+      /* If authentication error (timeout / not logging) */
       if (error.status == 401) {
         const alertRef = this.modalService.open(AlertBox);
         alertRef.componentInstance.body = "Your session timed out, please log in again.";
@@ -73,6 +74,7 @@ export class EditPostplaceComponent {
       console.log(params);
     }, (error: HttpErrorResponse) => {
       if (error.status == 401) {
+        /* If authentication error (timeout / not logging) */
         const alertRef = this.modalService.open(AlertBox);
         alertRef.componentInstance.body = "Your session timed out, please log in again.";
         alertRef.componentInstance.title = "Session timeout";

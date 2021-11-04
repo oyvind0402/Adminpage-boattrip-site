@@ -29,6 +29,7 @@ export class CustomerComponent {
       this.showModalAndDelete(id);
     }, (error: HttpErrorResponse) => {
       if (error.status == 401) {
+        /* If authentication error (timeout / not logging) */
         const alertRef = this.modalService.open(AlertBox);
         alertRef.componentInstance.body = "Your session timed out, please log in again.";
         alertRef.componentInstance.title = "Session timeout";
@@ -43,16 +44,19 @@ export class CustomerComponent {
     const modalRef = this.modalService.open(DeleteModal);
     modalRef.componentInstance.info = this.deletedCustomer;
     modalRef.result.then(result => {
+      /* If user selects 'Delete' in the modal*/
       if (result == 'Delete') {
         this.customerService.delete(id).subscribe(() => {
           this.loadAllCustomers();
         }, (error: HttpErrorResponse) => {
           if (error.status == 404) {
+            /* Handles attempt to delete object that is foreign-key (no cascade delete) */
             const alertRef = this.modalService.open(AlertBox);
             alertRef.componentInstance.body = "Couldn't delete that customer, it's a part of another table (order) as a foreign key! Delete all the orders containing this customer first to be able to delete this customer!";
             alertRef.componentInstance.title = "Deletion not valid";
           }
           if (error.status == 401) {
+            /* If authentication error (timeout / not logging) */
             const alertRef = this.modalService.open(AlertBox);
             alertRef.componentInstance.body = "Your session timed out, please log in again.";
             alertRef.componentInstance.title = "Session timeout";
@@ -72,6 +76,7 @@ export class CustomerComponent {
       this.customers = customer;
     }, (error: HttpErrorResponse) => {
       if (error.status == 401) {
+        /* If authentication error (timeout / not logging) */
         const alertRef = this.modalService.open(AlertBox);
         alertRef.componentInstance.body = "Your session timed out, please log in again.";
         alertRef.componentInstance.title = "Session timeout";

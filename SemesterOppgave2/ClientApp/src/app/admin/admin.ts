@@ -20,6 +20,7 @@ export class Admin {
 
     }, (error: HttpErrorResponse) => {
       if (error.status == 401) {
+        /* If authentication error (timeout / not logging) */
         this.cookieService.delete(".AdventureWorks.Session");
         this.admin = false;
         this.router.navigate(['/home']);
@@ -29,6 +30,7 @@ export class Admin {
     if (this.cookieService.check(".AdventureWorks.Session")) {
       this.admin = true;
     } else {
+      /* If no cookie found, redirect */
       this.admin = false;
       this.router.navigate(['/home']);
     }

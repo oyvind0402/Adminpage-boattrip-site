@@ -16,13 +16,12 @@ export class EditOrderComponent {
   form: FormGroup;
   currentOrder: Order;
 
+  /* Validation patterns */
   validation = {
     id: [""],
     ticketamount: [0, Validators.compose([Validators.required, Validators.pattern("[1-9]{1}[0-9]{0,3}")])],
     totalprice: [0, Validators.compose([Validators.required, Validators.pattern("[1-9]{1}[0-9]{1,6}")])],
   }
-
-
 
   constructor(private orderService: OrderService, private router: Router, private cookieService: CookieService, private fb: FormBuilder, private route: ActivatedRoute, private modalService: NgbModal) {
     this.form = fb.group(this.validation);
@@ -38,6 +37,7 @@ export class EditOrderComponent {
 
     }, (error: HttpErrorResponse) => {
       if (error.status == 401) {
+        /* If authentication error (timeout / not logging) */
         const alertRef = this.modalService.open(AlertBox);
         alertRef.componentInstance.body = "Your session timed out, please log in again.";
         alertRef.componentInstance.title = "Session timeout";
@@ -89,12 +89,11 @@ export class EditOrderComponent {
     editedOrder.city = this.currentOrder.city;
     editedOrder.zipCode = this.currentOrder.zipCode;
 
-    console.log(editedOrder);
-
     this.orderService.edit(editedOrder).subscribe(() => {
       this.router.navigate(['/order']);
     }, (error: HttpErrorResponse) => {
       if (error.status == 401) {
+        /* If authentication error (timeout / not logging) */
         const alertRef = this.modalService.open(AlertBox);
         alertRef.componentInstance.body = "Your session timed out, please log in again.";
         alertRef.componentInstance.title = "Session timeout";

@@ -15,6 +15,7 @@ import { AlertBox } from '../alertmodal/alertmodal';
 export class EditTerminalComponent {
   form: FormGroup;
 
+  /* Validation patterns */
   validation = {
     id: [""],
     terminalName: [
@@ -44,6 +45,7 @@ export class EditTerminalComponent {
       this.form.patchValue({ zipCode: terminal.zipCode });
       console.log(terminal);
     }, (error: HttpErrorResponse) => {
+      /* If authentication error (timeout / not logging) */
       if (error.status == 401) {
         const alertRef = this.modalService.open(AlertBox);
         alertRef.componentInstance.body = "Your session timed out, please log in again.";
@@ -67,6 +69,7 @@ export class EditTerminalComponent {
     this.terminalService.edit(editedTerminal).subscribe(() => {
       this.router.navigate(['/terminal']);
     }, (error: HttpErrorResponse) => {
+      /* If authentication error (timeout / not logging) */
       if (error.status == 401) {
         const alertRef = this.modalService.open(AlertBox);
         alertRef.componentInstance.body = "Your session timed out, please log in again.";

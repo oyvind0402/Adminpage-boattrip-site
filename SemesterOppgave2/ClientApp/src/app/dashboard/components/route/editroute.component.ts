@@ -16,14 +16,13 @@ export class EditRouteComponent {
   form: FormGroup;
   currentRoute: Route;
 
+  /*Validation patterns*/
   validation = {
     id: [""],
     departuretime: ['', Validators.compose([Validators.required, Validators.pattern("[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}")])],
     arrivaltime: ['', Validators.compose([Validators.required, Validators.pattern("[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}")])],
     ticketsleft: [0, Validators.compose([Validators.required, Validators.pattern("[0-9]{1,4}")])],
   }
-
-
 
   constructor(private routeService: RouteService, private router: Router, private fb: FormBuilder, private route: ActivatedRoute, private cookieService: CookieService, private modalService: NgbModal) {
     this.form = fb.group(this.validation);
@@ -40,7 +39,6 @@ export class EditRouteComponent {
       this.form.patchValue({ arrivaltime: route.arrivalTime });
       this.form.patchValue({ ticketsleft: route.ticketsLeft });
 
-      
       //arrivalterminal
       this.form.patchValue({ arrivalterminalname: route.arrivalTerminalName });
       this.form.patchValue({ arrivalterminalcity: route.arrivalTerminalCity });
@@ -58,6 +56,7 @@ export class EditRouteComponent {
       this.form.patchValue({ capacity: route.capacity });
       this.form.patchValue({ ticketPrice: route.ticketPrice });
     }, (error: HttpErrorResponse) => {
+      /* If authentication error (timeout / not logging) */
       if (error.status == 401) {
         const alertRef = this.modalService.open(AlertBox);
         alertRef.componentInstance.body = "Your session timed out, please log in again.";
@@ -97,11 +96,10 @@ export class EditRouteComponent {
     editedRoute.capacity = this.currentRoute.capacity;
     editedRoute.ticketPrice = this.currentRoute.ticketPrice;
 
-    console.log(editedRoute);
-
     this.routeService.edit(editedRoute).subscribe(() => {
       this.router.navigate(['/route']);
     }, (error: HttpErrorResponse) => {
+      /* If authentication error (timeout / not logging) */
       if (error.status == 401) {
         const alertRef = this.modalService.open(AlertBox);
         alertRef.componentInstance.body = "Your session timed out, please log in again.";

@@ -15,6 +15,7 @@ import { AlertBox } from '../alertmodal/alertmodal';
 export class SaveRouteComponent {
   form: FormGroup;
 
+  /*Validation patterns*/
   validation = {
     //route
     departuretime: ['', Validators.compose([Validators.required, Validators.pattern("[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}")])],
@@ -38,7 +39,6 @@ export class SaveRouteComponent {
     capacity: [0, Validators.compose([Validators.required, Validators.pattern("([1-9]{1}[0-9]{1,4})")])],
     ticketPrice: [0, Validators.compose([Validators.required, Validators.pattern("([1-9]{1}[0-9]{1,3})")])],
   }
-
 
   constructor(private orderService: RouteService, private router: Router, private fb: FormBuilder, private cookieService: CookieService, private modalService: NgbModal) {
     this.form = fb.group(this.validation);
@@ -72,6 +72,7 @@ export class SaveRouteComponent {
     this.orderService.save(newRoute).subscribe(() => {
       this.router.navigate(['/route']);
     }, (error: HttpErrorResponse) => {
+      /* If authentication error (timeout / not logging) */
       if (error.status == 401) {
         const alertRef = this.modalService.open(AlertBox);
         alertRef.componentInstance.body = "Your session timed out, please log in again.";
@@ -80,7 +81,6 @@ export class SaveRouteComponent {
         this.router.navigate(['/home']);
       }
     }
-   
     );
   }
 

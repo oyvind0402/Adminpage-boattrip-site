@@ -15,6 +15,7 @@ import { AlertBox } from '../alertmodal/alertmodal';
 export class SaveBoatComponent {
   form: FormGroup;
 
+  /*Validation patterns*/
   validation = {
     id: [""],
     boatName: [
@@ -44,6 +45,7 @@ export class SaveBoatComponent {
     this.boatService.save(newBoat).subscribe(() => {
       this.router.navigate(['/boat']);
     }, (error: HttpErrorResponse) => {
+      /* If authentication error (timeout / not logging) */
       if (error.status == 401) {
         const alertRef = this.modalService.open(AlertBox);
         alertRef.componentInstance.body = "Your session timed out, please log in again.";

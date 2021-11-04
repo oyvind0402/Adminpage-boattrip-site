@@ -27,6 +27,7 @@ export class OrderComponent {
       this.deletedOrder = order.departureTerminalName + "-" + order.arrivalTerminalName;
       this.showModalAndDelete(id);
     }, (error: HttpErrorResponse) => {
+    /* If authentication error (timeout / not logging) */
       if (error.status == 401) {
         const alertRef = this.modalService.open(AlertBox);
         alertRef.componentInstance.body = "Your session timed out, please log in again.";
@@ -38,7 +39,7 @@ export class OrderComponent {
     );
   }
 
-
+  /*Handles deletion, includes confirmation modal*/
   showModalAndDelete(id: number) {
     const modalRef = this.modalService.open(DeleteModal);
     modalRef.componentInstance.info = this.deletedOrder;
@@ -47,6 +48,7 @@ export class OrderComponent {
         this.orderService.delete(id).subscribe(() => {
           this.loadAllOrders();
         }, (error: HttpErrorResponse) => {
+          /* If authentication error (timeout / not logging) */
           if (error.status == 401) {
             const alertRef = this.modalService.open(AlertBox);
             alertRef.componentInstance.body = "Your session timed out, please log in again.";
@@ -62,11 +64,12 @@ export class OrderComponent {
     );
   }
 
-
+  /*Get all orders*/
   loadAllOrders() {
     this.orderService.getAll().subscribe(order => {
       this.orders = order;
     }, (error: HttpErrorResponse) => {
+      /* If authentication error (timeout / not logging) */
       if (error.status == 401) {
         const alertRef = this.modalService.open(AlertBox);
         alertRef.componentInstance.body = "Your session timed out, please log in again.";

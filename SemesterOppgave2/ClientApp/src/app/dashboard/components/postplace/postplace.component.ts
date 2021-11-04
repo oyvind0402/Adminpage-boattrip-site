@@ -22,9 +22,7 @@ export class PostPlaceComponent {
     this.loadAllPostPlaces();
   }
 
-
   constructor(private postPlaceService: PostPlaceService, private router: Router, private modalService: NgbModal, private cookieService : CookieService) {
-
   }
 
   deletePostPlace(id: string) {
@@ -32,6 +30,7 @@ export class PostPlaceComponent {
       this.deletedPostPlace = postplace.zipCode + " " + postplace.city;
       this.showModalAndDelete(id);
     }, (error: HttpErrorResponse) => {
+      /* If authentication error (timeout / not logging) */
       if (error.status == 401) {
         const alertRef = this.modalService.open(AlertBox);
         alertRef.componentInstance.body = "Your session timed out, please log in again.";
@@ -48,15 +47,18 @@ export class PostPlaceComponent {
     const modalRef = this.modalService.open(DeleteModal);
     modalRef.componentInstance.info = this.deletedPostPlace;
     modalRef.result.then(result => {
+   /* If user selects 'Delete' in modal */
       if (result == 'Delete') {
         this.postPlaceService.delete(id).subscribe(() => {
           this.loadAllPostPlaces();
         }, (error: HttpErrorResponse) => {
+          /* Handles attempt to delete object which is foreign key (no cascade deletion)*/
           if (error.status == 404) {
             const alertRef = this.modalService.open(AlertBox);
             alertRef.componentInstance.body = "Couldn't delete that postplace, it's a part of another table (customer or terminal) as a foreign key! Delete all the entries containing this postplace first to be able to delete this postplace!";
             alertRef.componentInstance.title = "Deletion not valid";
           }
+          /* If authentication error (timeout / not logging) */
           if (error.status == 401) {
             const alertRef = this.modalService.open(AlertBox);
             alertRef.componentInstance.body = "Your session timed out, please log in again.";
@@ -76,6 +78,7 @@ export class PostPlaceComponent {
     this.postPlaceService.getAll().subscribe(postplace => {
       this.postplaces = postplace;
     }, (error: HttpErrorResponse) => {
+      /* If authentication error (timeout / not logging) */
       if (error.status == 401) {
         const alertRef = this.modalService.open(AlertBox);
         alertRef.componentInstance.body = "Your session timed out, please log in again.";
