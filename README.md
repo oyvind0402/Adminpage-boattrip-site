@@ -12,7 +12,7 @@ If, however, you need to install them manually, do:
 
 `$ npm install`
 
-At times, two dependencies will not be installed automatically, despite being in `package.json`. If that happens, do :
+At times, two dependencies will not be installed automatically, despite being in `package.json`. If that happens, do:
 
 `$ npm install --save @ng-bootstrap/ng-bootstrap@5` which is needed for the Modals that we use in conjunction with deleting different values in the database
 
