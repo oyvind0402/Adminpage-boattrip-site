@@ -1,8 +1,9 @@
 <app-nav-menu></app-nav-menu>
-<div>
+<main>
   <div class="content">
-    <h2>Postplaces:</h2>
-    <button class="btn btn-add" [routerLink]="['/savepostplace']">New postplace</button>
+    <button class="btn-back" routerLink="/admin">Back</button>
+    <h1 class="align-bootstrap">Post places</h1>
+    <button class="align-bootstrap" [routerLink]="['/savepostplace']">New post place</button>
     <table class="table table-postplace">
       <thead>
         <tr>
@@ -16,10 +17,10 @@
         <tr *ngFor="let postplace of postplaces">
           <td label="ZipCode">{{postplace.zipCode}}</td>
           <td label="City">{{postplace.city}}</td>
-          <td><button class="btn btn-endre" [routerLink]="['/editpostplace', postplace.zipCode]">Edit</button></td>
-          <td><button class="btn btn-slett" (click)="deletePostPlace(postplace.zipCode)">Delete</button></td>
+          <td class="nullable right-content"><button class="btn-sm" [routerLink]="['/editpostplace', postplace.zipCode]">Edit</button></td>
+          <td class="nullable"><button class="btn-sm btn-alt" (click)="deletePostPlace(postplace.zipCode)">Delete</button></td>
         </tr>
       </tbody>
     </table>
   </div>
-</div>
+</main>
