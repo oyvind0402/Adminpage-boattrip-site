@@ -1,10 +1,35 @@
+# Holbergs Båter - Admin Panel
+
 The admin user uses an email and a password: "admin@admin.com - Admin1". 
 
-To run the project you need to first type cd SemesterOppgave2/ClientApp from the root folder. Then you need to install a package from npm: "npm install --save @ng-bootstrap/ng-bootstrap@5". This will install the package which is needed for the Modals that we use in conjunction with deleting different values in the database. You also need to install another package: "npm install --save ngx-cookie-service@2.1.0". This will install the package which is needed to check for the session cookie in Angular projects.
+## Before running
 
-Functionality choices: 
-To be able to delete for instance a customer that is a part an order from the database, we need to enable cascading deletion in the database. This would then delete all the orders that the deleted customer is a part of. And we thought that this was a good idea when it comes to deleting customers. However we thought that this would be a bad thing for our database when it comes to for instance deleting a postplace, because if you for instance delete a postplace - then you would delete every customer that postplace is a part of. To add onto that you would also delete every order the deleted customer is a part of, and you would also delete every terminal the postplace is a part of - and every route the terminal is a part of. It really would just snowball out of control. So we thought through all the options, and decided on the admin being able to delete a customer, but that the admin couldnt delete for instance a route until the admin had manually deleted all the orders that route is a part of. We decided to just give the user a notification if they are trying to delete an entity in the database that is a part of another table as a foreign key, except for the customer to order relation where deletion works fine.
+When running the project with IIS Express through Visual Studio Community/Pro, dependencies are installed automatically.
 
-We decided that there shouldn't be a possibility to save a new order as an admin, because we felt that functionality should be strictly for the customer. We also felt that the page would look very messy with like 15 input fields and felt like it was better if we scrapped it.
+If, however, you need to install them manually, do: 
 
-When speaking of messiness in inputfields, we also made it so that when you click to edit a route or an order - you can only edit the route and order specific values. Because of the same reason, that it would look too bloated and messy with too many inputfields. If the admin wishes to edit the customer of an order it can just go to customers to edit that specific customer and it will also be edited in the order automatically.
+`$ cd SemesterOppgave2/ClientApp` from the root folder
+
+`$ npm install`
+
+At times, two dependencies will not be installed automatically, despite being in `package.json`. If that happens, do :
+
+`$ npm install --save @ng-bootstrap/ng-bootstrap@5` which is needed for the Modals that we use in conjunction with deleting different values in the database
+
+`$ npm install --save ngx-cookie-service@2.1.0` to install the package that handles session cookies in Angular projects.
+
+## Running the project
+
+Please, be patient, as it will take some time for the project to load.
+
+## Functionality choices 
+### Cascading deletion
+To be able to delete rows/objects that are used as a foreign key in another table, cascading deletion needs to be enabled in the database. For customers, for example, it entails deleting both the customer and all orders it is a part of, which we thought would be a desirable feature for an administrator. However, we thought that this would be problematic for our database when it comes to, for instance, deleting a postplace, because that would entail deleting every customer and terminal that postplace is a part of. Consequently, that would also delete every order the deleted customer is a part of, as well as every route the terminal is a part of. In summary, it would snowball out of control.
+
+We have thus turned cascading deletion off for post places, terminals, boats, routes and orders. Instead, the user will be notified if they are trying to delete an entity in the database that is a part of another table as a foreign key (except for customers).
+
+### No new order
+We decided that there should not be a possibility to save a new order as an admin, because we believe that functionality should be strictly for the customer. 
+
+### No editing of foreign-key data
+We also made it so that when you click to edit a route or an order - you can only edit the route and order specific values. If the admin wishes to edit the customer of an order it can just go to customers to edit that specific customer and it will also be edited in the order automatically.
