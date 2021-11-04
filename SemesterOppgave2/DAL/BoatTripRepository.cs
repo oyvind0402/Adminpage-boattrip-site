@@ -257,7 +257,7 @@ namespace SemesterOppgave2.DAL
             try
             {
                 PostPlaces postPlace = await _db.PostPlaces.FindAsync(zipCode);
-                //if posrt place is a part of Customer or Terminal you will not be able to delete it
+                //if post place is a part of Customer or Terminal you will not be able to delete it
                 var checkPostPlaceInCustomer = await _db.Customers.FirstOrDefaultAsync(c => c.Postplace.ZipCode == postPlace.ZipCode);
                 var checkPostPlaceInTerminal = await _db.Terminals.FirstOrDefaultAsync(t => t.TerminalAddress.ZipCode == postPlace.ZipCode);
 
@@ -266,7 +266,7 @@ namespace SemesterOppgave2.DAL
                     _db.PostPlaces.Remove(postPlace);
                     await _db.SaveChangesAsync();
                     _log.LogInformation("Postplace with ZipCode: " + zipCode + " deleted!");
-                return true;
+                    return true;
                 }
                 else
                 {
@@ -284,14 +284,6 @@ namespace SemesterOppgave2.DAL
             try
             {
                 PostPlaces postPlace = await _db.PostPlaces.FindAsync(changedPostPlace.ZipCode);
-                if(postPlace == null)
-                {
-                    postPlace = new PostPlaces
-                    {
-                        ZipCode = changedPostPlace.ZipCode,
-                        City = changedPostPlace.City
-                    };
-                }
                 postPlace.City = changedPostPlace.City;
                 await _db.SaveChangesAsync();
                 _log.LogInformation(postPlace.ToString() + " edited!");
@@ -552,8 +544,7 @@ namespace SemesterOppgave2.DAL
                     editedTerminal.TerminalAddress = checkPostPlace;
                 } else
                 {
-                    editedTerminal.TerminalAddress.City = terminal.City;
-                    editedTerminal.TerminalAddress.ZipCode = terminal.ZipCode;
+                    return false;
                 }
                 await _db.SaveChangesAsync();
                 _log.LogInformation(terminal.ToString() + " edited!");
@@ -1003,6 +994,7 @@ namespace SemesterOppgave2.DAL
                 order.TicketAmount = editedOrder.TicketAmount;
                 order.TotalPrice = editedOrder.TotalPrice;
 
+                //Checking if the route already exists by comparing the values of all relevant fields in the editedOrder to routes in the database:
                 var checkRoute = await _db.Routes.FirstOrDefaultAsync(r => r.ArrivalTime == editedOrder.ArrivalTime && r.DepartureTime == editedOrder.DepartureTime && r.ArrivalPlace.TerminalName == editedOrder.ArrivalTerminalName && r.DeparturePlace.TerminalName == editedOrder.DepartureTerminalName);
 
                 //If the route doesnt already exist we create a new one:
