@@ -16,6 +16,7 @@ import { AlertBox } from '../alertmodal/alertmodal';
 export class SavePostPlaceComponent {
   form: FormGroup;
 
+  /*Validation patterns*/
   validation = {
     zipcode: ["", Validators.compose([Validators.required, Validators.pattern("[1-9][0-9]{4}|[0-9]{4}|[1-9]{1}[0-9]{2}( )[0-9]{2}")])],
     city: ["", Validators.compose([Validators.required, Validators.pattern("[0-9a-zA-ZøæåØÆÅ. \\-]{2,30}")])]
@@ -34,11 +35,13 @@ export class SavePostPlaceComponent {
     this.postPlaceService.save(newPostPlace).subscribe(() => {
       this.router.navigate(['/postplace']);
     }, (error: HttpErrorResponse) => {
+      /* Handles duplicates */
       if (error.status == 400) {
         const alertRef = this.modalService.open(AlertBox);
         alertRef.componentInstance.body = "Couldn't save that postplace, there's a postplace with the same ZipCode that already exists!";
         alertRef.componentInstance.title = "ZipCode already exists";
       }
+      /* If authentication error (timeout / not logging) */
       if (error.status == 401) {
         const alertRef = this.modalService.open(AlertBox);
         alertRef.componentInstance.body = "Your session timed out, please log in again.";

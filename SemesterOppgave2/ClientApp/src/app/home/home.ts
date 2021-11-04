@@ -14,7 +14,8 @@ import { CookieService } from 'ngx-cookie-service';
 export class Home {
   form: FormGroup;
   admin: boolean;
-  
+
+  /* Validation patterns */
   validering = {
     email: [
       '', Validators.compose([Validators.required, Validators.pattern("([\\w\\.\\-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)")])
@@ -46,6 +47,7 @@ export class Home {
 
   ngOnInit() {
     if (this.cookieService.check(".AdventureWorks.Session")) {
+    /* If admin is logged in, redirect to admin page */
       this.admin = true;
       this.router.navigate(['/admin']);
     } else {

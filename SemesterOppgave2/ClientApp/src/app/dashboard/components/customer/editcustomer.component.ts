@@ -15,6 +15,7 @@ import { AlertBox } from '../alertmodal/alertmodal';
 export class EditCustomerComponent {
   form: FormGroup;
 
+  /*Validation patterns*/
   validation = {
     id: [""],
     firstname: [
@@ -56,6 +57,7 @@ export class EditCustomerComponent {
       this.form.patchValue({ zipCode: customer.zipCode });
       this.form.patchValue({ city: customer.city });
     }, (error: HttpErrorResponse) => {
+      /* If authentication error (timeout / not logging) */
       if (error.status == 401) {
         const alertRef = this.modalService.open(AlertBox);
         alertRef.componentInstance.body = "Your session timed out, please log in again.";
@@ -86,6 +88,7 @@ export class EditCustomerComponent {
       this.router.navigate(['/customer']);
     }, (error: HttpErrorResponse) => {
       if (error.status == 401) {
+        /* If authentication error (timeout / not logging) */
         const alertRef = this.modalService.open(AlertBox);
         alertRef.componentInstance.body = "Your session timed out, please log in again.";
         alertRef.componentInstance.title = "Session timeout";        this.cookieService.delete(".AdventureWorks.Session");

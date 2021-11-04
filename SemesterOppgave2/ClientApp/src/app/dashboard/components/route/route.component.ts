@@ -22,9 +22,7 @@ export class RouteComponent {
     this.loadAllRoutes();
   }
 
-
   constructor(private routeService: RouteService, private modalService: NgbModal, private router: Router, private cookieService : CookieService) {
-
   }
 
   deleteRoute(id: number) {
@@ -32,6 +30,7 @@ export class RouteComponent {
       this.deletedRoute = route.boatName + ": from " + route.arrivalTerminalName + "-" + route.departureTerminalName;
       this.showModalAndDelete(id);
     }, (error: HttpErrorResponse) => {
+      /* If authentication error (timeout / not logging) */
       if (error.status == 401) {
         const alertRef = this.modalService.open(AlertBox);
         alertRef.componentInstance.body = "Your session timed out, please log in again.";
@@ -51,11 +50,13 @@ export class RouteComponent {
         this.routeService.delete(id).subscribe(() => {
           this.loadAllRoutes();
         }, (error: HttpErrorResponse) => {
+          /* Handles attempt to delete route that is foreign key (no cascade deletion)*/
           if (error.status == 404) {
             const alertRef = this.modalService.open(AlertBox);
             alertRef.componentInstance.body = "Couldn't delete that route, it's a part of another table (order) as a foreign key! Delete all the orders containing this route first to be able to delete this route!";
             alertRef.componentInstance.title = "Deletion not valid";
           }
+          /* If authentication error (timeout / not logging) */
           if (error.status == 401) {
             const alertRef = this.modalService.open(AlertBox);
             alertRef.componentInstance.body = "Your session timed out, please log in again.";
@@ -75,6 +76,7 @@ export class RouteComponent {
     this.routeService.getAll().subscribe(route => {
       this.routes = route;
     }, (error: HttpErrorResponse) => {
+      /* If authentication error (timeout / not logging) */
       if (error.status == 401) {
         const alertRef = this.modalService.open(AlertBox);
         alertRef.componentInstance.body = "Your session timed out, please log in again.";

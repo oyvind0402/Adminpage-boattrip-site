@@ -23,9 +23,7 @@ export class TerminalComponent {
     this.loadAllTerminals();
   }
 
-
   constructor(private terminalService: TerminalService, private modalService: NgbModal, private router: Router, private cookieService: CookieService) {
-
   }
 
   deleteTerminal(id: number) {
@@ -33,6 +31,7 @@ export class TerminalComponent {
       this.deletedTerminal = terminal.street + ", " + terminal.zipCode + " " + terminal.city;
       this.showModalAndDelete(id);
     }, (error: HttpErrorResponse) => {
+      /* If authentication error (timeout / not logging) */
       if (error.status == 401) {
         const alertRef = this.modalService.open(AlertBox);
         alertRef.componentInstance.body = "Your session timed out, please log in again.";
@@ -48,15 +47,18 @@ export class TerminalComponent {
     const modalRef = this.modalService.open(DeleteModal);
     modalRef.componentInstance.info = this.deletedTerminal;
     modalRef.result.then(result => {
+      /*If user chooses to delete*/
       if (result == 'Delete') {
         this.terminalService.delete(id).subscribe(() => {
           this.loadAllTerminals();
         }, (error: HttpErrorResponse) => {
+          /* If authentication error (timeout / not logging) */
           if (error.status == 404) {
             const alertRef = this.modalService.open(AlertBox);
             alertRef.componentInstance.body = "Couldn't delete that terminal, it's a part of another table (route) as a foreign key! Delete all the routes containing this terminal first to be able to delete this terminal!";
             alertRef.componentInstance.title = "Deletion not valid";
           }
+          /* If authentication error (timeout / not logging) */
           if (error.status == 401) {
             const alertRef = this.modalService.open(AlertBox);
             alertRef.componentInstance.body = "Your session timed out, please log in again.";
@@ -77,6 +79,7 @@ export class TerminalComponent {
     this.terminalService.getAll().subscribe(t => {
       this.terminals = t;
     }, (error: HttpErrorResponse) => {
+      /* If authentication error (timeout / not logging) */
       if (error.status == 401) {
         const alertRef = this.modalService.open(AlertBox);
         alertRef.componentInstance.body = "Your session timed out, please log in again.";

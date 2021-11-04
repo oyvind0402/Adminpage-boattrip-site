@@ -15,6 +15,7 @@ import { AlertBox } from '../alertmodal/alertmodal';
 export class EditBoatComponent {
   form: FormGroup;
 
+  // Valdiation patterns
   validation = {
     id: [""],
     boatName: [
@@ -40,6 +41,7 @@ export class EditBoatComponent {
       this.form.patchValue({ capacity: boat.capacity });
       this.form.patchValue({ ticketPrice: boat.ticketPrice });
     }, (error: HttpErrorResponse) => {
+      /* If authentication error (timeout / not logging) */
       if (error.status == 401) {
         const alertRef = this.modalService.open(AlertBox);
         alertRef.componentInstance.body = "Your session timed out, please log in again.";
@@ -61,6 +63,7 @@ export class EditBoatComponent {
     this.boatService.edit(editedBoat).subscribe(() => {
       this.router.navigate(['/boat']);
     }, (error: HttpErrorResponse) => {
+      /* If authentication error (timeout / not logging) */
       if (error.status == 401) {
         const alertRef = this.modalService.open(AlertBox);
         alertRef.componentInstance.body = "Your session timed out, please log in again.";
