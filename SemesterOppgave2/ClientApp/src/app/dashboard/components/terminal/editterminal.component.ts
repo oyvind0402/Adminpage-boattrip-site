@@ -14,6 +14,7 @@ import { AlertBox } from '../alertmodal/alertmodal';
 
 export class EditTerminalComponent {
   form: FormGroup;
+  terminal: Terminal;
 
   /* Validation patterns */
   validation = {
@@ -23,12 +24,6 @@ export class EditTerminalComponent {
     ],
     street: [
       '', Validators.compose([Validators.required, Validators.pattern("[0-9a-zA-ZøæåØÆÅ. \\-]{2,50}")])
-    ],
-    city: [
-      '', Validators.compose([Validators.required, Validators.pattern("[0-9a-zA-ZøæåØÆÅ. \\-]{2,30}")])
-    ],
-    zipCode: [
-      '', Validators.compose([Validators.required, Validators.pattern("[1-9][0-9]{4}|[0-9]{4}|[1-9]{1}[0-9]{2}( )[0-9]{2}")])
     ]
   }
 
@@ -38,12 +33,10 @@ export class EditTerminalComponent {
 
   fetchTerminal(id: number) {
     this.terminalService.getOne(id).subscribe((terminal) => {
+      this.terminal = terminal;
       this.form.patchValue({ id: terminal.id });
       this.form.patchValue({ terminalName: terminal.terminalName });
       this.form.patchValue({ street: terminal.street });
-      this.form.patchValue({ city: terminal.city });
-      this.form.patchValue({ zipCode: terminal.zipCode });
-      console.log(terminal);
     }, (error: HttpErrorResponse) => {
       /* If authentication error (timeout / not logging) */
       if (error.status == 401) {
@@ -62,9 +55,9 @@ export class EditTerminalComponent {
     editedTerminal.id = this.form.value.id;
     editedTerminal.street = this.form.value.street;
     editedTerminal.terminalName = this.form.value.terminalName;
-    editedTerminal.city = this.form.value.city;
-    editedTerminal.zipCode = this.form.value.zipCode;
-    console.log(editedTerminal);
+    /* City & zipcode come from terminal so that foreign key is not handled here */
+    editedTerminal.city = this.terminal.city;
+    editedTerminal.zipCode = this.terminal.zipCode;
 
     this.terminalService.edit(editedTerminal).subscribe(() => {
       this.router.navigate(['/terminal']);
