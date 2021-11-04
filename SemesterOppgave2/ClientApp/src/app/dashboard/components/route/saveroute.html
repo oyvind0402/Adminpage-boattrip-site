@@ -1,118 +1,118 @@
 <app-nav-menu></app-nav-menu>
-<div class="container">
-  <div class="col-md-4">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+<main class="container">
+  <button class="btn-back" routerLink="/route">Back</button>
+  <h1 class="align-bootstrap">New Route</h1>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-      <!--Route-->
-      <div class="form-group">
-        <label>Departure Time</label>
-        <input class="form-control" formControlName="departuretime" />
-        <p class="alert alert-warning" [hidden]="form.controls.departuretime.valid || (form.controls.departuretime.pristine)">
-          Departure time isnt valid!
-        </p>
-      </div>
-      <div class="form-group">
-        <label>Arrival Time</label>
-        <input class="form-control" formControlName="arrivaltime" />
-        <p class="alert alert-warning" [hidden]="form.controls.arrivaltime.valid || (form.controls.arrivaltime.pristine)">
-          Arrival time isnt valid!
-        </p>
-      </div>
-      <div class="form-group">
-        <label>Ticket left</label>
-        <input class="form-control" type="number" formControlName="ticketsleft" />
-        <p class="alert alert-warning" [hidden]="form.controls.ticketsleft.valid || (form.controls.ticketsleft.pristine)">
-          Ticket left isnt valid!
-        </p>
-      </div>
+    <!--Boat-->
+    <h2 class="align-bootstrap">Boat & Tickets</h2>
+    <div class="form-group inline-blk col-md-4">
+      <label>Boat name</label>
+      <input formControlName="boatName" />
+      <p class="alert alert-warning" [hidden]="form.controls.boatName.valid || (form.controls.boatName.pristine)">
+        Boat name is invalid!
+      </p>
+    </div>
+    <div class="form-group inline-blk col-md-3">
+      <label>Boat capacity</label>
+      <input type="number" formControlName="capacity" />
+      <p class="alert alert-warning" [hidden]="form.controls.capacity.valid || (form.controls.capacity.pristine)">
+        Boat capacity is invalid!
+      </p>
+    </div>
+    <div class="form-group inline-blk col-md-3">
+      <label>Ticket price</label>
+      <input type="number" formControlName="ticketPrice" />
+      <p class="alert alert-warning" [hidden]="form.controls.ticketPrice.valid || (form.controls.ticketPrice.pristine)">
+        Ticket price is invalid!
+      </p>
+    </div>
+    <div class="form-group inline-blk col-md-2">
+      <label>Ticket(s) left</label>
+      <input type="number" formControlName="ticketsleft" />
+      <p class="alert alert-warning" [hidden]="form.controls.ticketsleft.valid || (form.controls.ticketsleft.pristine)">
+        Ticket(s) left is invalid!
+      </p>
+    </div>
 
-      <!--Terminals-->
-      <div class="form-group">
-        <label>Arrival Terminal Name</label>
-        <input class="form-control" formControlName="arrivalTerminalName" />
-        <p class="alert alert-warning" [hidden]="form.controls.arrivalTerminalName.valid || (form.controls.arrivalTerminalName.pristine)">
-          Arrival terminal isnt valid!
-        </p>
-      </div>
-      <div class="form-group">
-        <label>Arrival Terminal City</label>
-        <input class="form-control" formControlName="arrivalTerminalCity" />
-        <p class="alert alert-warning" [hidden]="form.controls.arrivalTerminalCity.valid || (form.controls.arrivalTerminalCity.pristine)">
-          Arrival terminal city isnt valid!
-        </p>
-      </div>
-      <div class="form-group">
-        <label>Arrival Terminal Zipcode</label>
-        <input class="form-control" formControlName="arrivalTerminalZipCode" />
-        <p class="alert alert-warning" [hidden]="form.controls.arrivalTerminalZipCode.valid || (form.controls.arrivalTerminalZipCode.pristine)">
-          Arrival terminal zipcode isnt valid!
-        </p>
-      </div>
-      <div class="form-group">
-        <label>Arrival Terminal Street</label>
-        <input class="form-control" formControlName="arrivalTerminalStreet" />
-        <p class="alert alert-warning" [hidden]="form.controls.arrivalTerminalStreet.valid || (form.controls.arrivalTerminalStreet.pristine)">
-          Arrival terminal street isnt valid!
-        </p>
-      </div>
+    <!--Route-->
+    <h2 class="align-bootstrap">Departure</h2>
+    <div class="form-group inline-blk col-md-6">
+      <label>Departure Time</label>
+      <input formControlName="departuretime" />
+      <p class="alert alert-warning" [hidden]="form.controls.departuretime.valid || (form.controls.departuretime.pristine)">
+        Departure time is invalid!
+      </p>
+    </div>
+    <div class="form-group inline-blk col-md-6">
+      <label>City</label>
+      <input formControlName="departureTerminalCity" />
+      <p class="alert alert-warning" [hidden]="form.controls.departureTerminalCity.valid || (form.controls.departureTerminalCity.pristine)">
+        Departure city is invalid!
+      </p>
+    </div>
+    <div class="form-group inline-blk col-md-4">
+      <label>Terminal Name</label>
+      <input formControlName="departureTerminalName" />
+      <p class="alert alert-warning" [hidden]="form.controls.departureTerminalName.valid || (form.controls.departureTerminalName.pristine)">
+        Departure terminal is invalid!
+      </p>
+    </div>
+    <div class="form-group inline-blk col-md-4">
+      <label>Terminal Zipcode</label>
+      <input formControlName="departureTerminalZipCode" />
+      <p class="alert alert-warning" [hidden]="form.controls.departureTerminalZipCode.valid || (form.controls.departureTerminalZipCode.pristine)">
+        Departure terminal zipcode is invalid!
+      </p>
+    </div>
+    <div class="form-group inline-blk col-md-4">
+      <label>Terminal Street</label>
+      <input formControlName="departureTerminalStreet" />
+      <p class="alert alert-warning" [hidden]="form.controls.departureTerminalStreet.valid || (form.controls.departureTerminalStreet.pristine)">
+        Departure terminal street is invalid!
+      </p>
+    </div>
 
-      <div class="form-group">
-        <label>Departure Terminal Name</label>
-        <input class="form-control" formControlName="departureTerminalName" />
-        <p class="alert alert-warning" [hidden]="form.controls.departureTerminalName.valid || (form.controls.departureTerminalName.pristine)">
-          Departure terminal isnt valid!
-        </p>
-      </div>
-      <div class="form-group">
-        <label>Departure Terminal City</label>
-        <input class="form-control" formControlName="departureTerminalCity" />
-        <p class="alert alert-warning" [hidden]="form.controls.departureTerminalCity.valid || (form.controls.departureTerminalCity.pristine)">
-          Departure terminal city isnt valid!
-        </p>
-      </div>
-      <div class="form-group">
-        <label>Departure Terminal Zipcode</label>
-        <input class="form-control" formControlName="departureTerminalZipCode" />
-        <p class="alert alert-warning" [hidden]="form.controls.departureTerminalZipCode.valid || (form.controls.departureTerminalZipCode.pristine)">
-          Departure terminal zipcode isnt valid!
-        </p>
-      </div>
-      <div class="form-group">
-        <label>Departure Terminal Street</label>
-        <input class="form-control" formControlName="departureTerminalStreet" />
-        <p class="alert alert-warning" [hidden]="form.controls.departureTerminalStreet.valid || (form.controls.departureTerminalStreet.pristine)">
-          Departure terminal street isnt valid!
-        </p>
-      </div>
+    <h2 class="align-bootstrap">Arrival</h2>
+    <div class="form-group inline-blk col-md-6">
+      <label>Arrival Time</label>
+      <input formControlName="arrivaltime" />
+      <p class="alert alert-warning" [hidden]="form.controls.arrivaltime.valid || (form.controls.arrivaltime.pristine)">
+        Arrival time is invalid!
+      </p>
+    </div>
+    <div class="form-group inline-blk col-md-6">
+      <label>Terminal City</label>
+      <input formControlName="arrivalTerminalCity" />
+      <p class="alert alert-warning" [hidden]="form.controls.arrivalTerminalCity.valid || (form.controls.arrivalTerminalCity.pristine)">
+        Arrival terminal city is invalid!
+      </p>
+    </div>
+    <div class="form-group inline-blk col-md-4">
+      <label>Terminal Name</label>
+      <input formControlName="arrivalTerminalName" />
+      <p class="alert alert-warning" [hidden]="form.controls.arrivalTerminalName.valid || (form.controls.arrivalTerminalName.pristine)">
+        Arrival terminal is invalid!
+      </p>
+    </div>
+    <div class="form-group inline-blk col-md-4">
+      <label>Terminal Zipcode</label>
+      <input formControlName="arrivalTerminalZipCode" />
+      <p class="alert alert-warning" [hidden]="form.controls.arrivalTerminalZipCode.valid || (form.controls.arrivalTerminalZipCode.pristine)">
+        Arrival terminal zipcode is invalid!
+      </p>
+    </div>
+    <div class="form-group inline-blk col-md-4">
+      <label>Terminal Street</label>
+      <input formControlName="arrivalTerminalStreet" />
+      <p class="alert alert-warning" [hidden]="form.controls.arrivalTerminalStreet.valid || (form.controls.arrivalTerminalStreet.pristine)">
+        Arrival terminal street is invalid!
+      </p>
+    </div>
 
-      <!--Boat-->
-      <div class="form-group">
-        <label>Boat name</label>
-        <input class="form-control" formControlName="boatName" />
-        <p class="alert alert-warning" [hidden]="form.controls.boatName.valid || (form.controls.boatName.pristine)">
-          Boat name isnt valid!
-        </p>
-      </div>
-      <div class="form-group">
-        <label>Boat capacity</label>
-        <input class="form-control" type="number" formControlName="capacity" />
-        <p class="alert alert-warning" [hidden]="form.controls.capacity.valid || (form.controls.capacity.pristine)">
-          Boat capacity isnt valid!
-        </p>
-      </div>
-      <div class="form-group">
-        <label>Boat ticket price</label>
-        <input class="form-control" type="number" formControlName="ticketPrice" />
-        <p class="alert alert-warning" [hidden]="form.controls.ticketPrice.valid || (form.controls.ticketPrice.pristine)">
-          Boat ticket price isnt valid!
-        </p>
-      </div>
-
-      <!--Submit-->
-      <div class="form-group">
-        <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Save</button>
-        <button class="btn btn-default" routerLink="/route">Back</button>
-      </div>
-    </form>
-  </div>
-</div>
+    <!--Submit-->
+    <div class="form-group center-content">
+      <button type="submit" [disabled]="!form.valid" class="align-bootstrap">Save</button>
+    </div>
+  </form>
+</main>

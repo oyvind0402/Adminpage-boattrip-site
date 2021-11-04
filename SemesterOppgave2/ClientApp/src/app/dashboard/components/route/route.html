@@ -1,8 +1,9 @@
 <app-nav-menu></app-nav-menu>
-<div>
+<main>
   <div class="content">
-    <h2>Routes:</h2>
-    <button class="btn btn-add" [routerLink]="['/saveroute']">New route</button>
+    <button class="btn-back" routerLink="/admin">Back</button>
+    <h1 class="align-bootstrap">Routes</h1>
+    <button class="align-bootstrap" [routerLink]="['/saveroute']">New route</button>
     <table class="table table-route">
       <thead>
         <tr>
@@ -18,13 +19,13 @@
           <td label="Departure">{{route.departureTerminalName}} <br />{{route.departureTime}}</td>
           <td label="Arrival">{{route.arrivalTerminalName}}<br />{{route.arrivalTime}}</td>
           <td label="Tickets left">{{route.ticketsLeft}}</td>
-          <td><button class="btn btn-endre" [routerLink]="['/editroute', route.id]">Edit</button></td>
-          <td><button class="btn btn-slett" (click)="deleteRoute(route.id)">Delete</button></td>
+          <td class="nullable right-content"><button class="btn-sm" [routerLink]="['/editroute', route.id]">Edit</button></td>
+          <td class="nullable"><button class="btn-sm btn-alt" (click)="deleteRoute(route.id)">Delete</button></td>
         </tr>
       </tbody>
     </table>
   </div>
-</div>
+</main>
 
 
 
