@@ -72,7 +72,6 @@ export class EditRouteComponent {
       }
     }
     );
-
   }
 
   editRoute() {
@@ -102,19 +101,35 @@ export class EditRouteComponent {
     editedRoute.capacity = this.boat.capacity;
     editedRoute.ticketPrice = this.boat.ticketPrice;
 
-    this.routeService.edit(editedRoute).subscribe(() => {
-      this.router.navigate(['/route']);
-    }, (error: HttpErrorResponse) => {
-      /* If authentication error (timeout / not logging) */
-      if (error.status == 401) {
-        const alertRef = this.modalService.open(AlertBox);
-        alertRef.componentInstance.body = "Your session timed out, please log in again.";
-        alertRef.componentInstance.title = "Session timeout";
-        this.cookieService.delete(".AdventureWorks.Session");
-        this.router.navigate(['/home']);
-      }
+    const depDate = new Date(this.form.value.departuretime);
+    const arrDate = new Date(this.form.value.arrivaltime);
+
+    if (this.departureTerminal == this.arrivalTerminal) {
+      const alertRef = this.modalService.open(AlertBox);
+      alertRef.componentInstance.body = "You can't choose the same arrival and departure terminal!";
+      alertRef.componentInstance.title = "Same terminal";
+    } else if (depDate > arrDate) {
+      const alertRef = this.modalService.open(AlertBox);
+      alertRef.componentInstance.body = "You can't choose an arrivaltime thats before the departuretime!";
+      alertRef.componentInstance.title = "Time error";
+      this.form.patchValue({ departuretime: this.currentRoute.departureTime });
+      this.form.patchValue({ arrivaltime: this.currentRoute.arrivalTime });
     }
-    );
+    else {
+      this.routeService.edit(editedRoute).subscribe(() => {
+        this.router.navigate(['/route']);
+      }, (error: HttpErrorResponse) => {
+        /* If authentication error (timeout / not logging) */
+        if (error.status == 401) {
+          const alertRef = this.modalService.open(AlertBox);
+          alertRef.componentInstance.body = "Your session timed out, please log in again.";
+          alertRef.componentInstance.title = "Session timeout";
+          this.cookieService.delete(".AdventureWorks.Session");
+          this.router.navigate(['/home']);
+        }
+      }
+      );
+    }
   }
 
   changeBoat(event) {
