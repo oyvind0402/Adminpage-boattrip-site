@@ -7,6 +7,7 @@ import { Route } from '../../../models/route';
 import { RouteService } from '../../../_services/route.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertBox } from '../alertmodal/alertmodal';
+import { release } from 'os';
 
 @Component({
   templateUrl: 'saveroute.html'
@@ -69,19 +70,28 @@ export class SaveRouteComponent {
     newRoute.capacity = this.form.value.capacity;
     newRoute.ticketPrice = this.form.value.ticketPrice;
 
-    this.orderService.save(newRoute).subscribe(() => {
-      this.router.navigate(['/route']);
-    }, (error: HttpErrorResponse) => {
-      /* If authentication error (timeout / not logging) */
-      if (error.status == 401) {
-        const alertRef = this.modalService.open(AlertBox);
-        alertRef.componentInstance.body = "Your session timed out, please log in again.";
-        alertRef.componentInstance.title = "Session timeout";
-        this.cookieService.delete(".AdventureWorks.Session");
-        this.router.navigate(['/home']);
+    const depDate = new Date(this.form.value.departuretime);
+    const arrDate = new Date(this.form.value.arrivaltime);
+
+    if (depDate > arrDate) {
+      const alertRef = this.modalService.open(AlertBox);
+      alertRef.componentInstance.body = "You can't choose an arrivaltime thats before the departuretime!";
+      alertRef.componentInstance.title = "Time error";
+    } else {
+      this.orderService.save(newRoute).subscribe(() => {
+        this.router.navigate(['/route']);
+      }, (error: HttpErrorResponse) => {
+        /* If authentication error (timeout / not logging) */
+        if (error.status == 401) {
+          const alertRef = this.modalService.open(AlertBox);
+          alertRef.componentInstance.body = "Your session timed out, please log in again.";
+          alertRef.componentInstance.title = "Session timeout";
+          this.cookieService.delete(".AdventureWorks.Session");
+          this.router.navigate(['/home']);
+        }
       }
+      );
     }
-    );
   }
 
   onSubmit() {
