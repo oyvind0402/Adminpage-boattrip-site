@@ -67,6 +67,16 @@ code {
   color: var(--blue-700);
 }
 
+label {
+  display: block;
+  text-transform: uppercase;
+  color: var(--blue-500);
+  font-family: var(--font-accent);
+  font-weight: 500;
+  font-size: var(--font-size-400);
+  margin-bottom: 0;
+}
+
 input {
   display: block;
   width: 100%;
@@ -83,38 +93,36 @@ input {
   transition: background 0.3s linear;
 }
 
-select {
-  background-color: white;
-  border-radius: 4px;
-  border: solid rgba(var(--blue-300-v), 0.5);
-  display: inline-block;
-  line-height: 1.5em;
-}
-
-select option:checked {
-    background: var(--blue-700);
-    color: var(--white);
-}
-
-
 input::placeholder {
     color: rgba(var(--blue-500-v), 0.5);
 }
 
-  input:focus {
+input:focus {
+  border-bottom-color: rgba(var(--blue-300-v), 0.15);
+  outline: var(--blue-700);
+  background-size: 100% var(--font-size-200);
+}
+
+select {
+  width: 100%;
+  background: var(--white);
+  border: unset;
+  padding: var(--padding-050) 0;
+  color: var(--black);
+  font-family: var(--font-accent);
+  border-bottom: var(--font-size-200) solid rgba(var(--blue-300-v), 0.15);
+  background-image: linear-gradient(var(--blue-700), var(--blue-700));
+  background-size: 0% var(--font-size-200);
+  background-position: 0% calc(100% + var(--font-size-200));
+  background-repeat: no-repeat;
+  transition: background 0.3s linear;
+  cursor: pointer;
+}
+
+select:focus {
     border-bottom-color: rgba(var(--blue-300-v), 0.15);
     outline: var(--blue-700);
     background-size: 100% var(--font-size-200);
-  }
-
- label {
-  display: block;
-  text-transform: uppercase;
-  color: var(--blue-500);
-  font-family: var(--font-accent);
-  font-weight: 500;
-  font-size: var(--font-size-400);
-  margin-bottom: 0;
 }
 
 button {
