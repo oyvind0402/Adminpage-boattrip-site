@@ -101,8 +101,11 @@ export class EditRouteComponent {
     editedRoute.capacity = this.boat.capacity;
     editedRoute.ticketPrice = this.boat.ticketPrice;
 
-    const depDate = new Date(this.form.value.departuretime);
-    const arrDate = new Date(this.form.value.arrivaltime);
+    var depDateArr = this.form.value.departuretime.split("-");
+    var arrDateArr = this.form.value.arrivaltime.split("-");
+
+    const depDate = new Date(depDateArr[2], depDateArr[1] - 1, depDateArr[0]);
+    const arrDate = new Date(arrDateArr[2], arrDateArr[1] - 1, arrDateArr[0]);
 
     if (this.departureTerminal == this.arrivalTerminal) {
       const alertRef = this.modalService.open(AlertBox);
